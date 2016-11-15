@@ -71,8 +71,10 @@
           <!--采购单号开始-->
           <div  class="ub ub-f1 ub-ver yqq-xxk uc-a uinn umar-a "style="margin-bottom: 1em" >
               <div  class="ub yqq-w10"  >
-                  <div  class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">产出批次</div>
-                  <div id="materialBatch" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w w-click">1</div>
+                  <div  id="materialBatchClick" class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w w-click">产出批次</div>
+                 <div   class="ub ub-f1 uinput umar-l yqq-bbd ub-ac ub-pc wkf-hh wkf-font-w">
+                     <input  type="text" id="materialBatch" class="ub wkf-font-w" placeholder="请输入批次"/>
+                 </div>
               </div>
               <div  class="ub yqq-w10" >
                  <div  id="matTest" class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w w-click">条码</div>
@@ -140,6 +142,8 @@
         var inputMatJD;
         //保存展示的对象
         var detailJD = [];
+        //产出批次
+        var batchJD;
         //当前打开的窗口名字
         var winNameNow = '';
         
@@ -186,8 +190,6 @@
             }else if($("#inputMaterial").text() == ""){
                  appcan.window.openToast('请选择投入物料！',1000,5,0);
                  return;
-            }else if($("#materialBatch").text() == ""){
-                 materialBatchAjax( barcode );
             }else if($("#materialNumber").text() == ""){
                  materialNumberAjax( barcode );
             }else if($("#productNumber").text() == ""){
@@ -209,7 +211,7 @@
                 },
                 dataType:"json",
                 success:function(info){
-                    //console.log(JSON.stringify(info));
+                    // appcan.alert(JSON.stringify(info));
                     if(!info.bSuccess){
                         appcan.window.openToast(info.Error,3000,5,0);
                         return;
@@ -221,6 +223,9 @@
                         $('#station').html(info.WorkLocationInfo.StationName);
                         $('#process').html('');
                         $('#inputMaterial').html('');
+                        $('#coilNum').val('');
+                        $('#stoveNum').val('');
+                        $('#materialBatch').val('');
                         if(info.WorkLocationProcessList.length === 1){
                             processJD = info.WorkLocationProcessList[0];
                             $('#process').html(info.WorkLocationProcessList[0].ProcessName);
@@ -316,18 +321,32 @@
             });
         }
         //产出批次
-        function materialBatchAjax( barcode ){
+        function materialBatchAjax( batchJD ){
             appcan.request.ajax({
-                url:"http://182.254.131.195:8888/process/batch",
+                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
-                    barcode : barcode  
+                    input:{
+                         LogicType:"批次编码",
+                        OpType:"生产批次",
+                        id:processJD.ProcessId,//工序ID
+                        VDic:{
+                            班次:LOGIN.UserID,//当前登录人ID
+                            捆次:$('#coilNum').val(),
+                            炉号:$('#stoveNum').val(),
+                            设备代码:deviceJD.DeviceID,//设备ID
+                            投入批次:batchJD//materialbarcode表的InsideBatch
+                        }
+                    }
                 },
                 dataType:"json",
                 success:function(info){
-                    if(info.status){
-                        $('#materialBatch').html(info.batchName);
+                    appcan.alert(JSON.stringify(info));
+                    if(info.bSuccess){
+                        $('#materialBatch').val(info.batchNumber);
                         $('html,body').animate({scrollTop:$('#materialBatch').offset().top-80},1000);
+                    }else{
+                        appcan.window.openToast(info.Error,1000,5,0);
                     }
                 },
                 error:function(e){
@@ -503,8 +522,8 @@
                     }
                     openWindow('inputMaterial');
                     break;
-                case 'materialBatch':
-                    //openWindow('materialBatch');
+                case 'materialBatchClick':
+                    materialBatchAjax( batchJD );
                     break;
                 case 'productNumber':
                     openWindow('productNumber');
@@ -596,9 +615,11 @@
                     //alert(localOption.getWindowName());
                     break;
                 case 'inputMaterial':
-                    inputMat = info;
+                    // appcan.alert('1',JSON.stringify(info));
+                    batchJD = info.InsideBatch;
                     $('#inputMaterial').html(info.MatName);
                     $('html,body').animate({scrollTop:$('#inputMaterial').offset().top-80},1000);
+                    materialBatchAjax(info.InsideBatch);
                     //alert('投入物料开窗回调成功！');
                     //alert(localOption.getWindowName());
                     break;
@@ -647,7 +668,7 @@
        
        //保存数据
        function groupSave(){
-           var materialBatch = $('#materialBatch').html(),
+           var materialBatch = $('#materialBatch').val(),
                materialCode = $('#materialNumber').html(),
                productNumber = $('#productNumber').html(),
                amount = $('#amount').val();
@@ -682,6 +703,7 @@
            barcodeArrNow.push(subInfo);
            //清空updatapart
            //$("#materialBatch").html("");   //暂时不做清除
+           materialBatchAjax( batchJD );
            $("#productName").html("");
            $("#productNumber").html("");
            $("#productSpecification").html("");

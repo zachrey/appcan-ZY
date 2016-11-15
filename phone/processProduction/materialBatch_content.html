@@ -28,6 +28,8 @@
         var list = [];
         var lastFlag;
         appcan.ready(function() {
+            var info = appcan.locStorage.val('BATCHJD');
+            info = eval('('+info+')');
         });
 
         //模糊查询请求
