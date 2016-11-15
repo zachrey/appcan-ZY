@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/ui-box.css">
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/ui-color.css">
+        <link rel="stylesheet" href="../css/appcan.icon.css">
+        <link rel="stylesheet" href="../css/appcan.control.css">
+        <link rel="stylesheet" href="css/yqq_cgrk.css">
+        <link rel="stylesheet" href="css/wkf.css"/>
+        <script src="../js/init.js"></script>
+    </head>
+    <body class="um-vp" ontouchstart>
+       <!-- 工位开始 -->
+          <div  class="ub ub-f1 ub-ver yqq-xxk uc-a uinn umar-a " style="margin-bottom: 1em">  
+              <div class="ub yqq-w10" >
+                 <div id="emptyStation" class="w-click ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">工位</div>
+                 <div  id="proInvStation" class="w-click ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc wkf-hh wkf-font-w"></div>
+              </div>
+              <div  class="ub yqq-w10" >
+                 <div id="emptyProcess" class="ub w-click yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">&diams;工序</div>
+                 <div  id="proInvProcess" class="ub w-click ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w"></div>
+              </div>
+              <div  class="ub yqq-w10" >
+                 <div  class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">日期</div>
+                 <div  id="time" class="ub ub-f1  umar-l yqq-bbd uinn ub-ac ub-pc wkf-hh wkf-font-w"></div>
+              </div>
+              <div  class="ub yqq-w10 " >
+                 <div id="emptyDevice"  class="ub yqq-w3 w-click uinn yqq-bbd ub-pc ub-ac wkf-font-w">设备</div>
+                 <div  id="proInvDevice" class="ub ub-f1 w-click umar-l  yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w"></div>
+              </div>
+              <div class="ub yqq-w10" >
+                 <div id="emptyWorkOrder" class="ub yqq-w3 w-click yqq-bbd uinn ub-pc ub-ac wkf-font-w">工单</div>
+                  <div id="proInvWorkOrder"  class="ub ub-f1 w-click umar-l yqq-bbd uinn ub-ac ub-pc wkf-hh wkf-font-w"></div>
+              </div>
+              <div  class="ub yqq-w10" >
+                 <div id="emptyProductNumber" class="ub yqq-w3 w-click yqq-bbd uinn ub-pc ub-ac wkf-font-w">&diams;产品品号</div>
+                  <div id="proInvProductNumber" class=" w-click ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w"></div>
+              </div>
+              <div  class="ub yqq-w10" >
+                 <div id="emptyProductName" class="ub yqq-w3 yqq-bbd   uinn ub-pc ub-ac wkf-font-w">产品品名</div>
+                  <div  id="proInvProductName" class="ub ub-f1  umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w"></div>
+              </div>
+              <div  class="ub yqq-w10" >
+                 <div id="emptyProductSpecification" class="ub yqq-w3  yqq-bbd uinn ub-pc ub-ac wkf-font-w">产品规格</div>
+                  <div  id="proInvProductSpecification" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w"></div>
+              </div>
+          </div>
+          <!-- 工位结束 -->
+          <!--采购单号开始-->
+          <div  class="ub ub-f1 ub-ver yqq-xxk uc-a uinn umar-a "style="margin-bottom: 1em" >
+              <div  class="ub yqq-w10" >
+                 <div id="emptyMaterialNumber" class="ub yqq-w3 w-click yqq-bbd uinn ub-pc ub-ac wkf-font-w">条码</div>
+                  <div id="proInvMaterialNumber" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w"></div>
+              </div>
+              <div  class="ub yqq-w10" >
+                 <div class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">&diams;品号</div>
+                  <div id="proInvNumber" class="w-click ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w"></div>
+              </div>
+              <div  class="ub yqq-w10" >
+                 <div  class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">品名</div>
+                  <div id="proInvName" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w"></div>
+              </div>
+              <div  class="ub yqq-w10" >
+                 <div class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">规格</div>
+                  <div id="proInvSpecification" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w"></div>
+              </div>
+              <div  class="ub yqq-w10" >
+                 <div class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">投料批次</div>
+                  <div id="proInvbatchCharging" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w"></div>
+              </div>
+              <div  class="ub yqq-w10" >
+                 <div class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">
+                      <div  id="count"class="ub">数量</div>
+                      <div  id="unit" class="ub" style="color:red;"></div>
+                  </div>
+                      <div  class="ub ub-f1 umar-l yqq-bbd ub-ac ub-pc wkf-font-z">
+                        <input type="number" onkeyup="this.value=this.value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')" id="amount" name=""  class="wkf-input-nob wkf-font-w" style="width:98%;text-align:center;border:none; height: 2.2em;" value="" placeholder="请手动输入"/ >
+                      </div>
+              </div>
+          </div>
+          <!--采购单号结束-->
+          
+          <!-- 扫码记录开始 -->
+         <div id="down" class="ub ub-f1 ub-ver yqq-xxk uc-a uinn umar-a " style="margin-bottom: 2em;color:white;">
+              <div id="" class="ub ub-f1">
+                  <div class="ub wkf-font-w umar-l uinn">条码</div>
+                  <div class="ub ub-f1 ub-pe">
+                      <div class="ub uinn uc-a" id="deleteBarcoe" style="background-color: #2B6576">删除</div>
+                  </div>
+              </div>
+              <div id="bar_append" class="wkf-hh1">
+              </div>
+               <!-- <label onclick="openNum('9900001173')"> 9900001173&nbsp;&nbsp;</label> -->
+           </div>
+        </div>
+           <!-- 扫码记录结束 -->
+    <script src="../js/appcan.js"></script>
+    <script src="../js/appcan.control.js"></script>
+    <script src="../js/init.js"></script>
+    <script src="../js/locStorageModify.js"></script>
+    <script src="../js/jquery.min.js"></script>
+ 
+    </body>
+    <script>
+        //全局变量 存数据
+        //全部条码
+        var barcodeBaseInfo = [];
+        //当前组条码
+        var barcodeArrNow = [];
+        var clickIndex;//点击物料条码详情  数组下标
+        var windowId//开窗的id
+        var barcodeArr = [];//避免重复条码扫描
+        var WORKORDER = {};//工单的对象
+        var STATION = {};//工位的对象
+        var PROCESS = {}; // 工序的对象
+        var PRODUCT = {};//物料的对象
+        var GOODS = {};//产品对象
+        var DEVICE = {};//设备对象
+        var PURCODE = {};  //品号对象
+        var MATERIALINSTANCE = {};//投入物料对象
+        // var MATERIALINSTANCED;
+        var LOGIN = appcan.locStorage.val('LOGIN');//存储名字
+        LOGIN = JSON.parse( LOGIN );
+        var Djson = [];
+        var productFlag = 0;
+        
+        //条码类型
+        var TYPE;
+        
+        var stationFlag = 0;
+        var SUBJSON = {};
+        
+        var LOGIN = appcan.locStorage.getVal("LOGIN");
+        LOGIN = JSON.parse( LOGIN );
+        
+        appcan.ready(function() {
+            stationAjax(LOGIN.StationID);
+            appcan.initBounce();
+            var myDate = new Date();
+            $("#time").html(myDate.getFullYear()+'/'+(myDate.getMonth()+1)+'/'+myDate.getDate());   
+//      日期选择器的回调   
+            uexControl.cbOpenDatePicker = function (opId,dataType,data) {
+                var oData=eval('('+data+')');
+                $("#time").html(oData.year+'/'+oData.month+'/'+oData.day);   
+            }
+        });
+       appcan.button("#time","ani-act",function(){
+            var myDate = new Date();
+             uexControl.openDatePicker(myDate.getFullYear(),(myDate.getMonth()+1),myDate.getDate());   
+        })
+        ///点击后根据id来开窗
+        appcan.button(".w-click","ani-act",function(){
+           windowId = this.id;
+           switch( this.id ){
+             case 'proInvStation': openWindow('proInvStation'); break;//工位
+             case 'proInvProcess': {
+                 if($("#proInvStation").html() == ""){ appcan.window.openToast("请先填写工位",1000,5,0);return};
+                 openWindow('proInvProcess') ;break;}//工序
+             case 'proInvDevice': openWindow('proInvDevice') ;break;//设备
+             case 'proInvWorkOrder': openWindow('proInvWorkOrder'); break;//工单
+             case 'proInvProductNumber':{
+                 // if($("#proInvWorkOrder").html() == ""){openWindow('ProductNumber'); productFlag = 1;break;};
+                 openWindow('proInvProductNumber');
+                  break;
+             } //产品品号
+             case 'proInvProductSpecification':{
+                 if($("#proInvWorkOrder").html() == ""){ appcan.window.openToast("请先填写单号",1000,5,0);return};
+                 openWindow('proInvProductSpecification');
+                  break;
+             }  //产品规格
+             case 'proInvProductName':{
+                 if($("#proInvWorkOrder").html() == ""){ appcan.window.openToast("请先填写单号",1000,5,0);return};
+                  openWindow('proInvProductName'); break;
+             } //产品品名
+         case 'proInvNumber':{
+             if($("#proInvMaterialNumber").html() == ""){ appcan.window.openToast("请先扫描条码",1000,5,0);return};
+                  openWindow('proGoodsId'); break;
+         }//品号品名规格
+         case 'emptyStation':{
+             $("#proInvStation").html("");
+             $("#proInvProcess").html("");
+             // stationAjax( "9900001474" );
+             break
+         };
+         case 'emptyDevice':{
+             $("#proInvDevice").html("");
+             // DeviceAjax( "9900001483" );
+             break
+         };
+         case 'emptyWorkOrder':{
+             $("#proInvWorkOrder").html("");
+             $("#proInvProductNumber").html("");
+             $("#proInvProductName").html("");
+             $("#proInvProductSpecification").html("");
+             // WorkOrderAjax( "9900001561" );
+             break
+         };
+         case 'emptyMaterialNumber':{
+             $("#proInvMaterialNumber").html("");
+             $("#proInvName").html("");
+             $("#proInvNumber").html("");
+             $("#proInvSpecification").html("");
+             $("#proInvbatchCharging").html("");
+             $("#unit").html("");
+              //MaterialNumberAjax( "9900001527" );
+             break
+         };
+           }
+        })
+        //开窗
+        function openWindow( name ){
+            localOption.localSave( name );
+            appcan.window.open({
+                name:name,
+                data:name+'.html',
+                aniId:10
+            })
+        }
+        //开窗带回
+         function openWindowBack (Obj){
+            var Obj = eval('('+Obj+')');
+           // appcan.window.alert(JSON.stringify(Obj));
+            switch( windowId )
+            {
+                case 'proInvStation': {
+                     stationAjax(Obj.StationBarcode);
+                     //alert(localOption.getWindowName());
+                     $('html,body').animate({scrollTop:$('#proInvStation').offset().top-80},1000);
+                     break;
+                }
+                case 'proInvProcess':{
+                   $("#proInvProcess").html(Obj.ProcessName);
+                   PROCESS = Obj;
+                   // alert('工序回调成功！');
+                   // alert(localOption.getWindowName());
+                   $('html,body').animate({scrollTop:$('#proInvProcess').offset().top-80},1000);
+                   break;
+                }
+                case 'proInvDevice':{
+                   $("#proInvDevice").html(Obj.DeviceName);
+                   DEVICE = Obj;
+                   // alert('设备回调成功！');
+                   // alert(localOption.getWindowName());
+                   $('html,body').animate({scrollTop:$('#proInvDevice').offset().top-80},1000);
+                   break;
+                }
+                case 'proInvWorkOrder':{//待定
+                     WORKORDER = Obj;
+                     console.log(JSON.stringify(Obj));
+                        $("#proInvWorkOrder").html(Obj.WorkOrderNumber); 
+                        $("#proInvProductNumber").html(Obj.ProductNumber);
+                        $("#proInvProductName").html(Obj.ProductName);
+                        $("#proInvProductSpecification").html(Obj.ProductSpecifications);                                
+                     appcan.locStorage.val('WORKORDER',WORKORDER);
+                     // alert('工单回调成功！');
+                     // alert(localOption.getWindowName());
+                     $('html,body').animate({scrollTop:$('#proInvWorkOrder').offset().top-80},1000);
+                     break;
+                }
+                case 'proInvProductNumber':{
+                      PRODUCT = Obj;
+                      console.log(JSON.stringify(Obj));
+                          $("#proInvProductNumber").html(Obj.MaterialID);
+                          $("#proInvProductName").html(Obj.MatName);
+                          $("#proInvProductSpecification").html(Obj.Standard);
+                          $('html,body').animate({scrollTop:$('#proInvProductNumber').offset().top-80},1000);
+                          break;
+                     //alert('品号回调成功！');
+                     //alert(localOption.getWindowName());
+                }
+                case 'proInvName':{
+                    PURCODE = Obj;
+                    $("#proInvName").html(Obj.MaterialID);
+                    $("#proInvNumber").html(Obj.MatName);
+                    $("#proInvSpecification").html(Obj.Specifications);
+                    $("#proInvbatchCharging").html("/");
+                    $("#unit").html('('+Obj.Company+')');
+                    // MATERIALINSTANCED = Obj;
+                    $('html,body').animate({scrollTop:$('#proInvName').offset().top-80},1000);
+                    break;
+                }
+                
+            }
+       }
+        //扫描得到数据
+        function getData( Data )
+        {
+            //alert( Data );
+            if($("#proInvStation").text() === ""){
+                 stationAjax( Data );
+            }else if($("#proInvProcess").text() === ""){
+                 appcan.window.openToast("请先填写工序",1000,5,0);
+            }else if($("#proInvDevice").text() === ""){
+                 DeviceAjax( Data );
+            }else if($("#proInvWorkOrder").text() === ""){
+                 WorkOrderAjax( Data );
+            }else if($("#proInvMaterialNumber").text() === ""){
+                 //alert('准备进入函数!');
+                 MaterialNumberAjax( Data );//投料物料
+            }
+        }
+        //satation-->ajax
+        function stationAjax( Data ){
+            // alert(Data);
+            appcan.request.ajax({
+                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                type:"POST",
+                data:{
+                    input:{
+                        "OpType":"扫码",
+                        "WorkLocationBarcode":Data,//9900001480
+                        "LogicType":"工位管理"
+                    }
+                },
+                dataType:"json",
+                success : function( info ) {
+                  //  appcan.window.alert(JSON.stringify(info))
+                    if(!info.bSuccess){
+                        appcan.window.openToast(info.Error,3000,5,0);
+                        return;
+                    }
+                    if(!info.ifStationBarcodeOnInstance){
+                        stationFlag = 1;
+                    }
+                    if( info.ifStationBarcode  ){
+                    //扫描工单后的工序准备数据
+                       // appcan.alert( JSON.stringify(info) );
+                        $("#proInvStation").html(info.WorkLocationInfo.StationName);
+                        $("#proInvProcess").html('');
+                        //唯一的话就带出
+                         if(info.WorkLocationProcessList.length == 1){
+                             $("#proInvProcess").html(info.WorkLocationProcessList[0].ProcessName);
+                             PROCESS = info.WorkLocationProcessList[0];
+                         }
+                         appcan.locStorage.val('PROCESSLIST',info.WorkLocationProcessList);
+                         STATION = info.WorkLocationInfo;
+                        $('html,body').animate({scrollTop:$('#proInvStation').offset().top-80},1000);
+                 }else {
+                        appcan.window.openToast("无法查询！",1000,5,0);
+                       }
+                 },
+                error: function(xhr, errorType, error,msg){
+                  //  appcan.window.alert(msg);
+                    appcan.window.openToast("网络请求错误！",1000,5,0);
+                }
+            })
+        }
+        
+        //Device-->ajax
+        function DeviceAjax( Data ){
+            appcan.request.ajax({
+                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                type:"POST",
+                data:{
+                    input:{
+                        LogicType:"扫码",
+                        ScanType:"设备精确查询",
+                        DeviceInput:{
+                            "DeviceBarCode":Data,//"9900001483"
+                        }
+                    }
+                },
+                dataType:"json",
+              success : function( info ) {
+                 // appcan.alert(JSON.stringify(info))
+                    if(!info.bSuccess){
+                        appcan.window.openToast(info.Error,3000,5,0);
+                        return;
+                    }
+                    if( info.DeviceOutput.IsSuccess  ){
+                        DEVICE = info.DeviceOutput.DeviceInfo;//保存设备的实体
+                        $("#proInvDevice").html(info.DeviceOutput.DeviceInfo.DeviceName);
+                        $('html,body').animate({scrollTop:$('#proInvDevice').offset().top-80},1000);
+                    }
+                },
+                error: function(){
+                    appcan.window.openToast("网络请求错误！",1000,5,0);
+                }
+            })
+        }  
+        
+        //WorkOrder-->ajax
+        function WorkOrderAjax( Data ){
+            appcan.request.ajax({
+                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                type:"POST",
+                data:{
+                    input:{
+                        LogicType:"扫码",
+                        ScanType:"工单精确查询",
+                        WorkOrderInput:{
+                            OutputType:1,
+                            Barcode:Data,//"9900001561"
+                        }
+                   }     
+                },
+                dataType:"json",
+                success : function( info ) {
+                    console.log(JSON.stringify( info ) );
+                    WORKORDER = info.WorkOrderOutput.WorkInfoList[0];
+                     appcan.locStorage.val('WORKORDER',WORKORDER);
+                     //alert(info.WorkOrderOutput.WorkInfoList[0].List.length);
+                     if( info.bSuccess ){
+                            $("#proInvWorkOrder").html(info.WorkOrderOutput.WorkInfoList[0].WorkOrderNumber);
+                            $("#proInvProductNumber").html(info.WorkOrderOutput.WorkInfoList[0].ProductNumber);
+                            $("#proInvProductName").html(info.WorkOrderOutput.WorkInfoList[0].ProductName);
+                            $("#proInvProductSpecification").html(info.WorkOrderOutput.WorkInfoList[0].ProductSpecifications);
+                            $('html,body').animate({scrollTop:$('#proInvWorkOrder').offset().top-80},1000);
+                    }else{
+                         appcan.window.openToast("无此工单！",1000,5,0);  
+                    }
+                },
+                error: function(){
+                    appcan.window.openToast("网络请求错误！",1000,5,0);
+                }
+            })
+        }
+        
+        //MaterialNumber-->ajax
+        function MaterialNumberAjax( Data ){
+            // if( barcodeArr.indexOf( Data ) !== -1){
+                // appcan.window.openToast('物料码重复!',1000,5,0);
+                // return;
+            // }
+            //alert('准备请求');
+            appcan.ajax({
+                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                type:"POST",
+                data:{
+                    input:{
+                        LogicType:"扫码",
+                        scanType:"通用扫码",
+                        barcode:Data
+                    }
+                },
+                dataType:"json",
+                success : function( info ) {
+                   // appcan.window.alert("123",JSON.stringify(info));
+                    if( info.bSuccess && info.isBarcodeBeUsed ){//------------------------等待后台
+                        if(info.BarcodeType=="1"){//容器码 类型判断
+                            if( info.isBarcodeBeUsed  ){        //容器码是否实例化
+                                if(info.BarcodeInfo.materialbarcodeList == null || info.BarcodeInfo.materialbarcodeList.length == 0){
+                                    appcan.window.openToast("容器码为空！",1000,5,0);
+                                    return;
+                                }
+                                TYPE = "容器";
+                                MATERIALINSTANCE = info.BarcodeInfo;
+                                if(info.BarcodeInfo.materialbarcodeList.length == 1){
+                                     // MATERIALINSTANCED = info.BarcodeInfo.materialbarcodeList[0];
+                                     if(info.BarcodeInfo.materialbarcodeList[0].Inspection === 1){
+                                         appcan.window.openToast('当前物料为送检状态，请重新扫描！',3000,5,0);
+                                         return;
+                                    }
+                                    $("#proInvMaterialNumber").html(Data);
+                                    $("#proInvName").html(info.BarcodeInfo.materialbarcodeList[0].MatName);
+                                    $("#proInvNumber").html(info.BarcodeInfo.materialbarcodeList[0].MaterialID);
+                                    $("#proInvSpecification").html(info.BarcodeInfo.materialbarcodeList[0].Specifications);
+                                    $("#proInvbatchCharging").html("/");
+                                    $("#unit").html('('+info.BarcodeInfo.materialbarcodeList[0].Company+')');
+                                 }
+                                 appcan.locStorage.setVal( "MATERIALINSTANCE" , info.BarcodeInfo );
+                            }else {
+                                    appcan.window.openToast("条码无实例！",1000,5,0);
+                            }
+                        }else if(info.BarcodeType=="9"){//物料实例码 类型判断
+                            if(info.BarcodeInfo.materialbarcode.Inspection === 1){
+                                appcan.window.openToast('当前物料为送检状态，请重新扫描！',3000,5,0);
+                                return;
+                            }
+                            if( info.isBarcodeBeUsed  ){        //物料实例码是否实例化
+                                TYPE = "物料";
+                                MATERIALINSTANCE = info.BarcodeInfo;
+                                // MATERIALINSTANCED = info.BarcodeInfo.materialbarcode;
+                                $("#proInvMaterialNumber").html(Data);
+                                $("#proInvName").html(info.BarcodeInfo.materialbarcode.MatName);
+                                $("#proInvNumber").html(info.BarcodeInfo.materialbarcode.MaterialID);
+                                $("#proInvSpecification").html(info.BarcodeInfo.materialbarcode.Specifications);
+                                $("#proInvbatchCharging").html("/");
+                                $("#unit").html('('+info.BarcodeInfo.materialbarcode.Company+')');
+                            } else {
+                                    appcan.window.openToast("条码无实例！",1000,5,0);
+                            }
+                        }else{
+                            appcan.window.openToast('条码不为容器码或物料实例码！',3000,5,0);
+                        }
+                        $('html,body').animate({scrollTop:$('#proInvMaterialNumber').offset().top-80},1000);
+                    }else{
+                        appcan.window.openToast("该条码没有被使用，请重新扫描！",1000,5,0);
+                    }
+                },
+                error: function(){
+                    appcan.window.openToast("网络请求错误！",1000,5,0);
+                }
+            })
+        }
+        
+        function processInventorySave(){
+           //判断保存数据的完整
+           if($("#proInvMaterialNumber").html() == "" || $("#proInvMaterialNumber").html() == null){
+               appcan.window.openToast("请先添加物料条码！",1000,5,0);
+               return ;
+           };
+           if($("#proInvNumber").html() == "" || $("#proInvNumber").html() == null){
+               appcan.window.openToast("请先添加品号！",1000,5,0);
+               return ;
+           }
+           // if($("#proInvName").html() == "" || $("#proInvName").html() == null){
+               // appcan.window.openToast("请先添加品名！",1000,5,0);
+               // return ;
+           // }
+            // if($("#proInvSpecification").html() == "" || $("#proInvSpecification").html() == null){
+               // appcan.window.openToast("请先添加规格！",1000,5,0);
+               // return ;
+           // } 
+           // if($("#proInvbatchCharging").html() == "" || $("#proInvbatchCharging").html() == null){
+               // appcan.window.openToast("请先添加投料批次！",1000,5,0);
+               // return ;
+           // }
+           if($("#amount").val() == "" || $("#amount").val() == null){
+               appcan.window.openToast("请先添加数量！",1000,5,0);
+               return ;
+           }
+           
+         //保存数据
+         var proInvupdataPartJson = {
+             proInvMaterialNumber:$("#proInvMaterialNumber").html(),
+             proInvName:$("#proInvName").html(),
+             proInvNumber:$("#proInvNumber").html(),
+             proInvSpecification :$("#proInvSpecification").html(),
+             proInvbatchCharging:$("#proInvbatchCharging").html(),
+             amount:$("#amount").val(),
+             unit:$("#unit").html(),
+             
+           };
+               if(TYPE === "容器"){
+                    var json = {
+                        InstanceGuid:MATERIALINSTANCE.materialbarcode.GUID,//物料实例、容器实例的guid
+                        InstanceType:TYPE,//容器，物料 ,包装
+                        Amount:$("#amount").val(),//数量
+                        HandleType:TYPE//混合实例输入处理类型
+                   };
+               }else if(TYPE === "物料"){
+                     var json = {
+                            InstanceGuid:MATERIALINSTANCE.materialbarcode.GUID,//物料实例、容器实例的guid
+                            InstanceType:TYPE,//容器，物料 ,包装
+                            Amount:$("#amount").val(),//数量
+                            HandleType:MATERIALINSTANCE.material.BarcodeType//混合实例输入处理类型
+                        };
+               }else{
+                   appcan.alert("提示", "保存失败");
+               }
+           Djson.push(json);
+           
+           barcodeBaseInfo.push(proInvupdataPartJson);
+           barcodeArr.push($("#proInvMaterialNumber").html()); 
+           var str = '<label>'+$("#proInvMaterialNumber").html()+'&nbsp;&nbsp;</label>'
+           $('#bar_append').prepend(str);
+           //barcodeArrNow.push();
+           
+           appcan.window.evaluateScript({
+                name:"processInventory",
+                scriptContent:"modifyCount("+barcodeBaseInfo.length+")"
+            });
+          
+        //清空数据
+          $("#proInvMaterialNumber").html(""),
+          $("#proInvNumber").html(""),
+          $("#proInvName").html(""),
+          $("#proInvSpecification").html(""),
+          $("#proInvbatchCharging").html(""),
+          $("#amount").val(""),
+          $("#unit").html(""), 
+          $('html,body').animate({scrollTop:$('#proInvMaterialNumber').offset().top-80},1000);
+          //appcan.window.alert("123",JSON.stringify(proInvupdataPartJson));
+        }  
+        
+        function openTotal(){
+           localOption.localSave('proInvAmount');
+           appcan.locStorage.val('AMOUNTINFO',barcodeBaseInfo);
+           appcan.window.open({
+               name:"proInvAmount",
+               data:"proInvAmount.html",
+               aniId:10
+           });
+       }
+       
+      appcan.button('#deleteBarcoe','ani-act',function(){
+            $('#bar_append>:first').remove();
+            barcodeArrNow.pop();
+            barcodeBaseInfo.pop();
+            Djson.pop();
+            appcan.window.evaluateScript({
+                name:"processInventory",
+                scriptContent:"modifyCount("+barcodeBaseInfo.length+")"
+            });
+        });
+       
+       function processInventorySubmit(){
+           if(!confirm("确定提交？")){
+               return;
+           }
+           if( barcodeBaseInfo.length === 0){
+               appcan.window.openToast('当前没有可提交数据！',1000,5,0);
+               return;
+           }
+           if(stationFlag == 0){
+               //alert(0);
+               SUBJSON = {OpType:"投入",
+                        WorkLocationGuid:STATION.StationID,//工位静态信息guid----
+                        DeviceGuid:DEVICE.RecordID,//设备的GUID------
+                        WorkProccessId:PROCESS.ProcessId,//工序唯一ID------
+                        ProductMaterialId : $("#proInvProductNumber").html(),
+                        BillNumber:$("#proInvWorkOrder").html(),
+                        WorkLocationInstanceGuid:STATION.GUID,
+                        InputListOfCreateMixInstance:Djson,
+                        LogicType: "工位管理",
+                        LoginUserID:LOGIN.UserID//操作人ID-----
+                    };
+           }else if(stationFlag == 1)
+           {
+               //alert(1);
+               SUBJSON = {OpType:"投入",
+                        WorkLocationGuid:STATION.StationID,//工位静态信息guid----
+                        DeviceGuid:DEVICE.RecordID,//设备的GUID------
+                        WorkProccessId:PROCESS.ProcessId,//工序唯一ID------
+                        WorkLocationInstanceGuid:"",
+                        ProductMaterialId :$("#proInvProductNumber").html(),
+                        BillNumber:$("#proInvWorkOrder").html(),
+                        InputListOfCreateMixInstance:Djson,
+                        LogicType: "工位管理",
+                        LoginUserID:LOGIN.UserID//操作人ID-----
+                    };
+           }
+            //appcan.window.alert("123",JSON.stringify(SUBJSON));
+           appcan.window.openToast('提交中...',10000,5,1);
+           appcan.request.ajax({
+                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                type:"POST",
+                data:{
+                    input:SUBJSON
+                },
+                dataType:"json",
+                success : function( info ) {
+                    appcan.window.closeToast();
+                    // appcan.window.alert("提示",JSON.stringify(info));                  
+                    if(info.bSuccess){
+                        appcan.window.openToast("提交成功！",1000,5,0); 
+                        appcan.window.evaluateScript({
+                               name:'processInventory',
+                               scriptContent:"reload()"
+                        })
+                    }else{
+                        appcan.window.openToast(info.Error,1000,5,0); 
+                    }
+                },
+                error: function(){
+                    appcan.window.openToast("网络请求错误！",1000,5,0);
+                }
+            })       
+       }
+    </script>
+</html>

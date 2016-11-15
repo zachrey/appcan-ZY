@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/ui-box.css">
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/ui-color.css">
+        <link rel="stylesheet" href="../css/appcan.icon.css">
+        <link rel="stylesheet" href="../css/appcan.control.css">
+        <link rel="stylesheet" href="login_content/css/main.css">
+        <script src="../js/init.js"></script>
+    </head>
+    <body class="um-vp" ontouchstart>
+        <div class="ub ub-ver uinn-a3 ub-fv ub-ac" style="width:100%">
+            <div class="ub ub-ver uinn uinn-at1" style="width:82%">
+                    <div class="umar-a uba zk-border c-wh uc-a">
+                        <div class="ub ub-ac ubb umh5 zk-border">
+                            <div class=" uinput ub ub-f1" id="stationBottom">
+                                <div class="uinn fa fa-laptop sc-text"></div>
+                                <input placeholder="工位" type="text" class="umw4 ub-f1" id="station" style="color:rgb(255,255,255)" readOnly="true">
+                            </div>
+                        </div>
+                        <div class="ub ub-ac ubb umh5 zk-border">
+                            <div class=" uinput ub ub-f1">
+                                <div class="uinn fa fa-user sc-text"></div>
+                                <input placeholder="账号" type="text" class="umw4 ub-f1" id="UserID" style="color:rgb(255,255,255)">
+                            </div>
+                        </div>
+                        <div class="ub ub-ac umh5 zk-border ">
+                            <div class=" uinput ub ub-f1">
+                                <div class="uinn fa fa-lock sc-text"></div>
+                                <input placeholder="密码" type="password" class="umw4 ub-f1" id="UserPassword" style="color:rgb(255,255,255)">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ub ub-ver">
+                        <div class="uinn-at1">
+                            <div class="btn ub ub-ac bc-text-head ub-pc uc-a1 zk-btn" id="login">
+                                登录
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+        </div>
+        <script src="../js/appcan.js"></script>
+        <script src="../js/appcan.control.js"></script>
+        <script src="../js/locStorageModify.js"></script>
+    </body>
+    <script>
+    //工位
+    var STATION;
+        appcan.ready(function() {
+            appcan.initBounce();
+            // stationAjax("9900001478");
+            // userAjax( "admin" );
+            // $("#UserPassword").val("admin");
+        })
+        appcan.button("#stationBottom", "ani-act", function() {
+            if($("#station").val() == null || $("#station").val() == ""){
+                // stationAjax( 9900001478 );
+                openWindow( "loginStation" );
+            } else {
+                $("#station").val("");
+            }
+        })
+        //接受扫描数据
+        function getData( Data ){
+            // alert( Data );
+            if($("#station").val() == null || $("#station").val() == ""){
+                 stationAjax( Data );
+            }else if($("#UserID").val() == null || $("#UserID").val() == ""){
+                userAjax( Data );
+            }else if($("#UserPassword").val() == null || $("#UserPassword").val() == ""){
+                appcan.window.openToast("请输入密码！",1000,5,0);
+            }else{
+                appcan.window.openToast("请点击登录！",1000,5,0);
+            }
+        }
+        //User_ID-->ajax
+        function userAjax( Data ){
+            $("#UserID").val( Data );
+        }
+           
+        appcan.button("#login", "ani-act", function() {
+            var station=$("#station").val();
+            var id=$("#UserID").val();
+            var psw=$("#UserPassword").val();
+            
+            if( station == ""||station == null){
+                appcan.window.openToast("请输入工位！",1000,5,0);
+            }else if( id == ""||id == null){
+                appcan.window.openToast("请输入账户！",1000,5,0);
+            }else if( psw == ""||psw == null){
+                appcan.window.openToast("请输入密码！",1000,5,0);
+            }else{
+                appcan.request.ajax({
+                    url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                    type:"POST",
+                    data:{
+                        input:{
+                            LogicType:"登录",
+                            opType:"用户登录",
+                            UserName:id,
+                            PassWord:psw,
+                            stationId:STATION.ID
+                        }
+                    },
+                    dataType:"json",
+                    success:function (data){
+                        // appcan.alert( JSON.stringify(data) );
+                        if( data.bLoginSuccess ){
+                            appcan.window.openToast("登入成功！",1000,5,0);
+                            appcan.locStorage.setVal("LOGIN",data);
+                            setTimeout( function(){
+                                localOption.localSave('event');
+                                //跳转页面
+                                appcan.window.open({
+                                    name:"event",
+                                    data:"../event/scanEvent.html",
+                                    aniId:10,
+                                    animDuration:500
+                                });
+                            },1000);
+                        }else{
+                            appcan.window.openToast(data.Error,3000,5,0);
+                        }
+                    },
+                    error:function (e){
+                        appcan.window.openToast("网络请求错误！",1000,5,0);
+                    }
+                });
+            }
+        })
+               
+        //satation-->ajax
+        function stationAjax( Data ){
+            appcan.request.ajax({
+                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                type:"POST",
+                data:{
+                    input:{
+                        LogicType:"扫码",
+                        ScanType:"工位精确查询",
+                        StationInput:{
+                            "StationBarCode":Data
+                        }
+                    }
+                },
+                dataType:"json",
+                success : function( info ) {
+                    // appcan.alert( 1, JSON.stringify(info) );
+                    if(!info.bSuccess){
+                        appcan.window.openToast(info.Error,3000,5,0);
+                        return;
+                    }
+                    if( info.StationOutput.bOperateSuccess  ){
+                        // alert( info.stationName, info.processList[0].processName);
+                        $("#station").val(info.StationOutput.StationInfo.StationName);
+                        STATION = info.StationOutput.StationInfo;
+                    } else {
+                        appcan.window.openToast("工位查询错误！",1000,5,0);
+                    }
+                },
+                error: function(){
+                    appcan.window.openToast("网络请求错误！",1000,5,0);
+                }
+            })
+        }
+        function openWindow( name ){
+            localOption.localSave( name );
+            appcan.window.open({
+                name:name,
+                data:name+'.html',
+                aniId:10
+            })
+        }
+       // //开窗带回函数
+       function openWindowBack (Obj){
+           // appcan.alert( Obj );
+            var Obj = JSON.parse( Obj );
+             $("#station").val(Obj.StationName);
+             STATION = Obj;
+       }
+
+    </script>
+</html>

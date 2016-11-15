@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/ui-box.css">
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/ui-color.css">
+        <link rel="stylesheet" href="../css/appcan.icon.css">
+        <link rel="stylesheet" href="../css/appcan.control.css">   
+        <link rel="stylesheet" href="css/yqq_cgrk.css">
+        <link rel="stylesheet" href="css/wkf.css"/>
+        <link rel="stylesheet" href="css/zk.css"/>
+        <script src="../js/init.js"></script>
+    </head>
+    <body class="um-vp " ontouchstart>
+        <div class="ub  ub-ver">
+            <div id="" class="ub ub-f1 ub-ver yqq-xxk uc-a uinn umar-a ">  
+              <div id="" class="ub yqq-w10" >
+                 <div  id="PitStation" class="ub yqq-w4  yqq-bbd uinn ub-pc ub-ac wkf-font-w w-click">工位</div>
+                 <div  id="packStation" class="ub ub-f1  umar-l yqq-bbd uinn ub-ac ub-pc wkf-hh wkf-font-z w-click"></div>
+              </div>
+              <div id="" class="ub yqq-w10 " >
+                 <div class="ub yqq-w4  uinn yqq-bbd ub-pc ub-ac wkf-font-w">日期</div>
+                 <div id="time" class="ub ub-f1 umar-l  yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-z"></div>
+              </div>
+              <div id="" class="ub yqq-w10 " >
+                 <div  id="PitOutputBarcode" class="ub yqq-w4  uinn yqq-bbd ub-pc ub-ac wkf-font-w w-click">外包装码</div>
+                 <div id="packOutputBarcode" class="ub ub-f1  umar-l  yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-z"></div>
+              </div>
+          </div>
+            <!-- 工位开始 -->
+          <div id="" class="ub ub-f1 ub-ver yqq-xxk uc-a uinn umar-a ">  
+              <div id="" class="ub yqq-w10">
+                 <div  id="PitInputBarcode" class="ub yqq-w4  uinn yqq-bbd ub-pc ub-ac wkf-font-w w-click">容器/包装码</div>
+                 <div id="packInputBarcode" class="ub ub-f1 umar-l  yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-z"></div>
+              </div>
+              <div id="" class="ub yqq-w10 " >
+                 <div  id="PitGoodsId" class="ub yqq-w4  uinn yqq-bbd ub-pc ub-ac wkf-font-w w-click">&diams;品号</div>
+                 <div id="packGoodsId" class="ub ub-f1 w-click umar-l  yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-z br"></div>
+              </div>
+              <div id="" class="ub yqq-w10 " >
+                 <div  class="ub yqq-w4 uinn yqq-bbd ub-pc ub-ac wkf-font-w">品名</div>
+                 <div id="packGoodsName" class="ub ub-f1 w-click umar-l  yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-z"></div>
+              </div>
+              <div id="" class="ub yqq-w10 " >
+                 <div  class="ub yqq-w4 uinn yqq-bbd ub-pc ub-ac wkf-font-w">规格</div>
+                 <div id="packGoodsStandard" class="ub ub-f1 w-click umar-l  yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-z"></div>
+              </div>
+              <div  class="ub yqq-w10" >
+                 <div class="ub yqq-w4 yqq-bbd uinn ub-pc ub-ac wkf-font-w">
+                      <div class="ub">数量</div>
+                      <div  id="unit" class="ub" style="color:red;"></div>
+                  </div>
+                  <div id="mtrCount" class="ub ub-f1 uinput umar-l yqq-bbd ub-ac ub-pc wkf-hh wkf-font-w">
+                        <input onkeyup="this.value=this.value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')"  type="number" id="amount" class="ub wkf-font-w" placeholder="请输入数量"/>
+                  </div>
+                      <!-- <div  class="ub ub-f1 uinput umar-l yqq-bbd ub-ac ub-pc wkf-hh wkf-font-w">
+                        <input id="amount" class="ub wkf-input-nob wkf-font-w" style="width:98%;text-align:center;border:none; height: 2.2em;" value="" placeholder="请手动输入"/ >
+                      </div> -->
+              </div>
+          </div>
+           <div id="down" class="ub ub-f1 ub-ver yqq-xxk uc-a uinn umar-a " style="margin-bottom: 2em;color:white;">
+              <div id="" class="ub ub-f1">
+                  <div class="ub wkf-font-w umar-l uinn">条码</div>
+                  <div class="ub ub-f1 ub-pe">
+                      <div class="ub uinn uc-a" id="deleteBarcoe" style="background-color: #2B6576">删除</div>
+                  </div>
+              </div>
+              <div id="bar_append" class="wkf-hh1">
+              </div>
+              <!-- <label onclick="openNum('9900001173')"> 9900001173&nbsp;&nbsp;</label> -->
+           </div>
+        </div>
+       
+    <script src="../js/appcan.js"></script>
+    <script src="../js/appcan.control.js"></script>
+    <script src="../js/locStorageModify.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    </body>
+    <script>
+        //全局变量 存数据
+        //全部条码
+        var barcodeBaseInfo = [];
+        //全部条码总计
+        var barcodeBaseInfoView = [];
+        //工位
+        var STATION;
+        //外包装码
+        var OuterPack;
+        //内包装码
+        var InPack;
+        var InPackM;
+        //当前组条码
+        var barcodeArrNow = [];
+        var clickIndex;//点击物料条码详情  数组下标
+        var windowId//开窗的id
+        //提交的json类别
+        var CASE;
+        var type;  //OpType
+        //避免重复条码扫描
+        var barcodeArr = []; 
+        //取出工位
+        var LOGIN = appcan.locStorage.getVal("LOGIN");
+        LOGIN = JSON.parse( LOGIN );
+        appcan.ready(function() {
+            $("#packStation").html( LOGIN.StationName );
+            //获取当前日期
+            var myDate = new Date();
+            $("#time").html(myDate.getFullYear()+'/'+(myDate.getMonth()+1)+'/'+myDate.getDate());   
+            //日期选择器的回调   
+            uexControl.cbOpenDatePicker = function (opId,dataType,data) {
+                var oData=eval('('+data+')');
+                $("#time").html(oData.year+'/'+oData.month+'/'+oData.day);   
+            }
+        });
+        appcan.button(".w-click","ani-act",function(){
+           windowId = this.id;
+           switch( this.id ){
+             case 'packStation': openWindow('packStation'); break;
+             case 'packGoodsId': if($('#packInputBarcode').html() == ''){appcan.window.openToast('请先扫描获取容器/包装条码！',1000,5,0);return;}openWindow('istGoodsId');openWindow('packGoodsId') ;break;
+             // case 'PitStation': $("#packStation").html(""); break;
+             case 'PitOutputBarcode': $("#packOutputBarcode").html(""); break;
+             case 'PitInputBarcode': $("#packInputBarcode").html(""); break;
+             case 'PitGoodsId': $("#packGoodsId").html(""); $("#packGoodsName").html(""); $("#packGoodsStandard").html(""); $("#unit").html(""); $("#amount").val(""); break;
+             
+             // case 'PitStation': stationAjax( 9900001471 ); break;
+             // case 'PitOutputBarcode': packOutputBarcodeAjax( 9900001574 ); break;
+             //case 'PitInputBarcode': packInputBarcodeAjax( "9900001598" );break;
+             // case 'PitGoodsId': packInputBarcodeAjax( 9900001572 );break;
+           }
+        })
+        //打开时间选择器
+        appcan.button("#time","ani-act",function(){
+            var myDate = new Date();
+             uexControl.openDatePicker(myDate.getFullYear(),(myDate.getMonth()+1),myDate.getDate());   
+        })
+        function openWindow( name ){
+            localOption.localSave( name );
+            appcan.window.open({
+                name:name,
+                data:name+'.html',
+                aniId:10
+            })
+        }
+        
+        function getData( Data )
+        {
+            // alert( Data );
+            // if($("#packStation").html() == null || $("#packStation").html() == ""){
+                 // stationAjax( Data );
+            // }else
+            if($("#packOutputBarcode").html() == null || $("#packOutputBarcode").html() == ""){
+                 packOutputBarcodeAjax( Data );
+            }else if($("#packInputBarcode").html() == null || $("#packInputBarcode").html() == ""){
+                 packInputBarcodeAjax( Data );
+            }
+        } 
+        
+        function openWindowBack ( Obj ){
+            // appcan.alert( 1, Obj );
+            var Obj = JSON.parse( Obj );
+            // appcan.alert( Obj );
+            switch( windowId )
+            {
+                case 'packStation': {
+                     $("#packStation").html(Obj.stationName);
+                     STATION = Obj;
+                     $('html,body').animate({scrollTop:$('#packStation').offset().top-80},1000);
+                     break;
+                }
+                case 'packGoodsId':{
+                    InPackM = Obj;
+                    $("#packGoodsId").html(Obj.MaterialID);
+                    $("#packGoodsName").html(Obj.MatName);
+                    $("#packGoodsStandard").html(Obj.Brand);
+                    $("#unit").html(Obj.Company);
+                    $('html,body').animate({scrollTop:$('#packGoodsId').offset().top-80},1000);
+                    break;
+                }
+            }
+       }  
+       //工位精确查询
+        function stationAjax( Data ){
+            appcan.request.ajax({
+                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                type:"POST",
+                data:{
+                    input:{
+                        LogicType:"扫码",
+                        ScanType:"工位精确查询",
+                        StationInput:{
+                            "StationBarCode":Data
+                        }
+                    }
+                },
+                dataType:"json",
+                success : function( info ) {
+                    // appcan.alert( JSON.stringify( info ) );
+                    if( info.StationOutput.IsSuccess  ){
+                        STATION = info.StationOutput.StationInfo;
+                        $("#packStation").html( info.StationOutput.StationInfo.StationName );
+                        $('html,body').animate({scrollTop:$('#packStation').offset().top-80},1000);
+                    } else {
+                        appcan.window.openToast("工位查询失败！",1000,5,0);
+                    }
+                },
+                error: function(){
+                    appcan.window.openToast("网络请求错误！",1000,5,0);
+                }
+            })
+        } 
+        //外包装码
+        function packOutputBarcodeAjax( Data ){
+            appcan.request.ajax({
+                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                type:"POST",
+                data:{
+                    input:{
+                        LogicType:"扫码",
+                        scanType:"通用扫码",
+                        barcode:Data
+                    }
+                },
+                dataType:"json",
+                success : function( info ) {
+                    // appcan.alert( JSON.stringify( info ) );
+                    if( info.BarcodeType == "14" ){     //外包装码
+                        $("#packOutputBarcode").html( Data );
+                        $('html,body').animate({scrollTop:$('#packOutputBarcode').offset().top-80},1000);
+                        if( !info.isBarcodeBeUsed ){        //外包装码是否使用
+                            type = "创建包装实例";
+                            OuterPack = {
+                                "OuterPackGuid": "",
+                                "OuterPackBarCode": Data,
+                            };
+                        } else {
+                            type = "添加到包装实例";
+                            OuterPack = {
+                                "OuterPackGuid": info.BarcodeInfo.GUID,
+                                "OuterPackBarCode": info.BarcodeInfo.Barcode,
+                            };
+                        }
+                    } else {
+                        appcan.window.openToast("条码类型错误！",1000,5,0);
+                    }
+                },
+                error: function(){
+                    appcan.window.openToast("网络请求错误！",1000,5,0);
+                }
+            })
+        } 
+        //内包装码
+        function packInputBarcodeAjax( Data ){
+            if( barcodeArr.indexOf(Data) !== -1){
+                appcan.window.openToast('条码重复!',1000,5,0);
+                return;
+            }
+            appcan.request.ajax({
+                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                type:"POST",
+                data:{
+                    input:{
+                        LogicType:"扫码",
+                        scanType:"通用扫码",
+                        barcode:Data
+                    }
+                },
+                dataType:"json",
+                success : function( info ) {
+                        console.log(JSON.stringify(info));
+                        if( info.BarcodeType == "1" ){           //容器码
+                            if(info.BarcodeInfo.materialbarcodeList && info.BarcodeInfo.materialbarcodeList.length == 1){
+                                if(info.BarcodeInfo.materialbarcodeList[0].Inspection === 1){
+                                         appcan.window.openToast('当前物料为送检状态，请重新选择！',3000,5,0);
+                                         return;
+                                 }
+                                 CASE = "Y";
+                                 $("#packInputBarcode").html( Data );
+                                 InPack = info.BarcodeInfo.materialbarcode;
+                                 InPackM = info.BarcodeInfo.materialbarcodeList[0];
+                                 $("#packGoodsId").html(info.BarcodeInfo.materialbarcodeList[0].MaterialID);
+                                 $("#packGoodsName").html(info.BarcodeInfo.materialbarcodeList[0].MatName);
+                                 $("#packGoodsStandard").html(info.BarcodeInfo.materialbarcodeList[0].Brand);
+                                 $("#unit").html(info.BarcodeInfo.materialbarcodeList[0].Company);
+                             }else{
+                                 appcan.window.openToast('当前容器码未实例，请重新扫描！',2000,5,0);
+                                 return;
+                             }
+                             // appcan.locStorage.setVal( "INPUTBARCODE" , Data );
+                             appcan.locStorage.setVal( "parkPRODUCT" , info.BarcodeInfo );
+                             $('html,body').animate({scrollTop:$('#packInputBarcode').offset().top-80},1000);
+                        } else {
+                            if( info.BarcodeType =="14" ){      //内包装码
+                                if( info.isBarcodeBeUsed  ){        //内包装码是否实例化
+                                    CASE = "X";
+                                    InPack = info.BarcodeInfo;
+                                    $("#packInputBarcode").html( Data );
+                                    $("#amount").val( 1 );
+                                }else {
+                                    appcan.window.openToast("条码无实例！",1000,5,0);
+                                }
+                            } else {
+                                appcan.window.openToast("条码类型错误！",1000,5,0);
+                            }
+                        }
+                        
+                        // appcan.alert(info.WorkLocationProcessList.length);
+                         
+                         },
+                error: function(){
+                    appcan.window.openToast("网络请求错误！",1000,5,0);
+                }
+            })
+        }
+        //删除当前条码
+        appcan.button('#deleteBarcoe','ani-act',function(){
+            // materialCodeAjax( 0 );
+            $('#bar_append>:first').remove();
+            if($("#materialNumber").html() == null || $("#materialNumber").html() == ""){
+                    barcodeArrNow.pop();
+                    barcodeArr.pop();
+            } else {
+                    $("#materialNumber").html("");
+                    $("#Name").html("");
+                    $("#NumberCode").html("");
+                    $("#Specification").html("");
+                    $("#count").val("");
+                    $("#unit").html("单位");
+            }
+            appcan.window.evaluateScript({
+                name:"productPackaging",
+                scriptContent:"modifyCount("+barcodeBaseInfoView.length+")"
+            });
+        });
+         function proSave(){
+            // 先判断是否都有值
+           if($("#packOutputBarcode").html() == "" || $("#packOutputBarcode").html() == null){
+               appcan.window.openToast("请先扫描外包装码！",1000,5,0);
+               return ;
+           };
+           if($("#packInputBarcode").html() == "" || $("#packInputBarcode").html() == null){
+               appcan.window.openToast("请先扫描容器/包装码！",1000,5,0);
+               return ;
+           };
+           if($("#amount").val() == "" || $("#amount").val() == null){
+               appcan.window.openToast("请先添加转出数量！",1000,5,0);
+               return ;
+           };
+          appcan.window.alert({
+            title:'提示',
+            content:'是否保存',
+            buttons:['是','否'],
+            callback:function(err,data,dataType,optId){
+               if( data == 0 ){
+                   var json = {
+                           //总计数据
+                           InputBarcode: $("#packInputBarcode").html(),
+                           GoodsId: $("#packGoodsId").html(),
+                           GoodsName: $("#packGoodsName").html(),
+                           GoodsStandard: $("#packGoodsStandard").html(),
+                           Amount:$("#amount").val(),
+                           unit:$("#unit").val(),
+                   }
+                   if(CASE ==="X"){                             //内包装码提交数据
+                       var updataPartJson = {
+                           BarcodeType: InPack.BarcodeType,
+                           InnerPackBarCode: InPack.Barcode,
+                           InnerPackGuid: InPack.GUID,
+                           // viewArr:json
+                       }
+                   }else if(CASE ==="Y"){                             //容器码提交数据
+                       var updataPartJson = {
+                           BarcodeType: InPack.BarcodeType,
+                           ContanierGuid: InPack.ContainerGuid,
+                           ContanierBacode: InPack.Barcode,
+                           MaterialGuid: InPackM.MaterialGUID,
+                           Amount:$("#amount").val(),
+                           // viewArr:json
+                       }
+                   }
+                   barcodeBaseInfo.push(updataPartJson);
+                   barcodeBaseInfoView.push(json);
+                   appcan.window.openToast("保存成功！",1000,5,0);
+                   //清空updatapart
+                   //alert(JSON.stringify(updataPartJson));
+                   var str = '<label>'+$("#packInputBarcode").html()+'&nbsp;&nbsp;</label>';
+                   $('#bar_append').prepend(str);
+                   barcodeArr.push($("#packInputBarcode").html());
+                   // $("#packOutputBarcode").html(""),
+                   $("#packInputBarcode").html(""),
+                   $("#packGoodsId").html(""),
+                   $("#packGoodsName").html(""),
+                   $("#packGoodsStandard").html(""),
+                   $("#unit").html(""),
+                   $("#amount").val(""),
+                   CASE = 0;
+                   //barcodeArrNow = [];
+                   $('html,body').animate({scrollTop:$('#packInputBarcode').offset().top-80},1000);
+               }
+               appcan.window.evaluateScript({
+                    name:"productPackaging",
+                    scriptContent:"modifyCount("+barcodeBaseInfoView.length+")"
+                });
+            }
+          })
+
+       }
+       appcan.button('#deleteBarcoe','ani-act',function(){
+            $('#bar_append>:first').remove();
+            typeArr.pop();
+            barcodeArr.pop();
+            barcodeBaseInfo.pop();
+            barcodeBaseInfoView.pop();
+        });
+       
+       function proSubmit(){
+           if(!confirm("确定提交？")){
+               return;
+           }
+           if( barcodeBaseInfo.length === 0){
+               appcan.window.openToast('当前没有可提交数据！',1000,5,0);
+               return;
+           }
+           //提交数据
+           var submitInfo = {
+                LogicType: "包装管理",
+                OpType:type,
+                "OuterPackGuid": OuterPack.OuterPackGuid,
+                "OuterPackBarCode": OuterPack.OuterPackBarCode,
+                "StationName": LOGIN.StationName,
+                "StationBarcode": LOGIN.StationBarcode,
+                "OperaterName": LOGIN.U_LoginName,
+                "OperaterBarcode": "",
+                "lstInstancesInPack":barcodeBaseInfo
+           }
+           appcan.window.openToast('提交中...',10000,5,1);
+           appcan.request.ajax({
+                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                type:"POST",
+                data:{
+                    input:submitInfo
+                },
+                dataType:"json",
+                success : function( info ) {
+                    appcan.window.closeToast();
+                    // appcan.window.alert( "提示",JSON.stringify(info) );                  
+                    if( info.bSuccess ){
+                        appcan.window.openToast("提交成功！",1000,5,0);
+                        setTimeout(function(){
+                           appcan.window.evaluateScript({
+                               name:'productPackaging',
+                               scriptContent:"reload()"
+                            }) 
+                        },1000)
+                    } else {
+                        appcan.window.openToast(info.Error,3000,5,0);
+                    }
+                 },
+                error: function(){
+                    appcan.window.openToast("网络请求错误！",1000,5,0);
+                }
+            })
+           // appcan.window.alert( "提示",JSON.stringify(submitInfo) );         
+       }
+       
+       function openTotal(){
+           localOption.localSave('parkAmountDetail');
+           appcan.locStorage.val('parkAmountDetailInfo',barcodeBaseInfoView);
+           appcan.window.open({
+               name:"parkAmountDetail",
+               data:"parkAmountDetail.html",
+               aniId:10,
+           });
+       }
+       
+        
+    </script>
+</html>

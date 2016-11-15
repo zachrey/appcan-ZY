@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/ui-box.css">
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/ui-color.css">
+        <link rel="stylesheet" href="../css/appcan.icon.css">
+        <link rel="stylesheet" href="../css/appcan.control.css">
+        <link rel="stylesheet" href="css/wkf.css"/>
+        <link rel="stylesheet" href="css/yqq_cgrk.css">
+        <link rel="stylesheet" href="css/zk.css">
+        <script src="../js/init.js"></script>
+    </head>
+    <body class="um-vp " ontouchstart>
+        <div id="sheet" class="ub uinn ub-f1 ub-ver bc-text">
+            
+            
+        </div>
+       
+    </body>
+    <script src="../js/appcan.js"></script>
+    <script src="../js/appcan.control.js"></script>
+    <script src="../js/locStorageModify.js"></script>
+    </body>
+    <script>
+        var lastFlag;
+        appcan.ready(function() {
+             var pseAmountDetailInfo = appcan.locStorage.val('pseAmountDetailInfo');
+             pseAmountDetailInfo = eval('('+pseAmountDetailInfo+')');
+             if(pseAmountDetailInfo.length === 0){
+                 appcan.window.openToast('当前没有数据！',1000,5,0);
+                 return;
+             }
+         //组
+         for(var j=0;j<pseAmountDetailInfo.length;j++)
+         {
+             var strTittle = '<div id="'+j+'" class="ub ub-f1 ub-ver yqq-xxk uc-a uinn umar-a zk-marTop2 ">'
+                                  +'<div id="" class="ub ub-ver">'
+                                      +'<div id="tittle" class="ub ub-ver yqq-bbd">'
+                                        +'<div  class="ub yqq-w10 ub-ver" >'
+                                            +'<div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">'
+                                                +'<div class="ub yqq-w3 ub-pc">工单：</div>'
+                                                +'<div class="ub yqq-w7">'+pseAmountDetailInfo[j].workOrder+'</div>'
+                                            +'</div>'
+                                        +'</div>'
+                                        +'<div  class="ub yqq-w10  ub-ver" >'
+                                            +'<div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">'
+                                                +'<div class="ub yqq-w3 ub-pc">库位：</div>'
+                                                +'<div class="ub yqq-w7">'+pseAmountDetailInfo[j].shippingSpace+'</div>'
+                                            +'</div>'
+                                        +'</div>'
+                                        +'<div  class="ub yqq-w10  ub-ver" >'
+                                            +'<div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">'
+                                                +'<div class="ub yqq-w3 ub-pc">仓库：</div>'
+                                                +'<div class="ub yqq-w7">'+pseAmountDetailInfo[j].wareHouse+'</div>'
+                                            +'</div>'
+                                        +'</div>'
+                                       +'</div>'
+                                     +'<div id="detail" class="ub ub-ver uinn ">'
+                                       +'<div id="addtion" class="">'
+                   var strDetail = "";
+                    for(var i=0;i<pseAmountDetailInfo[j].materialCodes.length;i++)
+                    {       
+                        strDetail += '<div id="lable'+i+'" class="ub ub-ver">'
+                                          +'<div id="" class="umar-l ub yqq-w9 ub-ac wkf-hh">'+pseAmountDetailInfo[j].materialCodes[i].Barcode+'</div>'
+                                       +'</div>'
+                    } 
+                    
+                    strTittle += strDetail;     
+                  strTittle += '</div></div></div></div>'
+                  $("#sheet").append(strTittle);
+                  
+                  appcan.button('.zk-marTop2','ani-act',function(){
+                        multipleChoice( this.id );
+                  });
+         }   
+        });
+        //模拟单项选择
+        function multipleChoice( flag ) {
+            if( $("#"+flag).hasClass("zk-clickR")){
+                appcan.window.alert({
+                            title:'警告',
+                            content:'是否删除该项',
+                            buttons:['确定','取消'],
+                            callback:function(err,data,dataType,optId){
+                                if(data == 0){
+                                   appcan.window.evaluatePopoverScript({
+                                       name:"productionStorage",
+                                       popName:"content",
+                                       scriptContent:"deleteArr("+flag+")"
+                                   });
+                                   // appcan.window.evaluateScript({
+                                       // name:"amountDetail", 
+                                       // scriptContent:"closeWindow()"
+                                   // });
+                                   uexWindow.reload();
+                                }
+                             }
+                        })
+            }else{
+                 if(lastFlag != null){
+                     $("#"+lastFlag).removeClass("zk-clickR");
+                     $("#"+lastFlag).addClass("yqq-xxk");
+                 }
+                 lastFlag = flag;
+                $("#"+lastFlag).removeClass("yqq-xxk");
+                $("#"+lastFlag).addClass("zk-clickR");
+            }
+        }     
+            
+            
+        
+       
+    </script>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/ui-box.css">
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/ui-color.css">
+        <link rel="stylesheet" href="../css/appcan.icon.css">
+        <link rel="stylesheet" href="../css/appcan.control.css">
+        <link rel="stylesheet" type="text/css" href="css/wkf.css"/>
+        <link rel="stylesheet" type="text/css" href="css/yqq_cgrk.css"/>
+        <script src="../js/init.js"></script>
+    </head>
+    <body class="um-vp " ontouchstart>
+      <div id="" class="ub">
+        <div id="" class="ub ub-f1 ub-ver yqq-xxk uc-a uinn umar-a " style="margin-bottom: 1em">
+              <div id="" class="ub yqq-w10" >
+                 <div  class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">采购单号</div>
+                 <div id="purchaseNum" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc wkf-hh wkf-font-z "></div>
+              </div>
+              <div id="" class="ub yqq-w10" >
+                 <div  class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">品名</div>
+                 <div id="articleName" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-z"></div>
+              </div>
+              <div id="" class="ub yqq-w10" >
+                 <div  class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">品号</div>
+                 <div id="articleNum" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-z"></div>
+              </div>
+              <div id="" class="ub yqq-w10" >
+                 <div  class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">规格</div>
+                 <div id="standard" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-z"></div>
+              </div>
+              <div id="" class="ub yqq-w10" >
+                 <div  class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">数量<div id="unit" class="wkf-font-r"></div></div>
+                 <div id="amount" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-z"></div>
+              </div>
+              <div id="" class="ub yqq-w10" >
+                 <div  class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">物料条码</div>
+                 <div id="materialCode" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-z"></div>
+              </div>
+              <div id="" class="ub yqq-w10" >
+                 <div  class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">仓位</div>
+                 <div id="shippingSpace" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-z"></div>
+              </div>
+              <div id="" class="ub yqq-w10" >
+                 <div class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">仓库</div>
+                 <div id="wareHouse"    class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-z"></div>
+              </div>
+          </div>
+  
+      </div>
+    </body>
+    <script src="../js/appcan.js"></script>
+    <script src="../js/appcan.control.js"></script>
+    <script src="../js/locStorageModify.js"></script>
+    </body>
+    <script>
+        appcan.ready(function() {
+            var BARCODEDETAILE = appcan.locStorage.val('BARCODEDETAILE');
+            var BARCODEDETAILE = eval('('+BARCODEDETAILE+')');
+            $("#purchaseNum").html(BARCODEDETAILE.purchaseNum);
+            $("#articleName").html(BARCODEDETAILE.articleName);
+            $("#articleNum").html(BARCODEDETAILE.articleNum);
+            $("#standard").html(BARCODEDETAILE.standard);
+            $("#amount").html(BARCODEDETAILE.amount);
+            $("#unit").html('('+BARCODEDETAILE.unit+')');
+            $("#materialCode").html(BARCODEDETAILE.materialCode);
+            $("#shippingSpace").html(BARCODEDETAILE.shippingSpace);
+            $("#wareHouse").html(BARCODEDETAILE.wareHouse);
+        });
+        
+        
+        
+
+    </script>
+</html>

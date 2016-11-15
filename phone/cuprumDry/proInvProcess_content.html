@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/ui-box.css">
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/ui-color.css">
+        <link rel="stylesheet" href="../css/appcan.icon.css">
+        <link rel="stylesheet" href="../css/appcan.control.css">
+        <link rel="stylesheet" href="css/yqq_cgrk.css">
+        <link rel="stylesheet" href="css/zk.css">
+    </head>
+    <body class="um-vp" ontouchstart>
+        <div id="sheet" class="ub uinn ub-f1 ub-ver bc-text">
+            <!-- <div id="sheet0" class="ub ub-f1 ub-ver yqq-xxk uc-a uinn umar-a zk-marTop2" onclick="multipleChoice( 0 );">
+                <div class="ub yqq-w10 zk-borderBottom" >
+                    <div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">
+                        工单
+                    </div>
+                    <div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">
+                        gd00003154
+                    </div>
+                </div>
+                <div  class="ub yqq-w10 zk-borderTop ub-ver" >
+                    <div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">
+                        <div class="ub yqq-w3 ub-pc">
+                            产品品号
+                        </div>
+                        <div class="ub yqq-w7">
+                            cpph6555
+                        </div>
+                    </div>
+                    <div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">
+                        <div class="ub yqq-w3 ub-pc">
+                            产品品名
+                        </div>
+                        <div class="ub yqq-w7">
+                            名称
+                        </div>
+                    </div>
+                    <div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">
+                        <div class="ub yqq-w3 ub-pc">
+                            产品规格
+                        </div>
+                        <div class="ub yqq-w7">
+                            GB941788
+                        </div>
+                    </div>
+                </div>
+                <div  class="ub yqq-w10 zk-borderBottom zk-marTop1">
+                    <div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">
+                        物料条码
+                    </div>
+                    <div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">
+                        wl55544985222
+                    </div>
+                </div>
+                <div  class="ub yqq-w10  zk-borderTop ub-ver" >
+                    <div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">
+                        <div class="ub yqq-w3 ub-pc">
+                            品号
+                        </div>
+                        <div class="ub yqq-w7">
+                            ph655665
+                        </div>
+                    </div>
+                    <div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">
+                        <div class="ub yqq-w3 ub-pc">
+                            品名
+                        </div>
+                        <div class="ub yqq-w7">
+                            名称
+                        </div>
+                    </div>
+                    <div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">
+                        <div class="ub yqq-w3 ub-pc">
+                            规格
+                        </div>
+                        <div class="ub yqq-w7">
+                            cpph6555
+                        </div>
+                    </div>
+                </div>
+                <div  class="ub yqq-w10  zk-marTop2" >
+                    <div class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">
+                        投料批次:
+                    </div>
+                    <div class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">
+                        tlpc823655
+                    </div>
+                    <div class="ub yqq-w4 sheetuinn ub-pc ub-ac wkf-font-w">
+                        18（kg）
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </body>
+    <script src="../js/appcan.js"></script>
+    <script src="../js/appcan.control.js"></script>
+    <script src="../js/init.js"></script>
+    <script src="../js/locStorageModify.js"></script>
+    </body>
+    <script>
+        var length;
+        var goodsId;
+        var list = [];
+        var lastFlag;
+        appcan.ready(function() {
+            var PROCESSLIST = appcan.locStorage.val('PROCESSLIST');
+            PROCESSLIST = eval('('+PROCESSLIST+')');
+           // appcan.window.alert("123",JSON.stringify(PROCESSLIST));
+            list = PROCESSLIST;
+            if(list.length === 0){
+                appcan.window.openToast('查询结果为空',1000,5,0);
+                return;
+            }
+             for (var i = 0; i < PROCESSLIST.length; i++) {
+                            var str = '<div id="'+i+'" class="ub ub-f1 ub-ver  uc-a uinn umar-a zk-marTop2 yqq-xxk">'+
+                                        '<div class="ub yqq-w10" >'+ //zk-borderBottom
+                                            '<div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                '工序:'+PROCESSLIST[i].ProcessId+
+                                            '</div>'+
+                                            '<div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                               PROCESSLIST[i].ProcessName+
+                                            '</div>'+
+                                        '</div>'+
+                                    '</div>';
+                            $('#sheet').append(str);
+                            
+                            appcan.button('.zk-marTop2','ani-act',function(){
+                                multipleChoice( this.id );
+                            });
+                        }
+        });
+        appcan.button(".nav-btn", "btn-act", function() {
+               appcan.window.evaluateScript({
+                   name:"proInvProcess", 
+                   scriptContent:"closeWindow()"
+               });
+        })
+        
+        //模拟单项选择
+        function multipleChoice( flag ) {
+            if( $("#"+flag).hasClass("zk-clickR")){
+                                    appcan.window.evaluatePopoverScript({
+                                       name:"cuprumDry",
+                                       popName:"content",
+                                       scriptContent:"openWindowBack('"+JSON.stringify(list[flag])+"')"
+                                   });
+                                   appcan.window.evaluateScript({
+                                       name:"proInvProcess", 
+                                       scriptContent:"closeWindow()"
+                                   });
+            }else{
+                 if(lastFlag != null){
+                     $("#"+lastFlag).removeClass("zk-clickR");
+                     $("#"+lastFlag).addClass("yqq-xxk");
+                 }
+                 lastFlag = flag;
+                $("#"+lastFlag).removeClass("yqq-xxk");
+                $("#"+lastFlag).addClass("zk-clickR");
+            }
+        }
+    </script>
+</html>

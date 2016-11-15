@@ -1,0 +1,88 @@
+/*基础header颜色*/
+.bc-head {
+    background-color: rbga(0 ,0 ,0 ,0.0);
+}
+/*****************************************/
+/*基础body背景颜色*/
+.bc-bg {
+    background-image: url('img/cover01.jpg');
+    background-size: 100% 100%;
+}
+/*辅助控件背景颜色*/
+.sc-bg {
+    background-image: url('img/cover01.jpg');
+    background-size: 100% 100%;
+}
+/*开窗指示箭头*/
+.br {
+    /*background-image: url('img/r.png');
+    background-size: 100% 100%;*/
+}
+/*辅助控件背景颜色*/
+.sc-bg-active {
+    background-color: #001414;
+}
+/*警告背景色*/
+.sc-bg-alert {
+    background-color: #f0f0c8;
+}
+/*****************************************/
+/*基础字体颜色*/
+.bc-text {
+    color: #fffff0;
+}
+/*基础标题字体颜色*/
+.bc-text-head {
+    color: #dcc8dc;
+}
+/*辅助字体颜色*/
+.sc-text {
+    color: #f0f0dc;
+}
+/*辅助字体颜色*/
+.sc-text-active {
+    color: #a0b4b4 !important;
+}
+/*辅助字体颜色*/
+.sc-text-hint {
+    color: #E3E3E3;
+}
+/*辅助字体颜色*/
+.sc-text-warn {
+    color: #c8b4a0;
+}
+/*辅助字体颜色*/
+.sc-text-tab {
+    color: #c8c8a0;
+}
+/*****************************************/
+/*基础边框颜色*/
+.bc-border {
+    border-color: #8c7850;
+}
+/*辅助边框颜色*/
+.sc-border {
+    border-color: #646464;
+}
+.sc-border-tab {
+    border-color: #a0a0b4;
+}
+/*****************************************/
+/*基础按钮颜色*/
+.bc-btn {
+    background-color: #28283c;
+}
+/*辅助按钮颜色*/
+.sc-btn {
+    background-color: #8c7864;
+}
+
+input::-webkit-input-placeholder {
+    color: #fff !important;
+}
+input::-moz-placeholder {
+    color: #fff !important;
+}
+input::-ms-input-placeholder {
+    color: #fff !important; 
+}

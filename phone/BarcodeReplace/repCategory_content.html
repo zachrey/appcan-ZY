@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/ui-box.css">
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/ui-color.css">
+        <link rel="stylesheet" href="../css/appcan.icon.css">
+        <link rel="stylesheet" href="../css/appcan.control.css">
+        <link rel="stylesheet" href="css/yqq_cgrk.css">
+        <link rel="stylesheet" href="css/zk.css">
+        <script src="../js/init.js"></script>
+    </head>
+    <body class="um-vp" ontouchstart>
+        <div id="sheet" class="ub uinn ub-f1 ub-ver bc-text"></div>
+    </body>
+    <script src="../js/appcan.js"></script>
+    <script src="../js/appcan.control.js"></script>
+    <script src="../js/locStorageModify.js"></script>
+    </body>
+    <script>
+     var lastFlag;
+     var list = [];
+        appcan.ready(function() {
+            appcan.request.ajax({
+                url : "http://182.254.131.195:8888/barcodeTypes",
+                type : "POST",
+                // data : {
+                    // WarhouseCode : Data //临时数据
+                // },
+                dataType : "json",
+                success : function(data) {
+                    appcan.alert("123",JSON.stringify(data))
+                    $('#sheet').html('');
+                    if (data.status) {
+                        for (var i = 0; i < data.list.length; i++) {
+                            list[i] = data.list[i];
+                            var str = '<div id="'+i+'" class="ub ub-f1 ub-ver  uc-a uinn umar-a zk-marTop2 yqq-xxk">'+
+                                        '<div class="ub yqq-w10 zk-borderBottom" >'+
+                                            '<div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                '物料类型'+
+                                            '</div>'+
+                                            '<div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                data.list[i]+
+                                            '</div>'+
+                                        '</div>'+
+                                    '</div>';
+                            $('#sheet').append(str);
+                            appcan.button('.zk-marTop2','ani-act',function(){
+                                multipleChoice( this.id );
+                            })
+                       }
+                   }
+             },
+             error : function(e) {
+                    appcan.window.openToast("网络连接错误！", 1000, 5, 0);
+                }
+          });
+        })
+        
+        function multipleChoice( flag ) {
+            if( $("#"+flag).hasClass("zk-clickR")){
+                appcan.window.alert({
+                            title:'提示',
+                            content:'是否确定选项',
+                            buttons:['确定','取消'],
+                            callback:function(err,data,dataType,optId){
+                                if(data == 0){
+                                    appcan.window.evaluatePopoverScript({
+                                       name:"BarcodeReplace",
+                                       popName:"content",
+                                       scriptContent:"openWindowBack('"+JSON.stringify(list[flag])+"')"
+                                   });
+                                   appcan.window.evaluateScript({
+                                       name:"repCategory", 
+                                       scriptContent:"closeWindow()"
+                                   });
+                                }
+                             }
+                        })
+            }else{
+                 if(lastFlag != null){
+                     $("#"+lastFlag).removeClass("zk-clickR");
+                     $("#"+lastFlag).addClass("yqq-xxk");
+                 }
+                 lastFlag = flag;
+                $("#"+lastFlag).removeClass("yqq-xxk");
+                $("#"+lastFlag).addClass("zk-clickR");
+            }
+        }        
+        
+        
+        
+        
+    </script>
+</html>

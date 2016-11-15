@@ -1,0 +1,27 @@
+.zk-min-h {
+    min-height: 1.6em;
+    line-height: 2.5em;
+}
+.zk-mar1 {
+    margin: 0.15em 0.35em 0.15em 0.4em ;
+}
+.zk-mar2 {
+    margin: 0;
+    width: 5em;
+}
+/*Input框外框颜色去色*/
+input       {
+    /*border:none;*/
+    outline:medium;
+    text-align: center;
+}
+/*Input框输入前字体颜色类*/
+input       ::-webkit-input-placeholder {
+  color: #414B56;
+}
+input       :-moz-placeholder {
+  color: #414B56;
+}
+input       :-ms-input-placeholder {
+  color: #414B56;
+}

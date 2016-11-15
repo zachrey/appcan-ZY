@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/ui-box.css">
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/ui-color.css">
+        <link rel="stylesheet" href="../css/appcan.icon.css">
+        <link rel="stylesheet" href="../css/appcan.control.css">
+        <link rel="stylesheet" href="css/yqq_cgrk.css">
+        <link rel="stylesheet" type="text/css" href="css/wkf.css"/>
+        <script src="../js/init.js"></script>
+    </head>
+    <body class="um-vp" ontouchstart>
+        <div class="ub ub-ver">
+          <!-- 刷新框 -->
+          <div id="" class="ub ub-f1 ub-ver yqq-xxk uc-a uinn umar-a ">  
+              <div id="" class="ub yqq-w10" >
+                 <div  id="matDel" class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">容器条码</div>
+                 <div  id="container" class="ub ub-f1 w-click umar-l yqq-bbd uinn ub-ac ub-pc wkf-hh wkf-font-z"></div>
+              </div>
+              <div id="" class="ub yqq-w10" >
+                 <div id="purDel" class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">品号</div>
+                 <div id="purNumber"  class="ub ub-f1  umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-z"></div>
+              </div>
+              <div id="" class="ub yqq-w10" >
+                 <div class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">品名</div>
+                 <div id="purName"  class="ub ub-f1  umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-z"></div>
+              </div>
+              <div id="" class="ub yqq-w10" >
+                 <div class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">规格</div>
+                 <div id="purStand"  class="ub ub-f1  umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-z"></div>
+              </div>
+              <div id="" class="ub yqq-w10" >
+                 <div class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">批次</div>
+                 <div id="purBatch"  class="ub ub-f1 w-click umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-z"></div>
+              </div>
+              <div id="" class="ub yqq-w10" >
+                 <div class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">材质代号</div>
+                 <div id="TexturesCode"  class="ub ub-f1 w-click umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-z"></div>
+              </div>
+              <div id="" class="ub yqq-w10" >
+                 <div class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">数量</div>
+                 <div id="Amount"  class="ub ub-f1 w-click umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-z"></div>
+              </div>
+              <div id="" class="ub yqq-w10" >
+                 <div  id="matDel" class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">送检工位</div>
+                 <div  id="InsStation" class="ub ub-f1 w-click umar-l yqq-bbd uinn ub-ac ub-pc wkf-hh wkf-font-z"></div>
+              </div>
+              <div id="" class="ub yqq-w10" >
+                 <div  id="matDel" class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">检验工序</div>
+                 <div  id="InsProcess" class="ub ub-f1 w-click umar-l yqq-bbd uinn ub-ac ub-pc wkf-hh wkf-font-z"></div>
+              </div>
+              <div id="" class="ub yqq-w10" >
+                 <div  id="matDel" class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">检验工位</div>
+                 <div  id="verStations" class="ub ub-f1 w-click umar-l yqq-bbd uinn ub-ac ub-pc wkf-hh wkf-font-z"></div>
+              </div>
+              <div id="" class="ub yqq-w10" >
+                 <div id="assDel" class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">检验类型</div>
+                 <div id="InsType"  class="ub ub-f1 w-click umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-z"></div>
+              </div>
+              <div id="" class="ub yqq-w10" >
+                 <div id="assDel" class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">检验项目</div>
+                 <div id="InsProject"  class="ub ub-f1 w-click umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-z"></div>
+              </div>
+              <div id="" class="ub yqq-w10" >
+                 <div class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">检查结论</div>
+                 <div id=""  class="ub ub-f1 w-click umar-l yqq-bbd ub-ac ub-pc  wkf-hh wkf-font-z">
+                    <div class="ub ub-f1 select uc-a bc-text" id="BinsConclusion">
+                        <div id="inspect" class="text ub ub-ac ub-pc">合格</div>
+                        <div class="icon"></div>
+                        <select id="inspectType" >
+                            <option value='合格'>合格</option>
+                            <option value='不合格'>不合格</option>
+                        </select>
+                    </div>
+                 </div>
+              </div>
+              <div id="part1" class="" style="display:none">
+                  <div id="" class="ub yqq-w10" >
+                     <div class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">处置结果</div>
+                     <div id=""  class="ub ub-f1 w-click umar-l yqq-bbd  ub-ac ub-pc  wkf-hh wkf-font-z">
+                         <div class="ub ub-f1 select uc-a bc-text " id="dispositionResult">
+                            <div id="insRe" class="text ub ub-ac ub-pc">让步放行</div>
+                            <div class="icon"></div>
+                            <select id="insResult">
+                                <option value='让步放行'>让步放行</option>
+                                <option value='返工'>返工</option>
+                                <option value='报废'>报废</option>
+                            </select>
+                        </div>
+                     </div>
+                  </div>
+           </div>
+           <div id="part2" style="display:none">
+                  <div id="" class="ub yqq-w10" >
+                     <div class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">先进先出</div>
+                     <div id="order"  class="ub ub-f1 w-click1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-z">
+                         <div class="ub ub-img7 zz-gg zz-gc-wh"></div>
+                     </div>
+                  </div>
+                  <div id="part3" class="ub yqq-w10" style="">
+                     <div class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">优先使用</div>
+                     <div id="tryOut"  class="ub ub-f1 w-click1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-z">
+                         <div class="ub ub-img7 zz-gg zz-gc-wh"></div>
+                     </div>
+                  </div>
+                   <div id="part4" class="ub yqq-w10" >
+                     <div class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">指定产品</div>
+                     <div id="productUsed"  class="ub ub-f1 w-click umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-z"></div>
+                  </div>
+             </div>     
+          </div>
+        </div>
+    </body>
+    <script src="../js/appcan.js"></script>
+    <script src="../js/appcan.control.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/locStorageModify.js"></script>
+    </body>
+    <script>
+        //记录当前开窗的名字
+        var openSubWinNow = '';
+        //保存信息的数组
+        var infoNow = [];
+        //保存请求的工位信息
+        var stationJD;
+        //保存请求的工序信息
+        var processJD;
+        //保存请求的物料信息
+        var materialJD;
+        //保存请求的指定产品信息
+        var assigneJS;
+        // 用来展示的对象数据
+        var detailJD = [];
+        // 当前扫描条码
+        var barcodeNow = '';
+        //避免重复条码
+        var barcodeArr = [];
+        var parameter;//参数
+        //登入用户
+        var infoObj = {};//带出的信息对象
+        var user;
+        var goodsId ;//品号
+        InspectionListObj = [];
+        appcan.ready(function() {
+            //获取登入名
+            $("#part1").hide();
+            $("#part2").hide();
+            user = appcan.locStorage.val('LOGIN');
+            user = eval('('+user+')');
+        });
+        
+        appcan.button("#matDel","ani-act",function(){
+            $("#container").html("");
+        }) 
+        appcan.button("#purNumber","ani-act",function(){
+            if($("#container").html() == ""){
+                appcan.window.openToast("请先扫描容器条码！",1000,5,0);
+                return;
+            }
+            localOption.localSave("traGoodsId");
+            appcan.window.open({
+                name:"traGoodsId",
+                data:"traGoodsId.html",
+                aniId:10
+            })
+        })
+        appcan.button("#productUsed","ani-act",function(){
+            localOption.localSave("assignePur");
+            appcan.window.open({
+                name:"assignePur",
+                data:"assignePur.html",
+                aniId:10
+            })
+        })
+        
+        
+        //勾叉替換
+        appcan.button('.w-click1','ani-act',function(){
+            var elem = $(this).children('.zz-gc-wh');
+            if(elem.hasClass('zz-gg')){
+                elem.removeClass('zz-gg');
+                elem.addClass('zz-cc');
+            }else{
+               elem.removeClass('zz-cc');
+               elem.addClass('zz-gg'); 
+            }
+        });
+        
+        //得到是否的值
+        function getRowStatus(elemId){
+            var elem = $('#'+elemId).children('.zz-gc-wh');
+            if( elem.hasClass('zz-gg') ){
+                return 1;
+            }else{
+                return 0;
+            }
+        }
+        
+        //得到条码
+        function getData( barcode ){
+            // alert(barcode);
+            if($("#container").html() == ""){
+                containerAjax( barcode );
+            }
+        }
+        
+       function containerAjax( Data ){
+            appcan.request.ajax({
+                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                type:"POST",
+                data:{
+                    input:{
+                        LogicType:"扫码",
+                        scanType:"通用扫码",
+                        barcode:Data
+                    }
+                },
+                dataType:"json",
+                success : function( info ) {
+                    if(!info.BarcodeInfo.materialbarcodeList  || info.BarcodeInfo.materialbarcodeList.length == 0){
+                         appcan.window.openToast("扫码失败！",1000,5,0);
+                         return ;
+                    }
+                    //appcan.window.alert(JSON.stringify(info));
+                    materialJD = info.BarcodeInfo.materialbarcodeList;
+                    appcan.locStorage.val('INFOLIST',materialJD);
+                    $("#container").html(Data);
+                },
+                error: function(){
+                    appcan.window.openToast("网络请求错误！",1000,5,0);
+                }
+            });
+        }
+        //检查结论的获取
+        // var insResultFn = function(){
+            // $('#insResult').html('');
+            // appcan.request.ajax({
+                // url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                // type:"POST",
+                // data:{
+                   // input:{
+                       // LogicType:"通用",
+                       // CommonType:"检验结果"
+                   // }
+                // },
+                // dataType:"json",
+                // success : function( info ) {
+                    // console.log(JSON.stringify(info));
+                    // if( info.bSuccess  ){//------------------------等待后台
+                        // var arr = info.CheckTypeLis,
+                            // length = arr.length;
+                        // for(var i=0;i<length;i++){
+                            // var str = '<option value='+arr[i].Value+'>'+arr[i].Value+'</option>';
+                            // $('#insResult').append(str);
+                        // }
+                       // appcan.select("#BinsResult",function(ele,value){
+                          // $('html,body').animate({scrollTop:$('#insResult').offset().top-80},1000);
+                       // });    
+                    // }
+//                     
+                // },
+                // error: function(){
+                    // appcan.window.openToast("网络请求错误！",1000,5,0);
+                // }
+            // });
+        // }
+       var flag = 1;//判断提交情况
+        appcan.select("#BinsConclusion",function(ele,value){
+            //$('html,body').animate({scrollTop:$('#BinsConclusion').offset().top-80},1000);
+            if(value == '合格' ){
+                $("#part1").slideToggle();
+                $("#part1").css("display","none");
+                $("#part2").css("display","none");
+                flag = 1;
+            }
+            if(value == '不合格'){
+                $("#part1").slideToggle();
+                $("#part2").css("display","block");
+                $('html,body').animate({scrollTop:$('#BinsConclusion').offset().top-80},1000);
+                flag = 2;   
+            }
+        });
+         
+        appcan.select("#dispositionResult",function(ele,value){
+            //$('html,body').animate({scrollTop:$('#BinsConclusion').offset().top-80},1000);
+            if(value == '让步放行' ){
+                  $("#part2").css("display","block");
+                  $('html,body').animate({scrollTop:$('#dispositionResult').offset().top-80},1000);
+                  flag = 2;            
+            }else{
+                if(value == '报废' || value == '返工'){
+                $("#part2").css("display","none");
+                flag = 3;
+            }
+            }
+        });       
+                    
+        function openWindowBack( Obj ){
+            //appcan.window.alert(Obj);
+            Obj = eval('('+Obj+')');
+            parameter = Obj.GUID;
+            //alert(parameter);
+            $("#purName").html(Obj.MatName);
+            appcan.request.ajax({
+                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                type:"POST",
+                data:{
+                   input:{
+                       LogicType:"扫码",
+                       ScanType:"检验查询",
+                       InspectionInput:{
+                           MaterialGUID:parameter
+                       }
+                   }
+                },
+                dataType:"json",
+                success : function( info ) {
+                    //appcan.window.alert(JSON.stringify(info));
+                    infoObj = info.InspectionOutput.InspectionConclusion;
+                    $("#purNumber").html(infoObj.ProductNo ? infoObj.ProductNo:'无');
+                    $("#purStand").html(infoObj.Specifications ? infoObj.Specifications:'无');
+                    $("#purBatch").html(infoObj.Batch ? infoObj.Batch:'无');
+                    $("#TexturesCode").html(infoObj.MaterialCode ? infoObj.MaterialCode:'无');
+                    $("#Amount").html(infoObj.Account ? infoObj.Account:'无');
+                    $("#InsStation").html(infoObj.InspectionStation ? infoObj.InspectionStation:'无');
+                    $("#InsProcess").html(infoObj.InspectionProcedure ? infoObj.InspectionProcedure:'无');
+                    $("#verStations").html(infoObj.TestStation ? infoObj.TestStation:'无');
+                    $("#InsType").html(infoObj.InspectionType ? infoObj.InspectionType:'无');
+                    $("#InsProject").html(infoObj.InspectionItems ? infoObj.InspectionItems:'无');
+                    //$("#productUsed").html(infoObj ? infoObj.ProductNo:'/');
+                },
+                error: function(){
+                    appcan.window.openToast("网络请求错误！",1000,5,0);
+                }
+            });
+        }
+        function AssopenWindowBack( Obj ){
+             //appcan.window.alert(Obj);
+             Obj = eval('('+Obj+')');
+             $("#productUsed").html(Obj.MatName);
+             goodsId = Obj.MaterialID;
+             
+        }
+       
+        //提交
+        function submit(){
+            if(!confirm("确定提交？")){
+               return;
+           }
+           if($("#container").html() == "" || $("#purNumber").html() == ""){
+               appcan.window.openToast('当前没有可提交数据！',1000,5,0);
+               return;
+           } 
+           var json={
+                      MaterialGUID: parameter,//物料实例GUID
+                      ProductNo: infoObj.ProductNo,//品号
+                      Specifications: infoObj.Specifications,//规格
+                      Batch: infoObj.Batch,//批次
+                      Account: infoObj.Account,//数量
+                      InspectionType: infoObj.InspectionType ,//检验类型
+                      InspectionItems: infoObj.InspectionItems ,//检验项目
+                      MaterialCode:infoObj.MaterialCode ,//材质代号
+                      InspectionConclusion:$("#inspect").html(),//检验结论
+                      DisposalResult:$("#insRe").html(),//处置结果
+                      IsFirstInorOut:getRowStatus("order"),//是否遵循先进先出
+                      PriorityUse:getRowStatus("tryOut"),//是否优先使用
+                      ProductAllows:goodsId//指定产品使用
+                    }
+                   //alert(flag);
+               switch(flag){
+                   case 1 :{
+                      json.DisposalResult = "";
+                      delete json.IsFirstInorOut;
+                      delete json.PriorityUse ;
+                      json.ProductAllows = "";
+                      break;
+                   }
+                   case 2 :{
+                      break;
+                   }
+                   case 3 :{
+                      delete json.IsFirstInorOut;
+                      delete json.PriorityUse;
+                      json.ProductAllows = "";
+                      break; 
+                   }
+              }
+              InspectionListObj.push(json);      
+            
+            var submitInfo = {
+                  LogicType: "检验",
+                  OpType: "检验结论",
+                  InspectionStation: $("#verStations").html(),//送检工位
+                  InspectionProcedure: $("#InsProcess").html(),//检验工序
+                  TestStation: $("#InsStation").html(),//检验工位
+                  InspectionList: InspectionListObj
+            }
+            //appcan.window.alert('提交数据',JSON.stringify(submitInfo));     
+            appcan.window.openToast('提交中...',10000,5,1); 
+            appcan.ajax({
+                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                type:"POST",
+                data:{
+                  input:submitInfo  
+                },
+                dataType:"json",
+                success:function(info){
+                    appcan.window.closeToast(); 
+                    //appcan.window.alert('123',JSON.stringify(info));
+                    if(info.bSuccess){
+                        appcan.window.openToast('提交成功！',1000,5,0);
+                        appcan.window.evaluateScript({
+                               name:'inspectResult',
+                               scriptContent:"reload()"
+                           })
+                    }else{
+                        appcan.window.openToast(info['Error'],1000,5,0);
+                    }
+                },
+                error:function(){
+                    appcan.window.openToast('网络请求错误！',1000,5,0);
+                }
+            })
+            
+            
+            
+        }
+        
+        
+ </script>
+</html>

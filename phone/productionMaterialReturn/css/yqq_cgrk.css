@@ -1,0 +1,123 @@
+.tx{
+    border:1px solid red;
+}
+.yqq-bg{
+    background-image: url('../../img/bg1.png');
+}
+.yqq-font-w{
+    color:white;
+    font-weight: bold;
+    font-size:1em;
+}
+.yqq-fontsize{
+    color:black;
+    font-weight: bold;
+    font-size:0.8em;
+}
+.yqq-hg-min{
+    min-height:2em;
+}
+.yqq-hh{
+    word-break:break-all;
+    margin-right:1%; 
+}
+.yqq-butt{
+    width: 3em;
+    height: 1.7em;
+    background: rgba(27,57,48,1);
+}
+.yqq-delete-butt{
+    width: 4em;
+    height: 2em;
+    background: rgba(27,57,48,1);
+}
+.yqq-xxk{
+    background-color:rgba(255,255,255,0.2);
+}
+.zk-clickR{
+    background-color:rgba(255,0,0,0.4);
+}
+.yqq-xxk-a{
+    background-color:rgb(43,101,118);
+}
+.yqq-test{
+    border: 1px solid rgba(27,57,48,0.9);
+}
+.yqq-w1{
+    width: 10%;   
+}
+.yqq-w3{
+    width: 30%;   
+}
+.yqq-w4{
+    width: 40%;   
+}
+.yqq-w5{
+    width: 55%;   
+}
+.yqq-w6{
+    width: 60%;   
+}
+.yqq-w7{
+    width: 70%;   
+}
+.yqq-w8{
+    width: 80%;   
+}
+.yqq-w9{
+    width: 90%;   
+}
+.yqq-w10{
+    width: 100%;   
+}
+
+.yqq-jz{
+    text-align:center; 
+    vertical-align:middle;
+}
+.yqq-bt{
+    border-top:1px solid rgba(27,57,48,0.9);
+}
+.yqq-bbd{
+    border-bottom:1px solid rgba(255,255,255,0.9);
+}
+.yqq-bb{
+    border-bottom:1px solid rgba(27,57,48,0.9);
+}
+.yqq-bb1{
+    border-bottom:2px solid rgba(27,57,48,0.9);
+}
+.yqq-br{
+    border-right:1px solid rgba(27,57,48,0.9);
+}
+.yqq-bl{
+     border-left:1px solid rgba(27,57,48,0.9);
+}
+.yqq-marr{
+    margin-right: 2em;
+}
+.yqq-pad-l{
+    padding-left: 1em;
+}
+.yqq-font-l{
+    color:#74A18E;
+}
+.yqq-xx{
+    width: 8em;
+    min-height: 1.3em;
+}
+.yqq-xx-font{
+    font-size:.86em;
+}
+.yqq-h{
+    height: 1.1em;
+}
+.yqq-yctj{
+   
+}
+.yqq-head-c{
+    background-color: #1B3930;
+}
+.yqq-uinn{
+    padding:0.5 0.5 0 0.5;
+}

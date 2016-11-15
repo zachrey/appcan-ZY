@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/ui-box.css">
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/ui-color.css">
+        <link rel="stylesheet" href="../css/appcan.icon.css">
+        <link rel="stylesheet" href="../css/appcan.control.css">
+        <link rel="stylesheet" href="css/wkf.css"/>
+        <script src="../js/init.js"></script>
+    </head>
+    <body id="body" class="um-vp " ontouchstart>
+        <div id="space" class="wkf-w10 " style="height: 5%"></div>
+        <div id="father" class=" wkf-h10 ub-ac ub-ver" style="visibility:hidden;"><!-- visible --><!-- hidden -->
+            <div id="采购入库" class="uhide wkf-w45 w-click  ub wkf-h3 wkf-butt ub-ac ub-pc wkf-font-w wkf-button-left" >采购入库</div>
+            <div id="生产入库" class="uhide wkf-w45 w-click  ub wkf-h3 ub-ac ub-pc wkf-butt wkf-font-w wkf-button-left">生产入库</div>
+            <div id="生产领料" class="uhide wkf-w45 w-click  ub wkf-h3 ub-ac ub-pc wkf-butt wkf-font-w wkf-button-left">生产领料</div>
+            <div id="物料移库" class="uhide wkf-w45 w-click  ub wkf-h3 ub-ac ub-pc wkf-butt wkf-font-w wkf-button-left">物料移库</div>
+            <div id="容器转移" class="uhide wkf-w45 w-click  ub wkf-h3 ub-ac ub-pc wkf-butt wkf-font-w wkf-button-left">容器转移</div>
+            <div id="产品包装" class="uhide wkf-w45 w-click  ub wkf-h3 ub-ac ub-pc wkf-butt wkf-font-w wkf-button-left">产品包装</div>
+            <div id="条码替换" class="uhide wkf-w45 w-click  ub wkf-h3 ub-ac ub-pc wkf-butt wkf-font-w wkf-button-left">条码替换</div>
+            <div id="加工投料采集" class="uhide wkf-w45 w-click  ub wkf-h3 ub-ac ub-pc wkf-butt wkf-font-w wkf-button-left">加工投料采集</div>
+            <div id="加工产出采集" class="uhide wkf-w45 w-click  ub wkf-h3 ub-ac ub-pc wkf-butt wkf-font-w wkf-button-left">加工产出采集</div>
+            <div id="铜屑产出" class="uhide wkf-w45 w-click  ub wkf-h3 ub-ac ub-pc wkf-butt wkf-font-w wkf-button-left">铜屑产出</div>
+            <div id="铜屑干燥" class="uhide wkf-w45 w-click  ub wkf-h3 ub-ac ub-pc wkf-butt wkf-font-w wkf-button-left">铜屑干燥</div>
+            <div id="铜屑入库" class="uhide wkf-w45 w-click  ub wkf-h3 ub-ac ub-pc wkf-butt wkf-font-w wkf-button-left">铜屑入库</div>
+            <div id="采购退货" class="uhide wkf-w45 w-click  ub wkf-h3 ub-ac ub-pc wkf-butt wkf-font-w wkf-button-left">采购退货</div>
+            <div id="生产退料" class="uhide wkf-w45 w-click  ub wkf-h3 ub-ac ub-pc wkf-butt wkf-font-w wkf-button-left">生产退料</div>
+            <div id="容器装入" class="uhide wkf-w45 w-click  ub wkf-h3 ub-ac ub-pc wkf-butt wkf-font-w wkf-button-left">容器装入</div>
+            <div id="条码赋值" class="uhide wkf-w45 w-click  ub wkf-h3 ub-ac ub-pc wkf-butt wkf-font-w wkf-button-left">条码赋值</div>
+            <div id="送检" class="uhide wkf-w45 w-click  ub wkf-h3 ub-ac ub-pc wkf-butt wkf-font-w wkf-button-left">送检</div>
+            <div id="检验结论录入" class="uhide wkf-w45 w-click  ub wkf-h3 ub-ac ub-pc wkf-butt wkf-font-w wkf-button-left">检验结论录入</div>
+       </div>
+       <div id="space" class="wkf-w10 " style="height: 5%"></div>
+
+    </body>
+    <script src="../js/appcan.js"></script>
+    <script src="../js/appcan.control.js"></script>
+    <script src="../js/locStorageModify.js"></script>
+    </body>
+    <script>
+        var USER;
+        appcan.ready(function() {
+            USER = appcan.locStorage.val("LOGIN");
+            //appcan.window.alert('2',USER);
+            USER = eval('('+USER+')');
+            for(var i=0;i<USER.ListEvent.length;i++){
+                $('#'+USER.ListEvent[i].EventName).removeClass('uhide');
+            }
+            //eventAjax('9900001542');
+        });
+        function getData( Data ){
+            // alert(Data);
+            eventAjax( Data );
+        }
+        
+        function eventAjax( Data ){
+            appcan.request.ajax({
+                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                type:"POST",
+                data:{
+                   input:{
+                       LogicType:"扫码",
+                       ScanType:"事件扫码",
+                       OperatorId:USER.UserID,
+                       stationId:USER.ID,
+                       barcode:Data//"9900001541"
+                   }
+                },
+                dataType:"json",
+                success : function( info ) {
+                    //appcan.window.alert(JSON.stringify(info));
+                    if(info.bSuccess){
+                        var name = jumpEvent(info.Eventbarcode.EventName);
+                        if( name == ''){
+                            appcan.window.openToast('没有对应的事件，请重新扫描！',3000,5,0);
+                            return;
+                        }
+                        openWindow(name);
+                    }else{
+                        appcan.window.openToast(info.Error + ' 即将进入手动选择界面！',3000,5,0);
+                        setTimeout(function(){
+                          $("#father").css("visibility","visible")
+                          $("#body").addClass("wkf-butt-bg"); 
+                        },3000);
+                    }
+                    
+                },
+                error: function(){
+                    appcan.window.openToast("网络请求错误！",1000,5,0);
+                }
+            }) 
+        }
+        
+        appcan.button('.w-click','ani-act',function(){
+            var name = jumpEvent(this.id);
+            openWindow(name);
+        });
+        
+        
+        function jumpEvent( Event ){
+           var name = '';
+           switch ( Event ){
+                case '采购入库':{
+                  name = "purchase";
+                  break;  
+                }
+                case '生产入库':{
+                  name = "productionStorage";  
+                  break;  
+                }
+                case '生产领料':{
+                  name = "picking";   
+                  break;  
+                }
+                case '物料移库':{
+                  name = "materialTransfer";  
+                  break;  
+                }
+                case '容器转移':{
+                  name = "containerTransfer";  
+                  break;  
+                }
+                case '产品包装':{
+                  name = "productPackaging";   
+                  break;  
+                }
+                case '检验结论录入':{
+                  name = "inspectResult";   
+                  break;  
+                }
+                case '送检':{
+                  name = "inspect";   
+                  break;  
+                }
+                case '条码替换':{
+                  name = "BarcodeReplace";   
+                  break;  
+                }
+                case '加工投料采集':{
+                  name = "processInventory";   
+                  break;  
+                }
+                case '加工产出采集':{
+                  name = "processProduction";   
+                  break;  
+                }
+                case '铜屑产出':{
+                  name = "copperOut";   
+                  break;  
+                }
+                case '铜屑干燥':{
+                  name = "cuprumDry";   
+                  break;  
+                }
+                case '铜屑入库':{
+                  name = "copperInput";   
+                  break;  
+                }
+                case '采购退货':{
+                  name = "returnsInwards";   
+                  break;  
+                }
+                case '条码赋值':{
+                  name = "barcodeAssign";   
+                  break;  
+                }
+                case '生产退料':{
+                  name = "productionMaterialReturn";   
+                  break;  
+                }
+                case '容器装入':
+                  name = "containerInput";   
+                  break;   
+            }
+            return name;
+        }
+    
+    var openWindow = function(name){
+        localOption.localSave(name);
+        setTimeout(function(){
+            appcan.window.open({
+                name:name,
+                data:"../"+name+"/"+name+".html",
+                aniId:10
+            })
+        },1000)
+    }
+    
+    </script>
+</html>

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/ui-box.css">
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/ui-color.css">
+        <link rel="stylesheet" href="../css/appcan.icon.css">
+        <link rel="stylesheet" href="../css/appcan.control.css">
+        <link rel="stylesheet" href="css/yqq_cgrk.css">
+        <link rel="stylesheet" type="text/css" href="css/wkf.css"/>
+        <script src="../js/init.js"></script>
+    </head>
+    <body class="um-vp" ontouchstart>
+        <div  class="ub ub-f1 ub-ver yqq-xxk uc-a uinn umar-a " style="margin-bottom: 1em">  
+              <div class="ub yqq-w10" >
+                 <div  id="staDel" class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w w-click">工位</div>
+                 <div  id="station" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc wkf-hh wkf-font-w w-click"></div>
+              </div>
+              <div  class="ub yqq-w10" >
+                 <div  class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">&diams;工序</div>
+                 <div  id="process" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w w-click"></div>
+              </div>
+              <div  class="ub yqq-w10" >
+                 <div  class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">日期</div>
+                 <div  id="date" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc wkf-hh wkf-font-w"></div>
+              </div>
+        </div>
+        <div  class="ub ub-f1 ub-ver yqq-xxk uc-a uinn umar-a " style="margin-bottom: 1em">  
+              <div  class="ub yqq-w10" >
+                 <div  id="vesDel" class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w w-click">转出容器</div>
+                 <div  id="vesselCode" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w w-click"></div>
+              </div>
+              <div  class="ub yqq-w10" >
+                 <div  id="purNumDel" class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w w-click">&diams;品号</div>
+                 <div  id="purNum" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w w-click"></div>
+              </div>
+              <div  class="ub yqq-w10" >
+                 <div  class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w w-click">品名</div>
+                 <div  id="purName" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w "></div>
+              </div>
+              <div  class="ub yqq-w10" >
+                 <div  class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w w-click">规格</div>
+                 <div  id="purSta" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w"></div>
+              </div>
+              <div  class="ub yqq-w10" >
+                 <div  class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w w-click">材质代号</div>
+                 <div  id="matCode" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w"></div>
+              </div>
+              <div id="" class="ub yqq-w10" >
+                 <div id="emptyInputContainer" class="ub yqq-w3 w-click yqq-bbd uinn ub-pc ub-ac wkf-font-w">转入容器<div id="unit" class="wkf-font-r"></div></div>
+                 <div id="inputContainer" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-z"></div>
+              </div>
+        </div>
+        
+        <div id="down" class="ub ub-f1 ub-ver yqq-xxk uc-a uinn umar-a " style="margin-bottom: 2em;color:white;">
+              <div id="" class="ub ub-f1">
+                  <div class="ub wkf-font-w umar-l uinn">物料条码</div>
+                  <div class="ub ub-f1 ub-pe">
+                      <div class="ub uinn uc-a" id="deleteBarcoe" style="background-color: #2B6576">删除</div>
+                  </div>
+              </div>
+              <div id="bar_append" class="wkf-hh1">
+              </div>
+              <!-- <label onclick="openNum('9900001173')"> 9900001173&nbsp;&nbsp;</label> -->
+       </div>
+        
+    </body>
+    <script src="../js/appcan.js"></script>
+    <script src="../js/appcan.control.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/locStorageModify.js"></script>
+    </body>
+    <script>
+        //避免重复，条码数组
+        var barcodeArr = [];
+        //当前组的条码
+        var barcodeArrNow = [];
+        //全部物料条码信息
+        var barcodeBaseInfo = [];
+        //存入请求得到的工位信息对象
+        var stationJD;
+        //存入请求得到的工序信息对象
+        var processJD;
+        //存入请求得到的容器信息对象
+        var ContainerJD;
+        //存入请求得到的品号信息对象
+        var purNumJD = [];
+        //存入请求得到的总计信息对象
+        var detailJD = [];
+        //
+        var materialbarcodeObj = {};
+        //当前打开的窗口名字
+        var winNameNow = '';
+        var tdDate = new Date();
+        var tY=tdDate.getFullYear(),
+            tM=tdDate.getMonth()+1,
+            tD=tdDate.getDate();
+        var LOGIN = appcan.locStorage.getVal("LOGIN");
+        LOGIN = JSON.parse( LOGIN );
+        appcan.ready(function() {
+            stationAjax(LOGIN.StationBarcode);
+             appcan.initBounce();
+            //设置当前时间
+            tdDate=tY+'/'+tM+'/'+tD;
+            $("#date").html( tdDate );
+            //日期插件回调
+            uexControl.cbOpenDatePicker = function (opId,dataType,data) {
+                var oData=eval('('+data+')');
+                $("#date").html(oData.year+'/'+oData.month+'/'+oData.day);   
+            }
+        });
+        
+        //日期时间按钮监听
+        appcan.button('#date','ani-act',function(){
+            uexControl.openDatePicker(tY,tM,tD);
+        });
+        
+        //得到条码
+        function getData( barcode ){
+            if($("#station").html() == null || $("#station").html() == ""){
+                 stationAjax( barcode );
+            }else if($("#process").html() == null || $("#process").html() == ""){
+                 appcan.window.openToast('请选择工序！',1000,5,0);
+                 return;
+            }else if($("#vesselCode").html() == null || $("#vesselCode").html() == ""){
+                 vesselCodeAjax( barcode );
+            }else if($("#inputContainer").html() == null || $("#inputContainer").html() == ""){
+                inputContainerAjax( barcode );
+            }
+        }
+        
+        //工位
+        function stationAjax( barcode ){
+            appcan.request.ajax({
+                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                type:"POST",
+                data:{
+                    input:{
+                        "OpType":"扫码",
+                        "WorkLocationBarcode":barcode,
+                        "LogicType":"工位管理"
+                    } 
+                },
+                dataType:"json",
+                success:function(info){
+                     //appcan.window.alert(JSON.stringify(info));
+                    if(!info.bSuccess){
+                        appcan.window.openToast(info.Error,3000,5,0);
+                        return;
+                    }
+                    if(info.ifStationBarcode){
+                        stationJD = info.WorkLocationInfo;
+                        $('#station').html(info.WorkLocationInfo.StationName);
+                        $('#process').html('');
+                        if(info.WorkLocationProcessList.length === 1){
+                            processJD = info.WorkLocationProcessList[0];
+                            $('#process').html(info.WorkLocationProcessList[0].ProcessName);
+                        }
+                        //如果不是一条数据，则选进行本地存储，便于选择。
+                        appcan.locStorage.val('PROCESSLIST',info.WorkLocationProcessList);
+                        
+                        $('html,body').animate({scrollTop:$('#station').offset().top-80},1000);
+                    }else{
+                        appcan.window.openToast(info.Error,3000,5,0);
+                        return;
+                    }
+                },
+                error:function(e){
+                     appcan.window.openToast('网络请求错误！',1000,5,0);
+                }
+            });
+        }
+        
+        //容器条码
+        function vesselCodeAjax(barcode){
+            if(barcodeArr.indexOf(barcode)  !== -1){
+                appcan.window.openToast('容器码扫描重复！',1000,5,0);
+                return;
+            }
+            appcan.ajax({
+                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                type:"POST",
+                data:{
+                    input:{
+                        LogicType:"扫码",
+                        scanType:"通用扫码",
+                        barcode:barcode
+                    }
+                },
+                dataType:"json",
+                success:function(info){
+                    //appcan.window.alert(JSON.stringify(info));
+                    if(info.BarcodeType=="1"){
+                        //alert(123);
+                       if(info.isFitBarcodeType && info.isBarcodeBeUsed && info.BarcodeInfo.materialbarcode != null && info.BarcodeInfo.materialbarcodeList.length !=0){
+                                ContainerJD = info.BarcodeInfo.container;
+                                materialbarcodeObj = info.BarcodeInfo.materialbarcode;
+                                $('#vesselCode').html(ContainerJD.ContainerBarCode);
+                                goodObj = info.BarcodeInfo.materialbarcodeList[0];
+                                $("#purNum").html(goodObj.MaterialID);
+                                $("#purName").html(goodObj.MatName);
+                                $("#purSta").html(goodObj.Specifications);
+                                $("#matCode").html(goodObj.TextureOfMaterial);
+                       }else{
+                           appcan.window.openToast('不满足干燥条件！',1000,5,0); 
+                       } 
+                    }else{
+                        appcan.window.openToast('不为容器码，请重新扫描！',1000,5,0);                        
+                    }
+                },
+                error:function(a,b,c,msg){
+                    // appcan.window.alert('123',msg);
+                    appcan.window.openToast('网络请求错误！',1000,5,0);
+                }
+            })
+        }
+        
+          function inputContainerAjax( Data ){
+             //alert(1234);
+            // $("#inputContainer").html(Data);
+               appcan.ajax({
+                    url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                    type:"POST",
+                    data:{
+                        input:{
+                            LogicType:"扫码",
+                            scanType:"通用扫码",
+                            barcode:Data
+                        }
+                    },
+                    dataType:"json",
+                    success : function( info ) {
+                        //appcan.window.alert(JSON.stringify(info));
+                        inContaineObj = info.BarcodeInfo.container;
+                        if( info.isFitBarcodeType  ){
+                              $("#inputContainer").html(info.BarcodeInfo.container.ContainerBarCode);
+                        }
+                    },
+                    error: function(){
+                        appcan.window.openToast("网络请求错误！",1000,5,0);
+                    }
+            })
+        }
+        
+        
+        appcan.button('.w-click','ani-act',function(){
+            switch(this.id){
+                case 'station':
+                    openWindow('traStation');
+                    break;
+                case 'process':
+                    if($('#station').html() == ''){
+                        appcan.window.openToast('请先选择工位！',1000,5,0);
+                        return;
+                    }
+                    openWindow('proInvProcess');
+                    break;
+                case 'emptyInputContainer':{
+                    //inputContainerAjax('9900001446');
+                    $("#inputContainer").html("");
+                    break;
+                }
+                case 'staDel':{
+                   // stationAjax('9900001480');
+                   $("#station").html("");
+                   $("#process").html("");
+                    break;
+                }
+                    
+                case 'vesDel':{
+                     //vesselCodeAjax('9900001444');
+                     $("#vesselCode").html("");
+                     $("#purName").html("");
+                     $("#purSta").html("");
+                     $("#purNum").html("");
+                    break;
+                }
+            }
+        });
+        //打开窗口
+        function openWindow( name ){
+            localOption.localSave( name );
+            winNameNow = name;
+            appcan.window.open({
+                name:name,
+                data:name+'.html',
+                aniId:10
+            })
+        }
+         //各个窗口的回调
+        function openWindowBack( info ){
+            //appcan.window.alert(info);
+            info = eval('('+info+')');
+            switch(winNameNow){
+                case 'traStation':
+                    $('#station').html('');
+                    $('#process').html('');
+                    stationAjax(info.StationBarcode);
+                    break;
+                case 'proInvProcess':
+                    processJD = info;
+                    $('#process').html(info.ProcessName);
+                    $('html,body').animate({scrollTop:$('#process').offset().top-80},1000);
+                    break; 
+               case 'purNumber':
+                    materialJD = info;
+                    $("#purName").html(materialJD.MatName);
+                    $("#purNum").html(materialJD.MaterialID);
+                    $("#purSta").html(materialJD.Standard);
+                    $("#matCode").html(materialJD.TextureOfMaterial);
+                    $('html,body').animate({scrollTop:$('#purNum').offset().top-80},1000);
+                    break;
+            }
+        }
+        
+        //保存
+        function groupSave(){
+           // alert(213);
+           
+            var json = {};
+            var container = $('#vesselCode'),
+                purNum = $('#purNum');
+            if(container.html() === '' || purNum.html() === ''){
+                appcan.window.openToast('请先完善信息！',1000,5,0);
+                return;
+            }
+            //避免重复
+            barcodeArr.push(container.html());
+            //存入准备展示的数据
+            detailJD.push({
+                containerCode:container.html(),
+                purNum:$("#purNum").html(),
+                purName:$('#purName').html(),
+                purSta:$('#purSta').html(),
+                matCode:$('#matCode').html(),
+                inputContainer:$("#inputContainer").html(),
+                
+            });
+            //存入准备提交的数据
+            json.ProductNo = purNumJD.MaterialID;
+            json.ProductName = purNumJD.MatName;
+            json.ContainerBarCode = ContainerJD.ContainerBarCode;
+            json.ContainerGUID = ContainerJD.ContainerGuid;
+            json.MaterialBarcodeGuid = materialbarcodeObj.GUID;
+            json.NewContainerBarCode = $("#inputContainer").html();
+            json.NewMaterialBarcodeGuid = inContaineObj.ContainerGuid;
+            //存入数组
+            barcodeBaseInfo.push(json);
+            var str = '<li style="display:inline-block;">'+container.html()+'&nbsp;&nbsp;</li>';
+            $('#bar_append').prepend(str);
+            //清空
+            container.html('');
+            purNum.html('');
+            $('#purName').html('');
+            $('#purSta').html('');
+            $('#matCode').html('');
+            $("#inputContainer").html('');
+            //更新主页记录数量
+            appcan.window.evaluateScript({
+                name:"cuprumDry",
+                scriptContent:"modifyCount("+detailJD.length+")"
+            });
+            appcan.window.openToast('保存成功！',1000,5,0);
+            $('html,body').animate({scrollTop:$('#vesselCode').offset().top-80},1000);
+        }
+        
+        //删除当前条码
+        appcan.button('#deleteBarcoe','ani-act',function(){
+            $('#bar_append>:first').remove();
+            barcodeArr.pop();
+            barcodeBaseInfo.pop();
+            detailJD.pop();
+            appcan.window.evaluateScript({
+                name:"cuprumDry",
+                scriptContent:"modifyCount("+detailJD.length+")"
+            });
+        });
+        
+         //开启总计页面
+       function openTotal(){
+           localOption.localSave('copamountDetail');
+           appcan.locStorage.val('AMOUNTDETAILINFO',detailJD);
+           appcan.window.open({
+               name:"copamountDetail",
+               data:"amountDetail.html"
+           });
+       }
+       function copperOutSubmit(){
+           if(!confirm("确定提交？")){
+               return;
+           }
+
+           if(barcodeBaseInfo.length === 0){
+               appcan.window.openToast('当前没有信息！',1000,5,0);
+               return;
+           }
+           appcan.window.openToast('提交中...',10000,5,1);
+           var jsonData =  {
+                    "LogicType": "铜屑管理",
+                    "OpType": "铜屑干燥",
+                    "StationBarcode":stationJD.StationBarcode,//工位条码
+                    "ContainerLifeOperatorBarcode":"3556",//操作人ID
+                    "ContainerLifeOperatorName":"薄欣",//操作人姓名
+                    "copperScrapInfoList":barcodeBaseInfo
+           }
+           //appcan.window.alert('提示',JSON.stringify(jsonData));
+           appcan.ajax({
+               url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+               type:"POST",
+               data:{
+                   input:jsonData
+               },
+               dataType:'json',
+               success:function(info){
+                   //appcan.window.alert(JSON.stringify(info));
+                   if(info.bSuccess){
+                       appcan.window.closeToast();
+                       appcan.window.openToast('提交成功！',1000,5,0);
+                       appcan.window.evaluateScript({
+                               name:'cuprumDry',
+                               scriptContent:"reload()"
+                       })
+                   }else{
+                       appcan.window.openToast(info['Error'],1000,5,0);
+                   }
+               },
+               error:function(e){
+                   appcan.window.openToast('网络请求出错！',1000,5,0);
+               }
+           })
+           
+           
+           //appcan.window.alert('准备提交的数据',JSON.stringify(json));
+       }
+       
+    </script>
+</html>

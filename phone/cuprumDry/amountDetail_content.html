@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/ui-box.css">
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/ui-color.css">
+        <link rel="stylesheet" href="../css/appcan.icon.css">
+        <link rel="stylesheet" href="../css/appcan.control.css">
+        <link rel="stylesheet" href="css/wkf.css"/>
+        <link rel="stylesheet" href="css/yqq_cgrk.css">
+        <link rel="stylesheet" href="css/zk.css">
+        <script src="../js/init.js"></script>
+    </head>
+    <body class="um-vp " ontouchstart>
+        <div id="sheet" class="ub uinn ub-f1 ub-ver bc-text">
+            <!-- <div id="sheet0" class="ub ub-f1 ub-ver yqq-xxk uc-a uinn umar-a zk-marTop2 ">
+              <div id="" class="ub ub-ver">
+                  <div id="tittle" class="ub ub-ver yqq-bbd">
+                    <div  class="ub yqq-w10  zk-borderTop ub-ver" >
+                        <div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">
+                            <div class="ub yqq-w4 ub-pc">品号：</div>
+                            <div class="ub yqq-w6">品号1</div>
+                        </div>
+                    </div>
+                    <div  class="ub yqq-w10  zk-borderTop ub-ver" >
+                        <div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">
+                            <div class="ub yqq-w4 ub-pc">品名：</div>
+                            <div class="ub yqq-w6">品名11</div>
+                        </div>
+                    </div>
+                    <div  class="ub yqq-w10  zk-borderTop ub-ver" >
+                        <div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">
+                            <div class="ub yqq-w4 ub-pc">规格：</div>
+                            <div class="ub yqq-w6">规格1</div>
+                        </div>
+                    </div>
+                    <div  class="ub yqq-w10  zk-borderTop ub-ver" >
+                        <div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">
+                            <div class="ub yqq-w4 ub-pc">投料批次：</div>
+                            <div class="ub yqq-w6">批次1</div>
+                        </div>
+                    </div>
+                    <div  class="ub yqq-w10  zk-borderTop ub-ver" >
+                        <div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">
+                            <div class="ub yqq-w4 ub-pc">单位：</div>
+                            <div class="ub yqq-w6">KG</div>
+                        </div>
+                    </div>
+                 </div>
+                 <div id="detail" class="ub ub-ver uinn ">
+                   <div id="detailTittle" class="ub umar-t">
+                     <div id="" class="umar-l ub wkf-w6 ub-ac  wkf-font-w">物料条码</div>
+                     <div id="" class="ub wkf-4  ub-ac ub-pc wkf-font-w">数量</div>
+                   </div>
+                   <div id="addtion" class="">
+                     <div id="lable" class="ub" style="margin-bottom: -1em">
+                         <div id="" class="umar-l ub wkf-w6 ub-ac wkf-hh">9900001206</div>
+                         <div id="" class="ub wkf-4  ub-ac ub-pc uinn wkf-hh">33</div>
+                     </div>
+                   </div>
+                 </div>
+              </div>
+            </div> -->
+            
+            
+        </div>
+       
+    </body>
+    <script src="../js/appcan.js"></script>
+    <script src="../js/appcan.control.js"></script>
+    <script src="../js/locStorageModify.js"></script>
+    </body>
+    <script>
+        appcan.ready(function() {
+             var AMOUNTDETAILINFO = appcan.locStorage.val('AMOUNTDETAILINFO');
+             AMOUNTDETAILINFO = eval('('+AMOUNTDETAILINFO+')');
+             if(AMOUNTDETAILINFO.length === 0){
+                 appcan.window.openToast('当前没有数据！',1000,5,0);
+                 return;
+             }
+         //组
+         for(var j=0;j<AMOUNTDETAILINFO.length;j++)
+         {
+             var strTittle = '<div id="sheet0" class="ub ub-f1 ub-ver yqq-xxk uc-a uinn umar-a zk-marTop2 ">'
+              +'<div id="" class="ub ub-ver">'
+                  +'<div id="tittle" class="ub ub-ver yqq-bbd">'
+                   +' <div  class="ub yqq-w10  zk-borderTop ub-ver" >'
+                        +'<div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">'
+                            +'<div class="ub yqq-w4 ub-pc">转出容器：</div>'
+                            +'<div class="ub yqq-w6">'+AMOUNTDETAILINFO[j].containerCode+'</div>'
+                        +'</div>'
+                    +'</div>'
+                    +'<div  class="ub yqq-w10  zk-borderTop ub-ver" >'
+                        +'<div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">'
+                            +'<div class="ub yqq-w4 ub-pc">品号：</div>'
+                            +'<div class="ub yqq-w6">'+AMOUNTDETAILINFO[j].purNum+'</div>'
+                        +'</div>'
+                    +'</div>'
+                    +'<div  class="ub yqq-w10  zk-borderTop ub-ver" >'
+                        +'<div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">'
+                            +'<div class="ub yqq-w4 ub-pc">品名：</div>'
+                            +'<div class="ub yqq-w6">'+AMOUNTDETAILINFO[j].purName+'</div>'
+                        +'</div>'
+                    +'</div>'
+                    +'<div  class="ub yqq-w10  zk-borderTop ub-ver" >'
+                        +'<div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">'
+                            +'<div class="ub yqq-w4 ub-pc">规格：</div>'
+                            +'<div class="ub yqq-w6">'+AMOUNTDETAILINFO[j].purSta+'</div>'
+                        +'</div>'
+                    +'</div>'
+                   +'<div  class="ub yqq-w10  zk-borderTop ub-ver" >'
+                        +'<div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">'
+                            +'<div class="ub yqq-w4 ub-pc">材质代号：</div>'
+                            +'<div class="ub yqq-w6">'+AMOUNTDETAILINFO[j].matCode+'</div>'
+                        +'</div>'
+                    +'</div>'
+                    +'<div  class="ub yqq-w10  zk-borderTop ub-ver" >'
+                        +'<div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">'
+                            +'<div class="ub yqq-w4 ub-pc">转入容器：</div>'
+                            +'<div class="ub yqq-w6">'+AMOUNTDETAILINFO[j].inputContainer+'</div>'
+                        +'</div>'
+                    +'</div>'
+                 +'</div>'
+                 +'</div></div>'
+             $("#sheet").append(strTittle);
+         }   
+        });
+        
+            
+            
+        //物料条码    
+        
+       
+    </script>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/ui-box.css">
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/ui-color.css">
+        <link rel="stylesheet" href="../css/appcan.icon.css">
+        <link rel="stylesheet" href="../css/appcan.control.css">
+        <link rel="stylesheet" href="css/wkf.css"/>
+        <link rel="stylesheet" href="css/yqq_cgrk.css">
+        <link rel="stylesheet" href="css/zk.css">
+        <script src="../js/init.js"></script>
+    </head>
+    <body class="um-vp " ontouchstart>
+        <div id="sheet" class="ub uinn ub-f1 ub-ver bc-text">
+            <!-- <div id="sheet0" class="ub ub-f1 ub-ver yqq-xxk uc-a uinn umar-a zk-marTop2 ">
+              <div id="" class="ub ub-ver">
+                  <div id="tittle" class="ub ub-ver yqq-bbd">
+                    <div  class="ub yqq-w10 ub-ver" >
+                        <div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">
+                            <div class="ub yqq-w3 ub-pc">品号：</div>
+                            <div class="ub yqq-w7">品号1</div>
+                        </div>
+                    </div>
+                    <div  class="ub yqq-w10  ub-ver" >
+                        <div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">
+                            <div class="ub yqq-w3 ub-pc">单号：</div>
+                            <div class="ub yqq-w7">单号1</div>
+                        </div>
+                    </div>
+                 <div id="detail" class="ub ub-ver uinn ">
+                   <div id="detailTittle" class="ub umar-t">
+                     <div id="" class="umar-l ub wkf-w6 ub-ac  wkf-font-w">物料条码</div>
+                   </div>
+                   <div id="addtion" class="">
+                     <div id="lable'+i+'" class="ub ub-ver">
+                          <div id="" class="umar-l ub yqq-w9 ub-ac wkf-hh">9900001212</div>
+                          <div id="" class="umar-l ub yqq-w9 ub-ac wkf-hh">9900001212</div>
+                          <div id="" class="umar-l ub yqq-w9 ub-ac wkf-hh">9900001212</div>
+                       </div>
+                   </div>
+                 </div>
+              </div>
+            </div> -->
+            
+        </div>
+       
+    </body>
+    <script src="../js/appcan.js"></script>
+    <script src="../js/appcan.control.js"></script>
+    <script src="../js/locStorageModify.js"></script>
+    </body>
+    <script>
+        appcan.ready(function() {
+             var pmrAmountDetailInfo = appcan.locStorage.val('pmrAmountDetailInfo');
+             pmrAmountDetailInfo = eval('('+pmrAmountDetailInfo+')');
+             if(pmrAmountDetailInfo.length === 0){
+                 appcan.window.openToast('当前没有数据！',1000,5,0);
+                 return;
+             }
+             // else{
+                 // appcan.alert(mtrAmountDetailInfo);
+             // }
+         //组
+         var strTittle="";
+         for(var j=0;j<pmrAmountDetailInfo.length;j++){
+             strTittle += '<div class="ub ub-f1 ub-ver yqq-xxk uc-a uinn umar-a zk-marTop2 ">'
+                                +'<div  class="ub yqq-w10 ub-ver" >'
+                                    +'<div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">'
+                                        +'<div class="ub yqq-w4 ub-pc">库位：</div>'
+                                        +'<div class="ub yqq-w6">'+pmrAmountDetailInfo[j].shippingSpace+'</div>'
+                                    +'</div>'
+                                +'</div>'
+                                +'<div  class="ub yqq-w10  ub-ver" >'
+                                    +'<div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">'
+                                        +'<div class="ub yqq-w4 ub-pc">仓库：</div>'
+                                        +'<div class="ub yqq-w6">'+pmrAmountDetailInfo[j].wareHouse+'</div>'
+                                    +'</div>'
+                                +'</div>'
+                                 +'<div id="detail" class="ub ub-ver uinn ">'
+                                       +'<div id="detailTittle" class="ub umar-t">'
+                                            +'<div class="umar-l ub wkf-w4 ub-ac wkf-hh">条码：</div>'
+                                            +'<div class="umar-l ub wkf-w6 ub-ac wkf-hh">'+pmrAmountDetailInfo[j].materialNumber+'</div>'
+                                       +'</div>'
+                                       +'<div id="addtion" class="">'
+                                            +'<div class="ub ub-ver">'
+                                                +'<div class="ub">'
+                                                        +'<div id="" class="umar-l ub wkf-w4 ub-ac wkf-hh">品名</div>'
+                                                        +'<div id="" class="umar-l ub wkf-w6 ub-ac wkf-hh">'+pmrAmountDetailInfo[j].Name+'</div>'
+                                                +'</div>'
+                                                +'<div class="ub">'
+                                                        +'<div id="" class="umar-l ub wkf-w4 ub-ac wkf-hh">品号</div>'
+                                                        +'<div id="" class="umar-l ub wkf-w6 ub-ac wkf-hh">'+pmrAmountDetailInfo[j].NumberCode+'</div>'
+                                                +'</div>'
+                                                +'<div class="ub">'
+                                                        +'<div id="" class="umar-l ub wkf-w4 ub-ac wkf-hh">规格</div>'
+                                                        +'<div id="" class="umar-l ub wkf-w6 ub-ac wkf-hh">'+pmrAmountDetailInfo[j].Specification+'</div>'
+                                                +'</div>'
+                                                +'<div class="ub">'
+                                                        +'<div id="" class="umar-l ub wkf-w4 ub-ac wkf-hh">数量</div>'
+                                                        +'<div id="" class="ub wkf-4  ub-ac ub-pc uinn wkf-hh">'+pmrAmountDetailInfo[j].count+'（'+pmrAmountDetailInfo[j].unit+'）</div>'
+                                                +'</div>'
+                                             +'</div>'
+                                        + '</div>'
+                                    +'</div>'
+                                +'</div>';
+         }$("#sheet").html(strTittle);
+        });
+        
+            
+            
+        //物料条码    
+        
+       
+    </script>
+</html>

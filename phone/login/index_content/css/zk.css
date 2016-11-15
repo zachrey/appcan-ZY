@@ -1,0 +1,61 @@
+.zk-min-h {
+    min-height: 2em;
+    line-height: 2.5em;
+}
+.zk-mar1 {
+    margin: 0.15em 0.35em 0.15em 0.4em ;
+}
+.zk-mar2 {
+    margin: 0;
+    width: 3em;
+}
+.zk-mar3{
+    margin: 0.35em;
+}
+.zk-mar4{
+    margin: 0.15em;
+}
+.zk-width{
+    width: 100%;
+}
+.zk-padd1{
+    padding-left: 0.3em;
+}
+.zk-marTop1{
+    margin-top: 1.2em;
+}
+.zk-marTop2{
+    margin-top: 0.65em;
+}
+.zk-borderTop{
+    border-top:  1px solid white;
+    margin-top: 1px;
+}
+.zk-borderBottom{
+    border-bottom: 1px solid white;
+}
+.zk-borderRight{
+    border-right: 1px solid white;
+}
+.zk-boxSize{
+    width:29%;
+    min-height: 3.12em; 
+    position: relative;
+    float: left;
+}
+/*Input框外框颜色去色*/
+input       {
+    /*border:none;*/
+    outline:medium;
+    text-align: center;
+}
+/*Input框输入前字体颜色类*/
+input       ::-webkit-input-placeholder {
+  color: #414B56;
+}
+input       :-moz-placeholder {
+  color: #414B56;
+}
+input       :-ms-input-placeholder {
+  color: #414B56;
+}

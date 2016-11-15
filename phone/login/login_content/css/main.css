@@ -1,0 +1,60 @@
+.c-wh-pLG{
+	background-color:#f2f2f2;
+}
+.uinn-pLb1{
+	padding-bottom:0.7em;
+}
+.userImg{
+	background-image:url('images/userImg.png');
+}
+.pwdImg{
+	background-image:url('images/pwdImg.png');
+}
+.b-gra3{
+	border-color:#d8d8d8;
+}
+.uinn-a4{
+	padding:0.9em 0.625em 0.8125em 0.625em;
+}
+.t-gra2 {
+	color: #d8d8d8;
+}
+.mar-ar2 {
+margin-right: 0.375em;
+}
+.uinn-a5 {
+padding: 0.8125em 0.625em 0.9em 0.625em;
+}
+.uinn-a6 {
+padding: 1em 0.65em 0 0.65em;
+}
+.uinn-at2{
+    padding-top:0.75em;
+}
+.uinn-at1{
+    padding-top:1em;
+}
+.c-wh{
+    background-color: rgba(255 ,255 ,255 ,0.2);
+}
+.zk-btn{
+    background-color:rgb(43,101,118);
+}
+.zk-border{
+    border-color: rgba(255 ,255 ,255 ,0.12);
+}
+/*Input框外框颜色去色*/
+input       {
+    /*border:none;*/
+    outline:medium;
+}
+/*Input框输入前字体颜色类*/
+input::-webkit-input-placeholder {
+    color: #fff;
+}
+input::-moz-placeholder {
+    color: #fff;
+}
+input::-ms-input-placeholder {
+    color: #fff;
+}

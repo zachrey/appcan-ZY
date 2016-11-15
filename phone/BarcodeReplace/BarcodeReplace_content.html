@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/ui-box.css">
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/ui-color.css">
+        <link rel="stylesheet" href="../css/appcan.icon.css">
+        <link rel="stylesheet" href="../css/appcan.control.css">   
+        <link rel="stylesheet" href="css/yqq_cgrk.css">
+        <link rel="stylesheet" href="css/wkf.css"/>
+        <script src="../js/init.js"></script>
+    </head>
+    <body class="um-vp " ontouchstart>
+        <div class="ub  ub-ver">
+            <!-- 工位开始 -->
+          <div id="" class="ub ub-f1 ub-ver yqq-xxk uc-a uinn umar-a ">  
+              <div id="" class="ub yqq-w10" >
+                 <div  class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">工位</div>
+                 <div  id="repStation" class="ub ub-f1 w-click umar-l yqq-bbd uinn ub-ac ub-pc wkf-hh wkf-font-z"></div>
+              </div>
+              <div id="" class="ub yqq-w10 " >
+                 <div  class="ub yqq-w3  uinn yqq-bbd ub-pc ub-ac wkf-font-w">日期</div>
+                 <div id="time" class="ub ub-f1 umar-l  yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-z"></div>
+              </div>
+              <div id="" class="ub yqq-w10 " >
+                 <div id="scanOrdBarcode" class="ub yqq-w3  uinn yqq-bbd ub-pc ub-ac wkf-font-w">原条码</div>
+                 <div id="" class="ub ub-f1 umar-l  yqq-bbd  ">
+                     <input type="" id="repOrdBarcode" name=""  class="wkf-input-nob wkf-font-w " style="width:98%;text-align:center;border:none; height:2.2em;" value="" placeholder=""/ >
+                 </div>
+              </div>
+              <div id="" class="ub yqq-w10 " >
+                 <div  class="ub yqq-w3  uinn yqq-bbd   ub-pc ub-ac wkf-font-w">条码类型</div>
+                 <div id="repCategoryBtu" class="ub ub-f1 umar-l yqq-bbd  ub-ac ub-pc  wkf-font-w "></div>
+              </div>
+              <div id="" class="ub yqq-w10 " >
+                 <div id="scanrepNewBarcode" class="ub yqq-w3  uinn yqq-bbd ub-pc ub-ac wkf-font-w">新条码</div>
+                 <div id="repNewBarcode" class="ub ub-f1 umar-l  yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-z"></div>
+              </div>
+          </div>
+        </div>
+       
+    <script src="../js/appcan.js"></script>
+    <script src="../js/appcan.control.js"></script>
+    <script src="../js/locStorageModify.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    </body>
+    <script>
+        
+        //定义提交数据对象
+        var repSubmitinfo = [];
+        var WINDOWID;
+        var ORDBARCODETYPE ;//原条码类别
+        var ordBarcodeObj = {};
+        var SUBINPUT = {};
+        var LOGIN = appcan.locStorage.val('LOGIN');//存储名字
+        appcan.ready(function() {
+            LOGIN = eval('('+LOGIN+')');
+            $("#repStation").html(LOGIN.StationName);
+//      获取当前日期
+            var myDate = new Date();
+            $("#time").html(myDate.getFullYear()+'/'+(myDate.getMonth()+1)+'/'+myDate.getDate());   
+//      日期选择器的回调   
+            uexControl.cbOpenDatePicker = function (opId,dataType,data) {
+                var oData=eval('('+data+')');
+                $("#time").html(oData.year+'/'+oData.month+'/'+oData.day);   
+            }
+            
+            $("#repOrdBarcode").blur(function(){
+                if($(this).val() == ''){
+                    return;
+                }
+                repOrdBarcodeAjax($(this).val());
+            })
+            
+        });
+        //打开时间选择器
+        appcan.button("#time","ani-act",function(){
+            var myDate = new Date();
+             uexControl.openDatePicker(myDate.getFullYear(),(myDate.getMonth()+1),myDate.getDate());   
+        })
+        //开窗选择条码类别
+        // appcan.button("#repCategoryBtu","ani-act",function(){
+            // WINDOWID = 'repCategory';
+            // localOption.localSave( name );
+            // appcan.window.open({
+                // name:'repCategory',
+                // data:'repCategory.html',
+            // })
+        // })
+        appcan.button("#repStation","ani-act",function(){
+            WINDOWID = 'repStation';
+            localOption.localSave( name );
+            appcan.window.open({
+                name:'repStation',
+                data:'repStation.html',
+            })
+        })
+        appcan.button("#scanOrdBarcode","ani-act",function(){
+            $("#repOrdBarcode").val("");
+            $("#repCategoryBtu").html("");
+           //repOrdBarcodeAjax( "9900001472" );
+        })
+        appcan.button("#scanrepNewBarcode","ani-act",function(){
+           $("#repNewBarcode").html("");
+           //repNewBarcodeAjax( "9900001471" );
+        })
+        function getData( Data )
+        {
+            if($("#repStation").html() == "" || $("#repStation").html() == null){
+                repStationAjax(Data);
+            }else if($("#repOrdBarcode").val() == "" || $("#repOrdBarcode").val() == null){
+                repOrdBarcodeAjax(Data);
+            }else if( $("#repNewBarcode").html() == "" || $("#repNewBarcode").html() == null ){
+                if(String($("#repNewBarcode").html()) == String($("#repOrdBarcode").val())){
+                       appcan.window.openToast('新条码与旧条码相同，请重新选取！',1000,5,0); 
+                       return; 
+                }
+                repNewBarcodeAjax(Data);
+            }
+        }
+        function openWindowBack (Obj){
+            var Obj = eval('('+Obj+')');
+            switch(WINDOWID){
+                case 'repCategory':{$("#repCategory").val(Obj);break;}
+                case 'repStation':{$("#repStation").html(Obj.name);break;}
+            }
+            
+        }
+        function repSubmit(){
+            if(!confirm("确定提交？")){
+               return;
+           }
+            if($("#repOrdBarcode").val() == "" || $("#repNewBarcode").html() == "" || $("#repCategory").val() == "" ){
+               appcan.window.openToast('请将信息完善后再提交！',1000,5,0); return;
+            }
+            appcan.window.alert({
+            title:'提示',
+            content:'是否提交',
+            buttons:['是','否'],
+            callback:function(err,data,dataType,optId){
+               if( data == 0 ){
+                  appcan.window.openToast('提交中...',10000,5,1);
+                  subInput(); 
+                  appcan.request.ajax({
+                    url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                    type:"POST",
+                    data:{
+                        input:SUBINPUT
+                    },
+                    dataType:"json",
+                    success : function( info ) {
+                        if(info.bSuccess){
+                           appcan.window.closeToast();
+                           appcan.window.openToast('提交成功！',1000,5,0);
+                           setTimeout(function(){
+                               appcan.window.evaluateScript({
+                                   name:'BarcodeReplace',
+                                   scriptContent:"reload()"
+                               })
+                           },1000);
+                       }else{
+                          appcan.window.openToast(info['Error'],3000,5,0); 
+                       }
+                    },
+                    error: function(){
+                        appcan.window.openToast("网络请求错误！",1000,5,0);
+                    }
+                })
+              }
+         },
+         })
+       }
+       
+       function subInput(){
+           switch (ORDBARCODETYPE){
+               case '物料定义码': {
+                   SUBINPUT = {
+                        LogicType:"贴码",
+                        PostType:"物料定义贴码",
+                        BarcodeInfo: {
+                            Barcode: $("#repNewBarcode").html(),//新的码 
+                            Id: ordBarcodeObj.ID//被换
+                        }
+                   }
+                   return;
+               }
+               case '供应商码': {
+                   SUBINPUT = {
+                        LogicType:"贴码",
+                        PostType:"供应商贴码",
+                        BarcodeInfo: {
+                            Barcode: $("#repNewBarcode").html(), 
+                            Id: ordBarcodeObj.ID
+                        }
+                   }
+                   return ;
+               }
+               case '仓库码': {
+                   SUBINPUT = {
+                       LogicType:"贴码",
+                       PostType:"仓库贴码",
+                       BarcodeInfo: {
+                           Barcode: $("#repNewBarcode").html(), 
+                           Id: ordBarcodeObj.ID
+                       }
+                   }
+                   return ;
+               }
+               case '容器码': {
+                   SUBINPUT = {
+                      LogicType:"贴码",
+                      PostType:"容器贴码",
+                      BarcodeInfo: {
+                          Barcode: $("#repNewBarcode").html(), 
+                          Id: ordBarcodeObj.container.ID
+                      } 
+                   }
+                   return ;
+               }
+               case '设备码': {
+                   SUBINPUT = {
+                       LogicType:"贴码",
+                       PostType:"设备贴码",
+                       BarcodeInfo: {
+                            Barcode: $("#repNewBarcode").html(), 
+                            Id: ordBarcodeObj.RecordID
+                       }
+                   }
+                   return ;
+               }
+               case '客户码': {
+                   SUBINPUT = {
+                       LogicType:"贴码",
+                       PostType:"客户贴码",
+                       BarcodeInfo: {
+                            Barcode: $("#repNewBarcode").html(), 
+                            Id: ordBarcodeObj.ID
+                       }
+                   }
+                   return ;
+               }
+               case '库位码': {
+                   SUBINPUT = {
+                       LogicType:"贴码",
+                       PostType:"库位贴码",
+                       BarcodeInfo: {
+                            Barcode: $("#repNewBarcode").html(), 
+                            Id: ordBarcodeObj.AlibraryID
+                       }
+                   }
+                   return ;
+               }
+               case '工位码': {
+                   SUBINPUT = {
+                       LogicType:"贴码",
+                       PostType:"工位贴码",
+                       BarcodeInfo: {
+                            Barcode:$("#repNewBarcode").html(), 
+                            Id: ordBarcodeObj.ID
+                       }
+                   }
+                   return ;
+               }
+           }
+       }
+       function repNewBarcodeAjax( Data ){
+           if($("#repOrdBarcode").val() == ""||$("#repOrdBarcode").val() == null){
+                     appcan.window.openToast("请先添加原条码！",1000,5,0);
+                     return ;
+                 }
+           appcan.request.ajax({
+                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                type:"POST",
+                data:{
+                    input:{
+                        LogicType:"扫码",
+                        scanType:"通用扫码",
+                        barcode:Data
+                    }
+                },
+                dataType:"json",
+                success : function( info ) {
+                   //appcan.window.alert(JSON.stringify(info));
+                 if($("#repCategoryBtu").html() != info.BarcodeTypeName){
+                     appcan.window.openToast("条码类型与原条码类别不同！",1000,5,0);
+                     return ;
+                 }else if(info.isBarcodeBeUsed == true){
+                     appcan.window.openToast("该条码已经被使用！",1000,5,0);
+                     return;
+                 }else if(info.isBarcodeBeUsed == false && info.isFitBarcodeType == true){
+                    $("#repNewBarcode").html(Data);
+                 }
+                },
+                error: function(){
+                    appcan.window.openToast("网络请求错误！",1000,5,0);
+                }
+            })
+       }
+       function repOrdBarcodeAjax( Data ){
+           //alert(123);
+           appcan.request.ajax({
+                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                type:"POST",
+                data:{
+                    input:{
+                        LogicType:"扫码",
+                        scanType:"通用扫码",
+                        barcode:Data
+                    }
+                },
+                dataType:"json",
+                success : function( info ) {
+                    //appcan.window.alert(JSON.stringify(info));
+                    if(!info.bSuccess){
+                        appcan.window.openToast(info.Error,3000,5,0);
+                        return;
+                    }
+                    if(info.isFitBarcodeType == true && info.isBarcodeBeUsed == true){
+                        var t = info.BarcodeType;
+                        if(t === 1 || t === 2 ||t === 3 ||t === 4 ||t === 5 ||t === 6 ||t === 7 ||t === 8){
+                            ORDBARCODETYPE = info.BarcodeTypeName;
+                            ordBarcodeObj = info.BarcodeInfo;
+                           // alert(info.BarcodeTypeName)
+                            $("#repOrdBarcode").val(Data);
+                            $("#repCategoryBtu").html(info.BarcodeTypeName);
+                        }else{
+                            appcan.window.openToast("扫码类型错误！",1000,5,0);
+                        }
+                    }
+                },
+                error: function(){
+                    appcan.window.openToast("网络请求错误！",1000,5,0);
+                }
+            })
+       }
+ </script>
+</html>

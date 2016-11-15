@@ -1,0 +1,60 @@
+.zk-min-h {
+    min-height: 1.6em;
+    line-height: 2.5em;
+}
+.zk-mar1 {
+    margin: 0.15em 0.35em 0.15em 0.4em ;
+}
+.zk-mar2 {
+    margin: 0;
+    width: 5em;
+}
+/*Input框外框颜色去色*/
+input       {
+    /*border:none;*/
+    outline:medium;
+    text-align: center;
+}
+/*Input框输入前字体颜色类*/
+input       ::-webkit-input-placeholder {
+  color: #414B56;
+}
+input       :-moz-placeholder {
+  color: #414B56;
+}
+input       :-ms-input-placeholder {
+  color: #414B56;
+}
+
+/*select框外框颜色去色*/
+select       {
+    /*border:none;*/
+    outline:medium;
+    text-align: center;
+    /*将默认的select选择框样式清除*/
+  appearance:none;
+  -moz-appearance:none;
+  -webkit-appearance:none;
+    /*字体类型*/  
+    color:white;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    /*边框*/
+   border:none;
+   background-color: rgba(0,0,0,0);
+}
+/*select框输入前字体颜色类*/
+select::-webkit-input-placeholder {
+    color: #fff;
+}
+select::-moz-placeholder {
+    color: #fff;
+}
+select::-ms-input-placeholder {
+    color: #fff;
+}
+option{
+    color: black;
+    -moz-background: transparent;
+}

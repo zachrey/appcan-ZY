@@ -1,0 +1,1 @@
+ document.getElementsByTagName("html")[0].style.fontSize = Math.floor(window.innerWidth*0.05)+'px'

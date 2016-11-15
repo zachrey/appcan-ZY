@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/ui-box.css">
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/ui-color.css">
+        <link rel="stylesheet" href="../css/appcan.icon.css">
+        <link rel="stylesheet" href="../css/appcan.control.css">
+        <link rel="stylesheet" href="css/yqq_cgrk.css">
+        <link rel="stylesheet" href="css/zk.css">
+        <script src="../js/init.js"></script>
+    </head>
+    <body class="um-vp" ontouchstart>
+        <div id="sheet" class="ub uinn ub-f1 ub-ver bc-text">
+        </div>
+    </body>
+    <script src="../js/appcan.js"></script>
+    <script src="../js/appcan.control.js"></script>
+    <script src="../js/locStorageModify.js"></script>
+    </body>
+    <script>
+        var length;
+        var goodsId;
+        var list = [];
+        var lastFlag;
+        appcan.ready(function() {
+        });
+
+        //模糊查询请求
+        function searchRequest( Data ) {
+            appcan.request.ajax({
+                url : "http://10.101.55.75/fzzy/SPEngine/Barcode",
+                type : "POST",
+                data : {
+                   input:{
+                       LogicType:"扫码",
+                       ScanType:"物料定义模糊查询",
+                       MaterialDefineListInput:{
+                           "MaterialDefineName":Data//"铜矿"
+                       }
+                   }
+
+                },
+                dataType : "json",
+                success : function(info) {
+                    $('#sheet').html('');
+                    //console.log(JSON.stringify(info));
+                    if (info.bSuccess) {
+                        var arr = info.MaterialDefineListOutput.MaterialDefineName,
+                            length = arr.length;
+                         list = arr;
+                        for (var i = 0; i < length; i++) {
+                            var str = '<div id="'+i+'" class="ub ub-f1 ub-ver  uc-a uinn umar-a zk-marTop2 yqq-xxk">'+
+                                        '<div class="ub yqq-w10 zk-borderBottom" >'+
+                                            '<div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                '品号'+
+                                            '</div>'+
+                                            '<div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                arr[i].MaterialID+
+                                            '</div>'+
+                                        '</div>'+
+                                        '<div class="ub yqq-w10 zk-borderBottom" >'+
+                                            '<div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                '品名'+
+                                            '</div>'+
+                                            '<div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                arr[i].MatName+
+                                            '</div>'+
+                                        '</div>'+
+                                        '<div class="ub yqq-w10 zk-borderBottom" >'+
+                                            '<div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                '规格'+
+                                            '</div>'+
+                                            '<div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                arr[i].Standard+
+                                            '</div>'+
+                                        '</div>'+
+                                    '</div>';
+                            $('#sheet').append(str);
+                            
+                            appcan.button('.zk-marTop2','ani-act',function(){
+                                multipleChoice( this.id );
+                            });
+                        }
+                    } else {
+                        appcan.window.openToast("查询结果为空！", 1000, 5, 0);
+                    }
+                },
+                error : function(e) {
+                    appcan.window.openToast("网络连接错误！", 1000, 5, 0);
+                }
+            });
+        }
+        //模拟单项选择
+        function multipleChoice( flag ) {
+            if( $("#"+flag).hasClass("zk-clickR")){
+                    appcan.window.evaluatePopoverScript({
+                       name:"barcodeAssign",
+                       popName:"content",
+                       scriptContent:"openWindowBack('"+JSON.stringify(list[flag])+"')"
+                   });
+                   appcan.window.evaluateScript({
+                       name:"asspurNumber", 
+                       scriptContent:"closeWindow()"
+                   });
+            }else{
+                 if(lastFlag != null){
+                     $("#"+lastFlag).removeClass("zk-clickR");
+                     $("#"+lastFlag).addClass("yqq-xxk");
+                 }
+                 lastFlag = flag;
+                $("#"+lastFlag).removeClass("yqq-xxk");
+                $("#"+lastFlag).addClass("zk-clickR");
+            }
+        }
+    </script>
+</html>
