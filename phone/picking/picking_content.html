@@ -38,6 +38,14 @@
               </div>
         </div>
         <div  class="ub ub-f1 ub-ver yqq-xxk uc-a uinn umar-a " style="margin-bottom: 1em">  
+              <div class="ub yqq-w10" >
+                 <div  id="warDel" class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w w-click">存放库位</div>
+                 <div  id="warehouseNum" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc wkf-hh wkf-font-w w-click br"></div>
+              </div>
+              <div  class="ub yqq-w10" >
+                 <div  class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">存放仓库</div>
+                 <div  id="warehouse" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w"></div>
+              </div>
               <div  class="ub yqq-w10" >
                  <div  id="vesDel" class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w w-click">容器条码</div>
                  <div  id="vesselCode" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w w-click br"></div>
@@ -49,14 +57,6 @@
               <div  class="ub yqq-w10" >
                  <div  class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">原仓库</div>
                  <div  id="oldWarehouse" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w"></div>
-              </div>
-              <div class="ub yqq-w10" >
-                 <div  id="warDel" class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w w-click">存放库位</div>
-                 <div  id="warehouseNum" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc wkf-hh wkf-font-w w-click br"></div>
-              </div>
-              <div  class="ub yqq-w10" >
-                 <div  class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">存放仓库</div>
-                 <div  id="warehouse" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w"></div>
               </div>
         </div>
         
@@ -137,10 +137,10 @@
                  return;
             }else if($("#invoices").html() == null || $("#invoices").html() == ""){
                  invoicesAjax( barcode );
-            }else if($("#workorder").html() == null || $("#workorder").html() == ""){
-                 workorderAjax( barcode );
             }else if($("#vesselCode").html() == null || $("#vesselCode").html() == ""){
                  vesselCodeAjax( barcode );
+            }else if($("#workorder").html() == null || $("#workorder").html() == ""){
+                 workorderAjax( barcode );
             }else if($("#warehouseNum").html() == null || $("#warehouseNum").html() == ""){
                  warehouseNumAjax( barcode );
             }
@@ -380,19 +380,19 @@
                     $('#invoices').html('');
                     break;
                 case 'worDel':
-                    workorderAjax('9900001561');
-                    //$('#workorder').html('');
+                    //workorderAjax('9900001561');
+                    $('#workorder').html('');
                     break;
                 case 'warDel':
-                    //warehouseNumAjax('9900001503');
-                    $('#warehouseNum').html('');
-                    $('#warehouse').html('');
+                    warehouseNumAjax('9900001503');
+                    //$('#warehouseNum').html('');
+                    //$('#warehouse').html('');
                     break;
                 case 'vesDel':
-                    //vesselCodeAjax('9900001441');
-                    $('#vesselCode').html('');
-                    $('#bar_append').html('');
-                    barcodeArr.pop();
+                    vesselCodeAjax('9900001441');
+                    //$('#vesselCode').html('');
+                    //$('#bar_append').html('');
+                    //barcodeArr.pop();
                     break;
             }
         });

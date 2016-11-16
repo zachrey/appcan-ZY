@@ -62,16 +62,18 @@
                                        +'</div>'
                                      +'<div id="detail" class="ub ub-ver uinn ">'
                                        +'<div id="detailTittle" class="ub umar-t">'
-                                         +'<div id="" class="umar-l ub wkf-w6 ub-ac  wkf-font-w">物料条码</div>'
-                                         +'<div id="" class="ub wkf-4  ub-ac ub-pc wkf-font-w">数量</div>'
+                                         +'<div id="" class="umar-l ub wkf-w3 ub-ac  wkf-font-w">物料条码</div>'
+                                          +'<div id="" class="umar-l ub wkf-w3 ub-ac  wkf-font-w">物料名称</div>'
+                                         +'<div id="" class="ub wkf-3  ub-ac ub-pc wkf-font-w">数量</div>'
                                        +'</div>'
                                        +'<div id="addtion" class="">';
                    var strDetail = "";
                     for(var i=0;i<AMOUNTDETAILINFO[j].materialCodeList.length;i++)
                     {       
                         strDetail += '<div id="lable'+i+'" class="ub" style="margin-bottom: -1em">'
-                                          +'<div id="" class="umar-l ub wkf-w6 ub-ac wkf-hh">'+AMOUNTDETAILINFO[j].materialCodeList[i].MatBarcode+'</div>'
-                                          +'<div id="" class="ub wkf-w4  ub-ac uinn wkf-hh">'+(AMOUNTDETAILINFO[j].materialCodeList[i].Amount ? AMOUNTDETAILINFO[j].materialCodeList[i].Amount : "无")+'</div>'
+                                          +'<div id="" class="umar-l ub wkf-w3 ub-ac wkf-hh">'+AMOUNTDETAILINFO[j].materialCodeList[i].MatBarcode+'</div>'
+                                           +'<div id="" class="umar-l ub wkf-w3 ub-ac wkf-hh">'+AMOUNTDETAILINFO[j].materialCodeList[i].MatName+'</div>'
+                                          +'<div id="" class="ub wkf-w3  ub-ac uinn wkf-hh">'+(AMOUNTDETAILINFO[j].materialCodeList[i].Amount ? AMOUNTDETAILINFO[j].materialCodeList[i].Amount : "无")+'</div>'
                                        +'</div>';
                     } 
                   strTittle += strDetail;     
