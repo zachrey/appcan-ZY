@@ -46,21 +46,21 @@
               //监听返回按钮
            uexWindow.onKeyPressed = function( keyCode){
                 if( keyCode == 0){
-                    localOption.localPop();
-                    setTimeout(function(){appcan.window.close(-1);},500);
+                    while(1){if(localOption.localPop()){break;}}appcan.window.close(-1);
+                    
                 }
             }
            uexWindow.setReportKey(0,1);
         });
        appcan.button('#nav-left','ani-act',function(){
-           localOption.localPop();
+           while(1){if(localOption.localPop()){break;}}appcan.window.close(-1);
            closeWindow()
        });
        
        //关闭窗口
        function closeWindow(){
-           localOption.localPop();
-           setTimeout(function(){appcan.window.close(-1);},500);
+           while(1){if(localOption.localPop()){break;}}appcan.window.close(-1);
+           
        }
 
     </script>

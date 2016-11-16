@@ -53,20 +53,20 @@
             //监听返回按钮
            uexWindow.onKeyPressed = function( keyCode){
                 if( keyCode == 0){
-                    localOption.localPop();
-                    setTimeout(function(){appcan.window.close(-1);},500);
+                    while(1){if(localOption.localPop()){break;}}appcan.window.close(-1);
+                    
                 }
             }
            uexWindow.setReportKey(0,1);
         });
         appcan.button(".nav-btn", "btn-act", function() {
-           localOption.localPop();
-            setTimeout(function(){appcan.window.close(-1);},500);
+           while(1){if(localOption.localPop()){break;}}appcan.window.close(-1);
+            
         })
         
         appcan.button("#back","ani-act",function(){
-              localOption.localPop();
-              setTimeout(function(){appcan.window.close(-1);},500);
+              while(1){if(localOption.localPop()){break;}}appcan.window.close(-1);
+              
         })
         
         appcan.button("#delete","ani-act",function(){
@@ -84,8 +84,8 @@
                      popName:'content',
                      scriptContent:'deleteNum('+deleteNum+')',
                  })
-                 localOption.localPop();
-                 setTimeout(function(){appcan.window.close(-1);},500);}
+                 if(localOption.localPop()){appcan.window.close(-1);}
+                 }
                }
            })
         })

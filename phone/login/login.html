@@ -33,13 +33,14 @@
     </body>
     <script>
         //存储当前窗口的名字，便于调用
-        var windowName = ['root'];
         appcan.ready(function() {
+            localOption.intiWindowsName();
             uexSupoinScan.etStartScan =   function( data ){
                 data = eval('('+ data +')');
-                // alert(windowName);
+                var name = localOption.getWindowName();
+                console.log(name);
                 appcan.window.evaluatePopoverScript({
-                     name:windowName[windowName.length -1],
+                     name:name,
                      popName:'content',
                      scriptContent:'getData(\''+data.result+'\')'
                 })
@@ -50,13 +51,5 @@
                 appcan.frame.resize("content", 0, titHeight);
             }
         });
-        
-        var setWindowName = function(name){
-            windowName.push(name);
-        }
-        var popWindowName = function(){
-            windowName.splice(windowName.length - 1,1);
-            // console.log(windowName[windowName.length-1]);
-        }
     </script>
 </html>

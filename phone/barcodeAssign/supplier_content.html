@@ -111,12 +111,12 @@
         appcan.ready(function() {
         });
         appcan.button(".nav-btn", "btn-act", function() {
-            localOption.localPop();
-            setTimeout(function(){appcan.window.close(-1);},500);
+            while(1){if(localOption.localPop()){break;}}appcan.window.close(-1);
+            
         })
         function close() {
-            localOption.localPop();
-            setTimeout(function(){appcan.window.close(-1);},500);
+            while(1){if(localOption.localPop()){break;}}appcan.window.close(-1);
+            
         }
 
         //  点击提交 传数据 关闭页面

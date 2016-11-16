@@ -1,30 +1,29 @@
 var localOption = (function(){
     return {
         localSave :function(name){
-            appcan.window.evaluateScript({
-               name:"root", 
-               scriptContent:"setWindowName('"+name+"')"
-            });
+            var WINDOWNAMES = appcan.locStorage.val('WINDOWNAMES');
+            WINDOWNAMES = eval('('+WINDOWNAMES+')');
+            WINDOWNAMES.push(name);
+            appcan.locStorage.val('WINDOWNAMES',WINDOWNAMES);
         },
         localPop : function(){
-            appcan.window.evaluateScript({
-               name:"root", 
-               scriptContent:"popWindowName()"
-            });
+             var WINDOWNAMES = appcan.locStorage.val('WINDOWNAMES');
+             WINDOWNAMES = eval('('+WINDOWNAMES+')');
+             var length = WINDOWNAMES.length;
+             WINDOWNAMES.splice(WINDOWNAMES.length-1,1);
+             var flag = length > WINDOWNAMES.length ? true : false;
+             appcan.locStorage.val('WINDOWNAMES',WINDOWNAMES);
+             return flag;
+        },
+        intiWindowsName:function(){
+            appcan.locStorage.remove('WINDOWNAMES');
+            appcan.locStorage.val('WINDOWNAMES',['root']);
+        },
+        getWindowName:function(){
+            var WINDOWNAMES = appcan.locStorage.val('WINDOWNAMES');
+            WINDOWNAMES = eval('('+WINDOWNAMES+')');
+            return WINDOWNAMES[WINDOWNAMES.length -1];
         }
-        // showWindowName:function(){
-            // var WINDOWNAMES = appcan.locStorage.val('WINDOWNAMES');
-            // WINDOWNAMES = eval('('+WINDOWNAMES+')');
-            // alert(WINDOWNAMES[WINDOWNAMES.length-1]);
-        // }
-        // intiWindowsName:function(){
-            // appcan.locStorage.remove('WINDOWNAMES');
-            // appcan.locStorage.val('WINDOWNAMES',['root']);
-        // },
-        // getWindowName:function(){
-            // var WINDOWNAMES = appcan.locStorage.val('WINDOWNAMES');
-            // return WINDOWNAMES;
-        // }
     };
 }());
 

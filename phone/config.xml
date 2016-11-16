@@ -13,6 +13,7 @@
 	<obfuscation>true</obfuscation>
 	<bgcolor>#fefefe</bgcolor>
 	<orientation>15</orientation>
+	<debug>true</debug>
 <debug/>
 <partobfuscation/>
 <webapp/>

@@ -40,8 +40,8 @@
             }
             uexWindow.onKeyPressed = function( keyCode){
                 if( keyCode == 0){
-                    localOption.localPop();
-                    setTimeout(function(){appcan.window.close(-1);},500);
+                    while(1){if(localOption.localPop()){break;}}appcan.window.close(-1);
+                    
                 }
             }
             uexWindow.setReportKey(0,1);

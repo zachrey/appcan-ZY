@@ -156,7 +156,7 @@
                   $("#traGoodsName").html("");
                   $("#traStandard").html("");
                   $("#unit").html("");
-                 // outputContainerAjax("9900001442"); 
+                 //outputContainerAjax("9900001442"); 
                   break;
              };
              case 'emptyInputContainer': {
@@ -520,7 +520,7 @@
        //开窗带回函数
        function openWindowBack (Obj){
             var Obj = eval('('+Obj+')');
-            //appcan.window.alert(JSON.stringify(Obj));
+            appcan.window.alert(JSON.stringify(Obj));
             switch( windowId )
             {
                 case 'traStation': {
@@ -529,11 +529,11 @@
                      break;
                 }
                 case 'traGoodsId':{
-                    $("#traGoodsId").html(Obj.materialBarcodeEntity.MaterialID);
-                    $("#traGoodsName").html(Obj.materialBarcodeEntity.MatName);
-                    $("#traStandard").html(Obj.materialBarcodeEntity.Specifications);
-                    $("#oldCount").html(Obj.materialBarcodeEntity.Amount);
-                    $("#unit").html('('+Obj.materialBarcodeEntity.Company+')');
+                    $("#traGoodsId").html(Obj.MaterialID);
+                    $("#traGoodsName").html(Obj.MatName);
+                    $("#traStandard").html(Obj.Specifications);
+                    $("#oldCount").html(Obj.Amount);
+                    $("#unit").html('('+Obj.Company+')');
                     goodObj = Obj;
                     $('html,body').animate({scrollTop:$('#traGoodsId').offset().top-80},1000);
                     break;

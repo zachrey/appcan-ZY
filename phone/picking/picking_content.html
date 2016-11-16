@@ -38,14 +38,7 @@
               </div>
         </div>
         <div  class="ub ub-f1 ub-ver yqq-xxk uc-a uinn umar-a " style="margin-bottom: 1em">  
-              <div class="ub yqq-w10" >
-                 <div  id="warDel" class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w w-click">存放库位</div>
-                 <div  id="warehouseNum" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc wkf-hh wkf-font-w w-click br"></div>
-              </div>
-              <div  class="ub yqq-w10" >
-                 <div  class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">存放仓库</div>
-                 <div  id="warehouse" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w"></div>
-              </div>
+              
               <div  class="ub yqq-w10" >
                  <div  id="vesDel" class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w w-click">容器条码</div>
                  <div  id="vesselCode" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w w-click br"></div>
@@ -58,11 +51,19 @@
                  <div  class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">原仓库</div>
                  <div  id="oldWarehouse" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w"></div>
               </div>
+              <div class="ub yqq-w10" >
+                 <div  id="warDel" class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w w-click">存放库位</div>
+                 <div  id="warehouseNum" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc wkf-hh wkf-font-w w-click br"></div>
+              </div>
+              <div  class="ub yqq-w10" >
+                 <div  class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">存放仓库</div>
+                 <div  id="warehouse" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w"></div>
+              </div>
         </div>
         
         <div id="down" class="ub ub-f1 ub-ver yqq-xxk uc-a uinn umar-a " style="margin-bottom: 2em;color:white;">
               <div id="" class="ub ub-f1">
-                  <div class="ub wkf-font-w umar-l uinn">物料条码</div>
+                  <div class="ub wkf-font-w umar-l uinn">物料</div>
                   <div class="ub ub-f1 ub-pe">
                       <!-- <div class="ub uinn uc-a" id="deleteBarcoe" style="background-color: #2B6576">删除</div> -->
                   </div>
@@ -316,7 +317,7 @@
                        	ContainerJD = info.ContainerBarcodeOutput.ContainerEntity;
                        	oldWareObj = info.ContainerBarcodeOutput.ContainerInstance;
                         //避免重复
-                        //appcan.window.alert(JSON.stringify(info.ContainerBarcodeOutput.ContainerInstance));
+                        //appcan.window.alert(JSON.stringify(info.ContainerBarcodeOutput.ContainerEntity));
                         barcodeArr.push(barcode);
                         var arr = info.ContainerBarcodeOutput.ContainerInstance.listMaterial;
                         if(!arr && arr.length === 0){
@@ -330,7 +331,7 @@
                         barcodeArrNow = arr;
                         var length = arr.length;
                         for(var i=0;i<length;i++){
-                            var subBarcode = arr[i].MatBarcode;
+                            var subBarcode = arr[i].MatName;
                             var str = '<li style="display:inline-block;">'+subBarcode+'&nbsp;&nbsp;</li>';;
                             $('#bar_append').prepend(str);
                         }
@@ -376,7 +377,7 @@
                     $('#process').html('');
                     break;
                 case 'invDel':
-                    // invoicesAjax('123456');
+                    //invoicesAjax('123456');
                     $('#invoices').html('');
                     break;
                 case 'worDel':
@@ -384,15 +385,15 @@
                     $('#workorder').html('');
                     break;
                 case 'warDel':
-                    warehouseNumAjax('9900001503');
-                    //$('#warehouseNum').html('');
-                    //$('#warehouse').html('');
+                    //warehouseNumAjax('9900001503');
+                    $('#warehouseNum').html('');
+                    $('#warehouse').html('');
                     break;
                 case 'vesDel':
-                    vesselCodeAjax('9900001441');
-                    //$('#vesselCode').html('');
-                    //$('#bar_append').html('');
-                    //barcodeArr.pop();
+                    //vesselCodeAjax('9900001441');
+                    $('#vesselCode').html('');
+                    $('#bar_append').html('');
+                    barcodeArr.pop();
                     break;
             }
         });
@@ -451,10 +452,10 @@
                 	$('#oldWarehouseNum').html('/');//原库位
                    	$('#oldWarehouse').html('/');//原仓库             
                    	barcodeArrNow = info;
-                    ContainerJD = '';
+                    ContainerJD = info.listMaterialEntity;
                     var length = barcodeArrNow.listMaterialEntity.length;
                     for(var i=0;i<length;i++){
-                        var subBarcode = barcodeArrNow.listMaterialEntity[i].Barcode;
+                        var subBarcode = barcodeArrNow.listMaterialEntity[i].MatName;
                         var str = '<li style="display:inline-block;">'+subBarcode+'&nbsp;&nbsp;</li>';
                         $('#bar_append').prepend(str);
                     }
@@ -507,7 +508,7 @@
                 detailJD.push({
                     warehouseNum:warehouseNum.html(),
                     warehouse:warehouse.html(),
-                    vesselCode:vesselCode.html(),
+                    vesselCode:ContainerJD.ContainerBarCode,
                     materialCodeList:barcodeArrNow
                 });
             }

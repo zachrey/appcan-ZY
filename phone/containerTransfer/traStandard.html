@@ -46,20 +46,20 @@
             //监听返回按钮
            uexWindow.onKeyPressed = function( keyCode){
                 if( keyCode == 0){
-                    localOption.localPop();
-                    setTimeout(function(){appcan.window.close(-1);},500);
+                    while(1){if(localOption.localPop()){break;}}appcan.window.close(-1);
+                    
                 }
             }
            uexWindow.setReportKey(0,1);
         });
         //模糊查询请求
        appcan.button("#nav-left", "ani-act", function() {
-           localOption.localPop();
-            setTimeout(function(){appcan.window.close(-1);},500);
+           while(1){if(localOption.localPop()){break;}}appcan.window.close(-1);
+            
        });
         function closeWindow(){
-            localOption.localPop();
-            setTimeout(function(){appcan.window.close(-1);},500);
+            while(1){if(localOption.localPop()){break;}}appcan.window.close(-1);
+            
         }
     </script>
 </html>

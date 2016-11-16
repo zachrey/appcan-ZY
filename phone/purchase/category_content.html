@@ -167,7 +167,8 @@
         }
         //模拟单项选择
         function multipleChoice( flag ) {
-            if( $("#"+flag).hasClass("zk-clickR")){
+            var flag = 1;
+            if( flag&&$("#"+flag).hasClass("zk-clickR")){
                 appcan.window.evaluatePopoverScript({
                    name:"purchase",
                    popName:"content",
@@ -177,6 +178,7 @@
                    name:"category", 
                    scriptContent:"closeWindow()"
                });
+               flag = 0;
             }else{
                  if(lastFlag != null){
                      $("#"+lastFlag).removeClass("zk-clickR");

@@ -57,7 +57,7 @@
                 success : function(info) {
                     appcan.window.closeToast();
                     $('#sheet').html('');
-                    //console.log(JSON.stringify(info));
+                    appcan.window.alert(JSON.stringify(info));
                     if (info.bSuccess) {
                         if(!info.RecommendMaterialOutput.RecommendMaterialInstanceList[0].listMaterialEntity){
                             appcan.window.evaluateScript({
@@ -68,6 +68,7 @@
                             return;
                         }
                         var arr = info.RecommendMaterialOutput.RecommendMaterialInstanceList[0].listMaterialEntity,
+                            ARR = info.RecommendMaterialOutput.RecommendMaterialInstanceList[0],
                             length = arr.length;
                         list = info.RecommendMaterialOutput.RecommendMaterialInstanceList[0];
                         for (var i = 0; i < length; i++) {
@@ -102,6 +103,31 @@
                                             '</div>'+
                                             '<div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">'+
                                                 arr[i].MatName+
+                                            '</div>'+//库位、仓库、数量添加
+                                        '</div>'+
+                                        
+                                        '<div class="ub yqq-w10 zk-borderBottom" >'+
+                                            '<div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                '库位'+
+                                            '</div>'+
+                                            '<div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                ARR.NewAlibraryname+
+                                            '</div>'+
+                                        '</div>'+
+                                        '<div class="ub yqq-w10 zk-borderBottom" >'+
+                                            '<div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                '仓库'+
+                                            '</div>'+
+                                            '<div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                ARR.NewWareBarcodeName+
+                                            '</div>'+
+                                        '</div>'+
+                                        '<div class="ub yqq-w10 zk-borderBottom" >'+
+                                            '<div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                '数量添加'+
+                                            '</div>'+
+                                            '<div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                arr[i].Amount+
                                             '</div>'+
                                         '</div>'+
                                     '</div>';

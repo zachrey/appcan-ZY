@@ -144,6 +144,7 @@
         var detailJD = [];
         //产出批次
         var batchJD;
+        var batchGUID;
         //当前打开的窗口名字
         var winNameNow = '';
         
@@ -331,12 +332,12 @@
                         OpType:"生产批次",
                         id:processJD.ProcessId,//工序ID
                         VDic:{
-                            班次:LOGIN.UserID,//当前登录人ID
-                            捆次:$('#coilNum').val(),
-                            炉号:$('#stoveNum').val(),
-                            设备代码:deviceJD.DeviceID,//设备ID
-                            投入批次:batchJD//materialbarcode表的InsideBatch
-                        }
+                             班次:LOGIN.UserID,//当前登录人ID
+                             捆次:$('#coilNum').val(),
+                             炉号:$('#stoveNum').val(),
+                             设备代码:deviceJD.DeviceID,//设备ID
+                             投入批次:batchJD//materialbarcode表的InsideBatch
+                         }
                     }
                 },
                 dataType:"json",
@@ -617,6 +618,7 @@
                 case 'inputMaterial':
                     // appcan.alert('1',JSON.stringify(info));
                     batchJD = info.InsideBatch;
+                    batchGUID =  info.MatGuid;
                     $('#inputMaterial').html(info.MatName);
                     $('html,body').animate({scrollTop:$('#inputMaterial').offset().top-80},1000);
                     materialBatchAjax(info.InsideBatch);
@@ -698,7 +700,7 @@
               "Barcode":materialCode,
               "BarcodeType":"物料实例码",
               "Amount":amount,
-              "MiddleMaterialInstanceGuid":materialJD.MaterialGUID
+              "MiddleMaterialInstanceGuid":batchGUID
           };
            barcodeArrNow.push(subInfo);
            //清空updatapart
