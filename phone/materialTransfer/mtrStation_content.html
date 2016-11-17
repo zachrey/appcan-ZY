@@ -107,6 +107,7 @@
         var goodsId;
         var list = [];
         var lastFlag;
+        var FLAG = 1;
         appcan.ready(function() {
         });
 
@@ -170,7 +171,7 @@
         }
         //模拟单项选择
         function multipleChoice( flag ) {
-            if( $("#"+flag).hasClass("zk-clickR")){
+            if(FLAG && $("#"+flag).hasClass("zk-clickR")){
                 appcan.window.alert({
                             title:'提示',
                             content:'是否确定选项',
@@ -189,6 +190,7 @@
                                 }
                              }
                         })
+                  FLAG = 0;
             }else{
                  if(lastFlag != null){
                      $("#"+lastFlag).removeClass("zk-clickR");

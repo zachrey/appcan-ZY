@@ -27,6 +27,7 @@
         var goodsId;
         var list = [];
         var lastFlag;
+        var FLAG = 1;
         appcan.ready(function() {
         });
         //模糊查询请求
@@ -103,7 +104,7 @@
         }
         //模拟单项选择
         function multipleChoice( flag ) {
-            if( $("#"+flag).hasClass("zk-clickR")){
+            if(FLAG && $("#"+flag).hasClass("zk-clickR")){
                     appcan.window.evaluatePopoverScript({
                        name:"picking",
                        popName:"content",
@@ -113,6 +114,7 @@
                        name:"picwarehouseNum", 
                        scriptContent:"closeWindow()"
                    });
+                   FLAG = 0;
             }else{
                  if(lastFlag != null){
                      $("#"+lastFlag).removeClass("zk-clickR");

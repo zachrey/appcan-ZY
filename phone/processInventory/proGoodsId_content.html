@@ -27,6 +27,7 @@
         var goodsId;
         var list = [];
         var lastFlag;
+        var FLAG = 1;
         appcan.ready(function() {
             // var inputBarcodeDate = appcan.locStorage.getVal("INPUTBARCODE");
             var productDate = appcan.locStorage.getVal("MATERIALINSTANCE");
@@ -93,7 +94,7 @@
         }
         //模拟单项选择
         function multipleChoice( flag ) {
-            if( $("#"+flag).hasClass("zk-clickR")){
+            if(FLAG && $("#"+flag).hasClass("zk-clickR")){
                    if(list[flag].Inspection === 1){
                            appcan.window.openToast('当前物料为送检状态，请重新选择！',3000,5,0);
                            return;
@@ -107,6 +108,7 @@
                        name:"proGoodsId", 
                        scriptContent:"closeWindow()"
                    });
+                   FLAG = 0;
             }else{
                  if(lastFlag != null){
                      $("#"+lastFlag).removeClass("zk-clickR");

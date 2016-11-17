@@ -108,6 +108,7 @@
         var goodsId;
         var list = [];
         var lastFlag;
+        var FLAG = 1;
         appcan.ready(function() {
         });
 
@@ -175,8 +176,7 @@
         }
         //模拟单项选择
         function multipleChoice( flag ) {
-            var flag = 1;
-            if( flag&&$("#"+flag).hasClass("zk-clickR")){
+            if( FLAG&&$("#"+flag).hasClass("zk-clickR")){
                 appcan.window.evaluatePopoverScript({
                    name:"purchase",
                    popName:"content",
@@ -186,7 +186,7 @@
                    name:"shippingSpace", 
                    scriptContent:"closeWindow()"
                });
-               flag = 0;
+               FLAG = 0;
             }else{
                  if(lastFlag != null){
                      $("#"+lastFlag).removeClass("zk-clickR");

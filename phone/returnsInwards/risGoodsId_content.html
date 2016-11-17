@@ -27,6 +27,7 @@
         var goodsId;
         var list = [];
         var lastFlag;
+        var FLAG = 1;
         appcan.ready(function() {
             // var inputBarcodeDate = appcan.locStorage.getVal("INPUTBARCODE");
             var productDate = appcan.locStorage.getVal("RETURNINWORDPRODUCT");
@@ -93,7 +94,7 @@
         }
         //模拟单项选择
         function multipleChoice( flag ) {
-            if( $("#"+flag).hasClass("zk-clickR")){
+            if(FLAG &&  $("#"+flag).hasClass("zk-clickR")){
                     appcan.window.evaluatePopoverScript({
                        name:"returnsInwards",
                        popName:"content",
@@ -103,6 +104,7 @@
                        name:"risGoodsId", 
                        scriptContent:"closeWindow()"
                    });
+                   FLAG = 0;
             }else{
                  if(lastFlag != null){
                      $("#"+lastFlag).removeClass("zk-clickR");

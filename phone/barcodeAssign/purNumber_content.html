@@ -27,6 +27,7 @@
         var goodsId;
         var list = [];
         var lastFlag;
+        var FLAG = 1;
         appcan.ready(function() {
         });
 
@@ -97,7 +98,7 @@
         }
         //模拟单项选择
         function multipleChoice( flag ) {
-            if( $("#"+flag).hasClass("zk-clickR")){
+            if( FLAG == 1 && $("#"+flag).hasClass("zk-clickR")){
                     appcan.window.evaluatePopoverScript({
                        name:"barcodeAssign",
                        popName:"content",
@@ -107,6 +108,7 @@
                        name:"asspurNumber", 
                        scriptContent:"closeWindow()"
                    });
+                   FLAG = 0;
             }else{
                  if(lastFlag != null){
                      $("#"+lastFlag).removeClass("zk-clickR");

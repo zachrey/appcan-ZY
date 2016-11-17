@@ -108,6 +108,7 @@
         var goodsId;
         var list = [];
         var lastFlag;
+        var FLAG = 1;
         appcan.ready(function() {
             var INFOLIST = appcan.locStorage.val('INFOLIST');
             INFOLIST = eval('('+INFOLIST+')');
@@ -166,7 +167,7 @@
                        
         //模拟单项选择
         function multipleChoice( flag ) {
-            if( $("#"+flag).hasClass("zk-clickR")){
+            if( FLAG == 1 && $("#"+flag).hasClass("zk-clickR")){
                if(list[flag].Inspection === 1){
                    appcan.window.openToast('当前物料为送检状态，请重新扫描！',2000,5,0);
                    return;
@@ -180,6 +181,7 @@
                    name:"traGoodsId", 
                    scriptContent:"closeWindow()"
                });
+               FLAG = 0;
             }else{
                  if(lastFlag != null){
                      $("#"+lastFlag).removeClass("zk-clickR");

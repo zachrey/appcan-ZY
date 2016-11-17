@@ -108,15 +108,19 @@
         var goodsId;
         var list = [];
         var lastFlag;
+        var FLAG = 1;
         appcan.ready(function() {
         });
         appcan.button(".nav-btn", "btn-act", function() {
-            while(1){if(localOption.localPop()){break;}}appcan.window.close(-1);
+            if( localOption.localPop() ){
+                    break;
+            }appcan.window.close(-1);dow.close(-1);
             
         })
         function close() {
-            while(1){if(localOption.localPop()){break;}}appcan.window.close(-1);
-            
+            if( localOption.localPop() ){
+                    break;
+            }appcan.window.close(-1);reak;}}appcan.window.close(-1);
         }
 
         //  点击提交 传数据 关闭页面
@@ -184,7 +188,7 @@
         }
         //模拟单项选择
         function multipleChoice( flag ) {
-            if( $("#"+flag).hasClass("zk-clickR")){
+            if( FLAG == 1 && $("#"+flag).hasClass("zk-clickR")){
                 appcan.window.evaluatePopoverScript({
                    name:"barcodeAssign",
                    popName:"content",
@@ -194,6 +198,7 @@
                    name:"asssupplier", 
                    scriptContent:"closeWindow()"
                });
+               FLAG = 0;
             }else{
                  if(lastFlag != null){
                      $("#"+lastFlag).removeClass("zk-clickR");

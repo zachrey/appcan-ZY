@@ -27,6 +27,7 @@
         var goodsId;
         var list = [];
         var lastFlag;
+        var FLAG = 1;
         appcan.ready(function() {
             var info = appcan.locStorage.val('BATCHJD');
             info = eval('('+info+')');
@@ -73,7 +74,7 @@
         }
         //模拟单项选择
         function multipleChoice( flag ) {
-            if( $("#"+flag).hasClass("zk-clickR")){
+            if(FLAG && $("#"+flag).hasClass("zk-clickR")){
                     appcan.window.evaluatePopoverScript({
                        name:"processProduction",
                        popName:"content",
@@ -83,6 +84,7 @@
                        name:"proPromaterialBatch", 
                        scriptContent:"closeWindow()"
                    });
+                   FLAG = 0;
             }else{
                  if(lastFlag != null){
                      $("#"+lastFlag).removeClass("zk-clickR");

@@ -16,87 +16,6 @@
     </head>
     <body class="um-vp" ontouchstart>
         <div id="sheet" class="ub uinn ub-f1 ub-ver bc-text">
-            <!-- <div id="sheet0" class="ub ub-f1 ub-ver yqq-xxk uc-a uinn umar-a zk-marTop2" onclick="multipleChoice( 0 );">
-                <div class="ub yqq-w10 zk-borderBottom" >
-                    <div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">
-                        工单
-                    </div>
-                    <div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">
-                        gd00003154
-                    </div>
-                </div>
-                <div  class="ub yqq-w10 zk-borderTop ub-ver" >
-                    <div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">
-                        <div class="ub yqq-w3 ub-pc">
-                            产品品号
-                        </div>
-                        <div class="ub yqq-w7">
-                            cpph6555
-                        </div>
-                    </div>
-                    <div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">
-                        <div class="ub yqq-w3 ub-pc">
-                            产品品名
-                        </div>
-                        <div class="ub yqq-w7">
-                            名称
-                        </div>
-                    </div>
-                    <div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">
-                        <div class="ub yqq-w3 ub-pc">
-                            产品规格
-                        </div>
-                        <div class="ub yqq-w7">
-                            GB941788
-                        </div>
-                    </div>
-                </div>
-                <div  class="ub yqq-w10 zk-borderBottom zk-marTop1">
-                    <div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">
-                        物料条码
-                    </div>
-                    <div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">
-                        wl55544985222
-                    </div>
-                </div>
-                <div  class="ub yqq-w10  zk-borderTop ub-ver" >
-                    <div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">
-                        <div class="ub yqq-w3 ub-pc">
-                            品号
-                        </div>
-                        <div class="ub yqq-w7">
-                            ph655665
-                        </div>
-                    </div>
-                    <div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">
-                        <div class="ub yqq-w3 ub-pc">
-                            品名
-                        </div>
-                        <div class="ub yqq-w7">
-                            名称
-                        </div>
-                    </div>
-                    <div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">
-                        <div class="ub yqq-w3 ub-pc">
-                            规格
-                        </div>
-                        <div class="ub yqq-w7">
-                            cpph6555
-                        </div>
-                    </div>
-                </div>
-                <div  class="ub yqq-w10  zk-marTop2" >
-                    <div class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">
-                        投料批次:
-                    </div>
-                    <div class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">
-                        tlpc823655
-                    </div>
-                    <div class="ub yqq-w4 sheetuinn ub-pc ub-ac wkf-font-w">
-                        18（kg）
-                    </div>
-                </div>
-            </div> -->
         </div>
     </body>
     <script src="../js/appcan.js"></script>
@@ -108,6 +27,7 @@
         var goodsId;
         var list = [];
         var lastFlag;
+        var FLAG = 1;
         appcan.ready(function() {
             // var inputBarcodeDate = appcan.locStorage.getVal("INPUTBARCODE");
             var productDate = appcan.locStorage.getVal("parkPRODUCT");
@@ -164,11 +84,12 @@
         //模拟单项选择
         function multipleChoice( flag ) {
             // appcan.window.alert(JSON.stringify(list[flag]));
-                    if(list[flag].Inspection === 1){
+            if(FLAG && $("#"+flag).hasClass("zk-clickR")){
+                   if(list[flag].Inspection === 1){
                              appcan.window.openToast('当前物料为送检状态，请重新选择！',3000,5,0);
                              return;
-                     }
-                    appcan.window.evaluatePopoverScript({
+                   }
+                   appcan.window.evaluatePopoverScript({
                        name:"productPackaging",
                        popName:"content",
                        scriptContent:"openWindowBack('"+JSON.stringify(list[flag])+"')"
@@ -177,6 +98,7 @@
                        name:"packGoodsId", 
                        scriptContent:"closeWindow()"
                    });
+                   FLAG = 0;
             }else{
                  if(lastFlag != null){
                      $("#"+lastFlag).removeClass("zk-clickR");

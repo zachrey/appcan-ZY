@@ -61,9 +61,10 @@
             //监听返回按钮
            uexWindow.onKeyPressed = function( keyCode){
                 if( keyCode == 0){
-                    while(1){if(localOption.localPop()){break;}}appcan.window.close(-1);
-                    
-                }
+                if( localOption.localPop() ){
+                        break;
+                }appcan.window.close(-1);
+                    }
             }
            uexWindow.setReportKey(0,1);
         });
@@ -91,8 +92,9 @@
               })
         })
         appcan.button('#nav-left','ani-act',function(){
-            while(1){if(localOption.localPop()){break;}}appcan.window.close(-1);
-            
+            if( localOption.localPop() ){
+                    break;
+            }appcan.window.close(-1);
         })
         
         //更改数量

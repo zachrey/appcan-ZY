@@ -27,6 +27,7 @@
         var goodsId;
         var list = [];
         var lastFlag;
+        var FLAG = 1;
         appcan.ready(function() {
             var showJson = appcan.locStorage.val('RECOMMENDSHOWJSON');
             // appcan.window.alert('123',showJson);
@@ -147,7 +148,7 @@
         }
         //模拟单项选择
         function multipleChoice( flag ) {
-            if( $("#"+flag).hasClass("zk-clickR")){
+            if(FLAG && $("#"+flag).hasClass("zk-clickR")){
                    appcan.window.evaluatePopoverScript({
                        name:"picking",
                        popName:"content",
@@ -157,6 +158,7 @@
                        name:"picrecommendShow", 
                        scriptContent:"closeWindow()"
                    });
+                   FLAG = 0;
             }else{
                  if(lastFlag != null){
                      $("#"+lastFlag).removeClass("zk-clickR");
