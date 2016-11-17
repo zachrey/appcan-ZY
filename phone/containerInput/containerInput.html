@@ -56,14 +56,12 @@
            uexWindow.onKeyPressed = function( keyCode){
                 if( keyCode == 0){
                     if(localOption.localPop()){appcan.window.close(-1);}
-                    
                 }
             }
            uexWindow.setReportKey(0,1);
         });
         appcan.button("#nav-left", "btn-act", function() {
             if(localOption.localPop()){appcan.window.close(-1);}
-            
         })
         //点击提交按钮
          appcan.button("#nav-right","ani-act",function(){

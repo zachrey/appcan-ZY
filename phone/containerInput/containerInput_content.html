@@ -124,8 +124,8 @@
                    if(json.page !="purchase"){return;}
                    //appcan.alert("上级页面", json.page );
                    var arr = json.ProductList,
-                   ARR = json.detailJD,
-                   length = arr.length;
+                       ARR = json.detailJD,
+                       length = arr.length;
                    for(var i=0;i<length;i++){
                        var lengthA = arr[i].listMaterialEntity;
                        var lengthB = ARR[i].listMaterialEntity;
@@ -149,8 +149,13 @@
                        goodsArrNow[i].Guid = MATERIAL[i].GUID;
                        var str = '<label>'+MATERIAL[i].barcode+'&nbsp;&nbsp;</label>';
                        $("#bar_append").prepend(str);
-                       appcan.alert("数据列表",JSON.stringify( goodsArrNow ));
+                       // appcan.alert("数据列表",JSON.stringify( goodsArrNow ));            
                    }
+                   //增加了更改主页的记录数量,这里面数组长度我使用的是展示的长度
+                   appcan.window.evaluateScript({
+                       name:"containerTransfer",
+                       scriptContent:"modifyCount("+detailNeed.length+")"
+                   }); 
                }else{
                    var arr = json.ProductList,
                    ARR = json.detailJD,
@@ -165,15 +170,19 @@
                                outputAmount:ARR[i].amount,
                                unit:ARR[i].unit,
                             };
-                       var arr = {
+                       var subMit = {
                               Guid:ARR[i].MiddleMaterialInstanceGuid,
                               Amount:ARR[i].amount
                            }
                        detailNeed.push(Djson);
-                       goodsArrNow.push(arr);      
+                       goodsArrNow.push(subMit);      
                        var str = '<label>'+arr[i].Barcode+'&nbsp;&nbsp;</label>';
                        $("#bar_append").prepend(str);
                    }
+                   appcan.window.evaluateScript({
+                       name:"containerTransfer",
+                       scriptContent:"modifyCount("+length+")"
+                   }); 
                 }
             }
         });
@@ -271,7 +280,6 @@
              }
             
         }       
-       //------转出容器--->ajax
        
         function barcodeAjax( Data ){
              appcan.request.ajax({
@@ -444,7 +452,7 @@
                         ContanierGuid:inContaineObj.ContainerGuid,
                         lstMarteril:goodsArrNow
                     }
-                appcan.window.alert('123',JSON.stringify(json));
+                // appcan.window.alert('123',JSON.stringify(json));
                 appcan.request.ajax({
                     url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
                     type:"POST",

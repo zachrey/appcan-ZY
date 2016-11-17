@@ -46,9 +46,7 @@
               //监听返回按钮
            uexWindow.onKeyPressed = function( keyCode){
                 if( keyCode == 0){
-                    if( localOption.localPop() ){
-                            break;
-                    }appcan.window.close(-1);
+                    if(localOption.localPop()){appcan.window.close(-1);}
                 }
             }
            uexWindow.setReportKey(0,1);
@@ -62,9 +60,7 @@
        
        //关闭窗口
         function closeWindow(){
-            if( localOption.localPop() ){
-                    break;
-            }appcan.window.close(-1);
+            if(localOption.localPop()){appcan.window.close(-1);}
         }
     </script>
 </html>
