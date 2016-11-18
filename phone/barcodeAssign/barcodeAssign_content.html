@@ -187,10 +187,14 @@
                appcan.window.openToast("请先填写数量！",1000,5,0);
                return ;
            }
-           if( barcodeArr.length === 0){
+           if($("#barcode").html() == ''){
                appcan.window.openToast('无条码信息，无法保存！',1000,5,0);
                return;
            }
+           // if( barcodeArr.length === 0){
+               // appcan.window.openToast('无条码信息，无法保存！',1000,5,0);
+               // return;
+           // }
             //显示
           appcan.window.alert({
             title:'提示',
@@ -245,18 +249,20 @@
                 case 'purNum' : 
                     openWindow('purNumber');
                     break;
-                case 'Name':  
-	                materialAjax('9900001521');
+                case 'Name1':  
+	                $('#Name1').html('');
+	                $('#Name').html('');
+	                $('#purSta').html('');
 	                break;
 	            case 'barDel':  
 	                 $("#barcode").html("");
 	                break;
                 case 'supplier':  
-                openWindow('supplier');
-                break;
+                    openWindow('supplier');
+                    break;
                 case 'emptysupplier':  
-                $('#supplier').html("");
-                break;
+                    $('#supplier').html("");
+                    break;
             }
         });
         //供应商精确查询

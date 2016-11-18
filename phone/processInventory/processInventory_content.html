@@ -207,7 +207,7 @@
              $("#proInvSpecification").html("");
              $("#proInvbatchCharging").html("");
              $("#unit").html("");
-              //MaterialNumberAjax( "9900001527" );
+              // MaterialNumberAjax( "9900001442" );
              break
          };
            }
@@ -278,13 +278,12 @@
                     $("#proInvName").html(Obj.MaterialID);
                     $("#proInvNumber").html(Obj.MatName);
                     $("#proInvSpecification").html(Obj.Specifications);
-                    $("#proInvbatchCharging").html("/");
+                    $("#proInvbatchCharging").html(Obj.InsideBatch);
                     $("#unit").html('('+Obj.Company+')');
                     // MATERIALINSTANCED = Obj;
                     $('html,body').animate({scrollTop:$('#proInvName').offset().top-80},1000);
                     break;
                 }
-                
             }
        }
         //扫描得到数据
@@ -460,7 +459,7 @@
                                     $("#proInvName").html(info.BarcodeInfo.materialbarcodeList[0].MatName);
                                     $("#proInvNumber").html(info.BarcodeInfo.materialbarcodeList[0].MaterialID);
                                     $("#proInvSpecification").html(info.BarcodeInfo.materialbarcodeList[0].Specifications);
-                                    $("#proInvbatchCharging").html("/");
+                                    $("#proInvbatchCharging").html(info.BarcodeInfo.materialbarcode.InsideBatch);
                                     $("#unit").html('('+info.BarcodeInfo.materialbarcodeList[0].Company+')');
                                  }
                                  appcan.locStorage.setVal( "MATERIALINSTANCE" , info.BarcodeInfo );
@@ -480,7 +479,7 @@
                                 $("#proInvName").html(info.BarcodeInfo.materialbarcode.MatName);
                                 $("#proInvNumber").html(info.BarcodeInfo.materialbarcode.MaterialID);
                                 $("#proInvSpecification").html(info.BarcodeInfo.materialbarcode.Specifications);
-                                $("#proInvbatchCharging").html("/");
+                                $("#proInvbatchCharging").html(info.BarcodeInfo.materialbarcode.InsideBatch);
                                 $("#unit").html('('+info.BarcodeInfo.materialbarcode.Company+')');
                             } else {
                                     appcan.window.openToast("条码无实例！",1000,5,0);

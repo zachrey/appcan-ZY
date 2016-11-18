@@ -161,7 +161,7 @@
              };
              case 'emptyInputContainer': {
                   $("#inputContainer").html("");
-                   //inputContainerAjax("9900001605");
+                   // inputContainerAjax("9900001444");
                   break;
              };         
            }
@@ -268,21 +268,19 @@
                     },
                     dataType:"json",
                     success : function( info ) {
-                        //appcan.window.alert(JSON.stringify(info));
+                        // appcan.window.alert(JSON.stringify(info));
                         if(!info.bSuccess){
-                        	if(!info.isContainerBarcodeDefined){
+                            if( !info.isFitBarcodeType  ){
+                                appcan.window.openToast('不为容器码，请重新扫描！',1000,5,0);
+                                return ;
+                            }if(!info.ContainerBarcodeOutput.isContainerBarcodeDefined){
                         		appcan.window.openToast(info['Error'],1000,5,0);
                             	return ;//直接跳过return；
                             } 
                         }
-                        if( info.isFitBarcodeType  ){
-                            $("#inputContainer").html(info.ContainerBarcodeOutput.ContainerEntity.ContainerBarCode);
-                             inContaineObj = info.ContainerBarcodeOutput.ContainerEntity;
-                            $('html,body').animate({scrollTop:$('#inputContainer').offset().top-80},1000);
-                        }else{
-                            appcan.window.openToast('不为容器码，请重新扫描！',1000,5,0);
-                            return ;
-                        }
+                        $("#inputContainer").html(info.ContainerBarcodeOutput.ContainerEntity.ContainerBarCode);
+                         inContaineObj = info.ContainerBarcodeOutput.ContainerEntity;
+                        $('html,body').animate({scrollTop:$('#inputContainer').offset().top-80},1000);
                     },
                     error: function(){
                         appcan.window.openToast("网络请求错误！",1000,5,0);
@@ -520,7 +518,7 @@
        //开窗带回函数
        function openWindowBack (Obj){
             var Obj = eval('('+Obj+')');
-            appcan.window.alert(JSON.stringify(Obj));
+            // appcan.window.alert(JSON.stringify(Obj));
             switch( windowId )
             {
                 case 'traStation': {

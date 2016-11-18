@@ -112,6 +112,7 @@
         var LOGIN = appcan.locStorage.getVal("LOGIN");
         LOGIN = JSON.parse( LOGIN );
         appcan.ready(function() {
+            // vesselCodeAjax(9900001441);
             stationAjax(LOGIN.StationBarcode);
              appcan.initBounce();
             //设置当前时间
@@ -138,10 +139,10 @@
                  return;
             }else if($("#invoices").html() == null || $("#invoices").html() == ""){
                  invoicesAjax( barcode );
-            }else if($("#vesselCode").html() == null || $("#vesselCode").html() == ""){
-                 vesselCodeAjax( barcode );
             }else if($("#workorder").html() == null || $("#workorder").html() == ""){
                  workorderAjax( barcode );
+            }else if($("#vesselCode").html() == null || $("#vesselCode").html() == ""){
+                 vesselCodeAjax( barcode );
             }else if($("#warehouseNum").html() == null || $("#warehouseNum").html() == ""){
                  warehouseNumAjax( barcode );
             }
@@ -305,13 +306,13 @@
                 },
                 dataType:"json",
                 success:function(info){
-                    //appcan.window.alert(JSON.stringify(info));
+                    appcan.window.alert(JSON.stringify(info));
                     if(!info.bSuccess){
                         appcan.window.openToast(info.Error,3000,5,0);
                         return;
                     }
                     if(info.ContainerBarcodeOutput.bToInstanceSuccess){
-                        $('#vesselCode').html(info.ContainerBarcodeOutput.ContainerEntity.ContainerName);
+                        $('#vesselCode').html(info.ContainerBarcodeOutput.ContainerInstance.Barcode);
                        	$('#oldWarehouseNum').html(info.ContainerBarcodeOutput.ContainerInstance.Location);//原库位
                        	$('#oldWarehouse').html(info.ContainerBarcodeOutput.ContainerInstance.RepertoryName);//原仓库                    
                        	ContainerJD = info.ContainerBarcodeOutput.ContainerEntity;
