@@ -165,8 +165,8 @@
                                unit:ARR[i].unit,
                             };
                        var subMit = {
-                              Guid:ARR[i].MiddleMaterialInstanceGuid,
-                              Amount:ARR[i].amount
+                              Guid:ARR[i].GUID,
+                              Amount:ARR[i].Amount
                            }
                        detailNeed.push(Djson);
                        goodsArrNow.push(subMit);      
@@ -242,7 +242,7 @@
              case 'emptyInputContainer': {
                  // GUIDAjax( 9900001525 );
                   $("#inputContainer").html("");
-                  //inputContainerAjax("9900001443");
+                  // inputContainerAjax("9900001442");
                   break;
              };         
            }
@@ -425,12 +425,17 @@
           })
        }
        function traSubmit(){//0为ture
-           // if(!confirm("确定提交？")){
-               // return;
-           // }
+           if(!confirm("确定提交？")){
+               return;
+           }
+           if($("#inputContainer").html() == "" || $("#inputContainer").html() == null){
+               appcan.window.openToast('请先扫描转入容器！',1000,5,0);
+               return;
+           }
            if( detailNeed.length === 0){
-           appcan.window.openToast('当前没有可提交数据！',1000,5,0);
-           return;}
+               appcan.window.openToast('当前没有可提交数据！',1000,5,0);
+               return;
+           }
            appcan.window.openToast('提交中...',10000,5,1);
            //alert(0);
                 var json = {
@@ -452,19 +457,19 @@
                     },
                     dataType:"json",
                     success : function( info ) {
-                    appcan.window.alert(JSON.stringify(info))
-                       if(info.bSuccess){
-                           appcan.window.closeToast();
-                           appcan.window.openToast('提交成功！',1000,5,0);
-                           setTimeout(function(){
-                             appcan.window.evaluateScript({
-                               name:'containerInput',
-                               scriptContent:"reload()"
-                             })  
-                           },1000)
-                       }else{
-                           appcan.window.openToast(info['Error'],3000,5,0);
-                       }
+                        // appcan.window.alert(JSON.stringify(info));
+                           if(info.bSuccess){
+                               appcan.window.closeToast();
+                               appcan.window.openToast('提交成功！',1000,5,0);
+                               setTimeout(function(){
+                                 appcan.window.evaluateScript({
+                                   name:'containerInput',
+                                   scriptContent:"reload()"
+                                 })  
+                               },1000);
+                           }else{
+                               appcan.window.openToast(info.Error,3000,5,0);
+                           }
                     },
                     error: function(){
                         appcan.window.openToast("网络请求错误！",1000,5,0);

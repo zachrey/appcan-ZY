@@ -356,42 +356,7 @@
             });
         }
         //条码
-        var materialNumberAjax = function(barcode){
-            if( barcodeArr.indexOf( barcode ) !== -1){
-                appcan.window.openToast('物料码重复!',1000,5,0);
-                return;
-            }
-            //alert('进入函数，准备请求！');
-            appcan.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
-                type:"POST",
-                data:{
-                    input:{
-                        LogicType:"扫码",
-                        scanType:"通用扫码",
-                        barcode:barcode
-                    }
-                },
-                dataType:"json",
-                success : function( info ) {
-                    //console.log(JSON.stringify(info));
-                    if( info.BarcodeType != '9'){
-                        appcan.window.openToast('当前条码不是物料实例码，请重新扫描！',1000,5,0);
-                    }else if( info.isBarcodeBeUsed ){
-                        appcan.window.openToast('该条码已经使用,请重新扫描！',1000,5,0);
-                    }else{
-                        barcodeArr.push(barcode);
-                        $('#materialNumber').html(barcode);
-                        $('html,body').animate({scrollTop:$('#materialNumber').offset().top-80},1000);
-                    }
-                    
-                },
-                error: function(){
-                    appcan.window.openToast("网络请求错误！",1000,5,0);
-                }
-            })
-            
-        }
+        var csaiqing
         //品号
         function productNumberAjax( barcode ){
             //alert(barcode);
@@ -541,19 +506,19 @@
                     $('#device').html('');
                     break;
                 case 'worTest':
-                    //workorderAjax('9900001561');
-                    $('#workorder').html('');
+                    workorderAjax('9900001561');
+                    //$('#workorder').html('');
                     break;
                 case 'matTest':
-                    //materialNumberAjax('9900001528');
-                    $('#materialNumber').html('');
-                    barcodeArr.pop();
+                    materialNumberAjax('9900001528');
+                    //$('#materialNumber').html('');
+                    //barcodeArr.pop();
                     break;
                 case 'proNumTest':
-                   // productNumberAjax('9900001452');
-                    $('#productNumber').html('');
-                    $('#productName').html('');
-                    $('#productSpecification').html('');
+                    productNumberAjax('9900001452');
+                    //$('#productNumber').html('');
+                    //$('#productName').html('');
+                    //$('#productSpecification').html('');
                     break;
             }
         });
@@ -751,7 +716,7 @@
                 },
                 dataType:"json",
                 success:function(info){
-                    console.log(JSON.stringify(info));
+                    //appcan.window.alert(JSON.stringify(info));
                     if(info.bSuccess){
                         appcan.window.closeToast();
                         appcan.window.openToast('提交成功！',1000,5,0);
@@ -761,7 +726,7 @@
                                 var json = {
                                     stationJD : stationInJD,
                                     detailJD : detailJD,
-                                    ProductList : barcodeArrNow
+                                    ProductList : info.lstMaterialBarcode
                                 }
                                 //存入数据
                                 appcan.locStorage.val('CONINPUTDATA',json);
