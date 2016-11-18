@@ -145,12 +145,6 @@
                            }
                        }
                    }
-                   for(var i=0;i<goodsArrNow.length;i++){
-                       goodsArrNow[i].Guid = MATERIAL[i].GUID;
-                       var str = '<label>'+MATERIAL[i].barcode+'&nbsp;&nbsp;</label>';
-                       $("#bar_append").prepend(str);
-                       // appcan.alert("数据列表",JSON.stringify( goodsArrNow ));            
-                   }
                    //增加了更改主页的记录数量,这里面数组长度我使用的是展示的长度
                    appcan.window.evaluateScript({
                        name:"containerTransfer",
@@ -203,17 +197,14 @@
                     // appcan.alert(JSON.stringify(info));
                     if( info.bSuccess  ){
                         if( info.BarcodeType != '9'){
-                            appcan.window.openToast('条码'+Material.barcode+'不是物料实例码！',1000,5,0);
-                            Material.GUID = null;
-                            MATERIAL.push( Material );
+                            appcan.window.openToast('条码'+barcode+'不是物料实例码！',1000,5,0);
+                            return;
                         }else if( !info.isBarcodeBeUsed ){
-                            appcan.window.openToast('条码'+Material.barcode+'未被使用！',1000,5,0);
-                            Material.GUID = null;
-                            MATERIAL.push( Material );
+                            appcan.window.openToast('条码'+barcode+'未被使用！',1000,5,0);
+                            return;
                         }else if( info.BarcodeInfo == null || info.BarcodeInfo.materialbarcode == null ){
-                            appcan.window.openToast('条码'+Material.barcode+'存在问题！',1000,5,0);
-                            Material.GUID = null;
-                            MATERIAL.push( Material );
+                            appcan.window.openToast('条码'+barcode+'存在问题！',1000,5,0);
+                            return;
                         }else{
                             var arrq = {
                                    Guid:info.BarcodeInfo.materialbarcode.GUID,
@@ -226,7 +217,7 @@
                             //appcan.alert("数据列表",JSON.stringify( goodsArrNow ));
                         }
                     }else{
-                        appcan.window.openTost(info.Error,3000,5,0);
+                        appcan.window.openToast(info.Error,3000,5,0);
                     }
                 },
                 error: function(){
@@ -335,17 +326,17 @@
                     success : function( info ) {
                        //appcan.window.alert(JSON.stringify(info));
                         if(!info.bSuccess){
-                            appcan.window.openToast(info['Error'],1000,5,0);
-                            return ;
+                        	 if( !info.isFitBarcodeType  ){
+					            appcan.window.openToast('不为容器码，请重新扫描！',1000,5,0);
+					            return ;
+							 }if(!info.ContainerBarcodeOutput.isContainerBarcodeDefined){
+            					appcan.window.openToast(info['Error'],1000,5,0);
+             					return ;//直接跳过return；
+							} 
                         }
-                        if( info.isFitBarcodeType  ){
-                            $("#inputContainer").html(info.ContainerBarcodeOutput.ContainerEntity.ContainerBarCode);
-                             inContaineObj = info.ContainerBarcodeOutput.ContainerEntity;
-                            $('html,body').animate({scrollTop:$('#inputContainer').offset().top-80},1000);
-                        }else{
-                            appcan.window.openToast('不为容器码，请重新扫描！',1000,5,0);
-                            return ;
-                        }
+                        $("#inputContainer").html(info.ContainerBarcodeOutput.ContainerEntity.ContainerBarCode);
+                        inContaineObj = info.ContainerBarcodeOutput.ContainerEntity;
+                        $('html,body').animate({scrollTop:$('#inputContainer').offset().top-80},1000);
                     },
                     error: function(){
                         appcan.window.openToast("网络请求错误！",1000,5,0);
