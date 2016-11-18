@@ -208,6 +208,7 @@
                var updataPartJson = {
                		MaterialBarcode: $("#barcode").html(), 
 					MaterialID: $("#purNum").html(),
+					SupCode:supplierObj.SupplierCode,
 	                MatName: $("#purName").html(),
 					Specifications:$("#purSta").html(),
 	                Company:$("#unit").html(),
@@ -217,6 +218,7 @@
                     traGoodsId:$("#purNum").html(),
                     traGoodsName:$("#purName").html(),
                     traStandard:$("#purSta").html(),
+                    SupCode:supplierObj.SupplierCode,
                     unit:$("#unit").html(),
                     outputContainer:$("#barcode").html(),
                     outputAmount:$("#count").val() 
@@ -345,7 +347,6 @@
                     input:{
                     	LogicType:"贴码",//
                     	PostType:"物料贴码",
-						SupCode:supplierObj.SupplierCode,
 						StationBarcode:LOGIN.StationBarcode,//
 						OperatorId:LOGIN.UserID,//
 					    listMaterialStickCode: barcodeBaseInfo
