@@ -81,6 +81,8 @@
         }
         
         var reload = function(){
+            appcan.locStorage.remove('AMOUNTDETAILINFO');
+            appcan.locStorage.remove('INFOLIST');
             uexWindow.reload();
         }
     </script>

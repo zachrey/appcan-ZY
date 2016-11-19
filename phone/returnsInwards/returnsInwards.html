@@ -68,6 +68,9 @@
         })
          //提交
          function subReview(){
+            appcan.locStorage.remove('AMOUNTDETAILINFO');
+            appcan.locStorage.remove('RETURNINWORDPRODUCT');
+            appcan.locStorage.remove('BARCODEDETAILE');
              uexWindow.reload();
          }
         //点击提交按钮

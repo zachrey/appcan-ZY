@@ -97,7 +97,7 @@
         var LOGIN = appcan.locStorage.getVal("LOGIN");
         LOGIN = JSON.parse( LOGIN );
         appcan.ready(function() {
-             stationAjax(LOGIN.StationBarcode);
+             stationAjax(LOGIN.StationID);
              appcan.initBounce();
             //设置当前时间
             tdDate=tY+'/'+tM+'/'+tD;

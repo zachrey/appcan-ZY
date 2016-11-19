@@ -113,7 +113,7 @@
         LOGIN = JSON.parse( LOGIN );
         appcan.ready(function() {
             // vesselCodeAjax(9900001441);
-            stationAjax(LOGIN.StationBarcode);
+            stationAjax(LOGIN.StationID);
              appcan.initBounce();
             //设置当前时间
             tdDate=tY+'/'+tM+'/'+tD;
@@ -306,7 +306,7 @@
                 },
                 dataType:"json",
                 success:function(info){
-                    appcan.window.alert(JSON.stringify(info));
+                    // appcan.window.alert(JSON.stringify(info));
                     if(!info.bSuccess){
                         appcan.window.openToast(info.Error,3000,5,0);
                         return;

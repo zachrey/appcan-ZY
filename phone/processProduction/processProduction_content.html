@@ -229,6 +229,7 @@
                         $('#materialBatch').val('');
                         if(info.WorkLocationProcessList.length === 1){
                             processJD = info.WorkLocationProcessList[0];
+                            stoveAndcoilAjax();
                             $('#process').html(info.WorkLocationProcessList[0].ProcessName);
                         }
                         //如果不是一条数据，则选进行本地存储，便于选择。
@@ -335,14 +336,14 @@
                              班次:LOGIN.UserID,//当前登录人ID
                              捆次:$('#coilNum').val(),
                              炉号:$('#stoveNum').val(),
-                             设备代码:deviceJD.DeviceID,//设备ID
+                             设备代码:deviceJD.RecordID,//设备ID
                              投入批次:batchJD//materialbarcode表的InsideBatch
                          }
                     }
                 },
                 dataType:"json",
                 success:function(info){
-                    appcan.alert(JSON.stringify(info));
+                    // appcan.alert(JSON.stringify(info));
                     if(info.bSuccess){
                         $('#materialBatch').val(info.batchNumber);
                         $('html,body').animate({scrollTop:$('#materialBatch').offset().top-80},1000);
@@ -356,7 +357,37 @@
             });
         }
         //条码
-        var csaiqing
+        function materialNumberAjax (barcode) {
+          appcan.request.ajax({
+                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                type:"POST",
+                data:{
+                        input:{
+                            LogicType:"扫码",
+                            scanType:"通用扫码",
+                            barcode:barcode
+                        }
+                    },
+                dataType:"json",
+                success : function( info ) {
+                        // appcan.window.alert(JSON.stringify(info));
+                        if(info.isFitBarcodeType && info.isFitBarcodeType != 9){
+                            if( info.isBarcodeBeUsed  ){
+                                appcan.window.openToast('条码已使用，请重新扫描！',1000,5,0);
+                                return ;
+                            }else{
+                                $('#materialNumber').html(barcode);
+                            }
+                        }else{
+                            appcan.window.openToast('条码不是物料实例码，请重新扫描！',1000,5,0);
+                            return ;
+                        }
+                },
+                error: function(){
+                    appcan.window.openToast("网络请求错误！",1000,5,0);
+                }
+            });
+        }
         //品号
         function productNumberAjax( barcode ){
             //alert(barcode);
@@ -506,19 +537,19 @@
                     $('#device').html('');
                     break;
                 case 'worTest':
-                    workorderAjax('9900001561');
-                    //$('#workorder').html('');
+                    // workorderAjax('9900001561');
+                    $('#workorder').html('');
                     break;
                 case 'matTest':
-                    materialNumberAjax('9900001528');
-                    //$('#materialNumber').html('');
-                    //barcodeArr.pop();
+                    // materialNumberAjax('9900001528');
+                    $('#materialNumber').html('');
+                    barcodeArr.pop();
                     break;
                 case 'proNumTest':
-                    productNumberAjax('9900001452');
-                    //$('#productNumber').html('');
-                    //$('#productName').html('');
-                    //$('#productSpecification').html('');
+                    // productNumberAjax('9900001452');
+                    $('#productNumber').html('');
+                    $('#productName').html('');
+                    $('#productSpecification').html('');
                     break;
             }
         });
@@ -699,6 +730,8 @@
                "LogicType":"工位管理",
                "WorkLocationInstanceGuid":stationInJD.GUID,
                "WorkProccessId":processJD.ProcessId,
+               "Bundle":$('#coilNum').val(),//捆次
+               "Furnace":$('#stoveNum').val(),//炉号
                "DeviceBarcode":deviceJD.DeviceBarcode,
                "DeviceGuid":deviceJD.RecordID,
                "DeviceName":deviceJD.DeviceName,

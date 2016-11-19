@@ -96,7 +96,7 @@
         var LOGIN = appcan.locStorage.getVal("LOGIN");
         LOGIN = JSON.parse( LOGIN );
         appcan.ready(function() {
-            stationAjax(LOGIN.StationBarcode);
+            stationAjax(LOGIN.StationID);
             // materialCodeAjax( 9900001521 );
 //      获取当前日期
             var myDate = new Date();

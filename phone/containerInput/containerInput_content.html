@@ -101,6 +101,7 @@
         var materialJD = [];//物料实例
         var barcodeArr = []; 
         var goodsArrNow = [];
+        var GUIDFLAG = 0;
         var LOGIN = appcan.locStorage.val('LOGIN');//存储名字
         var ContainerGroupObj = [];//容器组对象
         appcan.ready(function() {
@@ -126,12 +127,16 @@
                    var arr = json.ProductList,
                        ARR = json.detailJD,
                        length = arr.length;
+                       var LENGTH=0;
+                   for(var i=0;i<length;i++){
+                       var lengthA = arr[i].listMaterialEntity;
+                        LENGTH += lengthA.length;
+                   }
                    for(var i=0;i<length;i++){
                        var lengthA = arr[i].listMaterialEntity;
                        var lengthB = ARR[i].listMaterialEntity;
                        if( lengthA.length === lengthB.length ){
                            for(var j=0;j<lengthA.length;j++){
-                               GUIDAjax( lengthB[j].Amount , lengthB[j].BarCode );
                                var Djson = {
                                        outputContainer:lengthB[j].BarCode,
                                        traGoodsId:ARR[i].ProductNo,
@@ -141,15 +146,10 @@
                                        outputAmount:lengthB[j].Amount,
                                        unit:ARR[i].Unit,
                                     };
-                               detailNeed.push(Djson);
+                               GUIDAjax( lengthB[j].Amount , lengthB[j].BarCode ,Djson , LENGTH);
                            }
                        }
                    }
-                   //增加了更改主页的记录数量,这里面数组长度我使用的是展示的长度
-                   appcan.window.evaluateScript({
-                       name:"containerTransfer",
-                       scriptContent:"modifyCount("+detailNeed.length+")"
-                   }); 
                }else{
                    var arr = json.ProductList,
                    ARR = json.detailJD,
@@ -174,14 +174,14 @@
                        $("#bar_append").prepend(str);
                    }
                    appcan.window.evaluateScript({
-                       name:"containerTransfer",
+                       name:"containerInput",
                        scriptContent:"modifyCount("+length+")"
                    }); 
                 }
             }
         });
         //GUID查询
-        function GUIDAjax( Amount , barcode ){
+        function GUIDAjax( Amount , barcode , Djson , LENGTH){
             appcan.request.ajax({
                 url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
                 type:"POST",
@@ -196,6 +196,7 @@
                 success : function( info ) {
                     // appcan.alert(JSON.stringify(info));
                     if( info.bSuccess  ){
+                         GUIDFLAG++;
                         if( info.BarcodeType != '9'){
                             appcan.window.openToast('条码'+barcode+'不是物料实例码！',1000,5,0);
                             return;
@@ -211,14 +212,24 @@
                                    Amount:Amount
                             };
                             var str = '<label>'+barcode+'&nbsp;&nbsp;</label>';
+                            
+                            // appcan.alert(1,JSON.stringify(Djson));
                             goodsArrNow.push(arrq);
+                            detailNeed.push(Djson);
                             $("#bar_append").prepend(str);
+                            if(GUIDFLAG === LENGTH){
+                                //增加了更改主页的记录数量,这里面数组长度我使用的是展示的长度
+                               appcan.window.evaluateScript({
+                                   name:"containerInput",
+                                   scriptContent:"modifyCount("+GUIDFLAG+")"
+                               }); 
+                            }
                             //appcan.alert("数据",JSON.stringify(arrq));
                             //appcan.alert("数据列表",JSON.stringify( goodsArrNow ));
                         }
                     }else{
                         appcan.window.openToast(info.Error,3000,5,0);
-                    }
+                    }                   
                 },
                 error: function(){
                     appcan.window.openToast("网络请求错误！",1000,5,0);
@@ -351,7 +362,7 @@
             detailNeed.pop();
             goodsArrNow.pop();
             appcan.window.evaluateScript({
-                name:"containerTransfer",
+                name:"containerInput",
                 scriptContent:"modifyCount("+barcodeArr.length+")"
             });
         });
@@ -406,11 +417,11 @@
                    $("#bar_append").prepend(str);
                    barcodeArr.push($("#barcode").html());
                    appcan.window.evaluateScript({
-                       name:"containerTransfer",
+                       name:"containerInput",
                        scriptContent:"modifyCount("+barcodeArr.length+")"
                    }); 
                    $("#barcode").html("");
-                   $("#inputContainer").html("");
+                   // $("#inputContainer").html("");
                    $("#traGoodsId").html("");
                    $("#traGoodsName").html("");
                    $("#traStandard").html("");
@@ -464,9 +475,9 @@
                                appcan.window.openToast('提交成功！',1000,5,0);
                                setTimeout(function(){
                                  appcan.window.evaluateScript({
-                                   name:'containerInput',
-                                   scriptContent:"reload()"
-                                 })  
+                                    name:"containerInput",
+                                    scriptContent:"reload()"
+                                 });   
                                },1000);
                            }else{
                                appcan.window.openToast(info.Error,3000,5,0);

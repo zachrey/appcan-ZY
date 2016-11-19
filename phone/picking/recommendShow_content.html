@@ -58,7 +58,7 @@
                 success : function(info) {
                     appcan.window.closeToast();
                     $('#sheet').html('');
-                    appcan.window.alert(JSON.stringify(info));
+                    // appcan.window.alert(JSON.stringify(info));
                     if (info.bSuccess) {
                         if(!info.RecommendMaterialOutput.RecommendMaterialInstanceList[0].listMaterialEntity){
                             appcan.window.evaluateScript({

@@ -106,6 +106,10 @@
         }
 
         var reload = function(){
+            appcan.locStorage.remove('AMOUNTDETAILINFO');
+            appcan.locStorage.remove('BARCODEDETAILE');
+            appcan.locStorage.remove('CONINPUTFLAG');
+            appcan.locStorage.remove('CONINPUTDATA');
             uexWindow.reload();
         }
     </script>

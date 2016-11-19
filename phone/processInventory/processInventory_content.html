@@ -273,7 +273,7 @@
                      //alert('品号回调成功！');
                      //alert(localOption.getWindowName());
                 }
-                case 'proInvName':{
+                case 'proInvNumber':{
                     PURCODE = Obj;
                     $("#proInvName").html(Obj.MaterialID);
                     $("#proInvNumber").html(Obj.MatName);
@@ -449,13 +449,13 @@
                                 }
                                 TYPE = "容器";
                                 MATERIALINSTANCE = info.BarcodeInfo;
+                                $("#proInvMaterialNumber").html(Data);
                                 if(info.BarcodeInfo.materialbarcodeList.length == 1){
                                      // MATERIALINSTANCED = info.BarcodeInfo.materialbarcodeList[0];
                                      if(info.BarcodeInfo.materialbarcodeList[0].Inspection === 1){
                                          appcan.window.openToast('当前物料为送检状态，请重新扫描！',3000,5,0);
                                          return;
                                     }
-                                    $("#proInvMaterialNumber").html(Data);
                                     $("#proInvName").html(info.BarcodeInfo.materialbarcodeList[0].MatName);
                                     $("#proInvNumber").html(info.BarcodeInfo.materialbarcodeList[0].MaterialID);
                                     $("#proInvSpecification").html(info.BarcodeInfo.materialbarcodeList[0].Specifications);

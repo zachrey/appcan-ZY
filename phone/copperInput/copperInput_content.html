@@ -68,7 +68,7 @@
                       <div  id="unit" class="ub wkf-font-r">(公斤)</div>
                   </div>
                   <div  class="ub ub-f1 umar-l yqq-bbd ub-ac ub-pc wkf-font-z">
-                     <input type="" id="amount" name=""  class="wkf-input-nob wkf-font-w" style="width:98%;text-align:center;border:none; height: 2.2em;" value="" placeholder="请手动输入"/ >
+                     <input onkeyup="this.value=this.value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')" type="number" id="amount" name=""  class="wkf-input-nob wkf-font-w" style="width:98%;text-align:center;border:none; height: 2.2em;" value="" placeholder="请手动输入"/ >
                  </div>
               </div>
         </div>
@@ -130,7 +130,7 @@
         var LOGIN = appcan.locStorage.getVal("LOGIN");
         LOGIN = JSON.parse( LOGIN ); 
         appcan.ready(function() {
-             stationAjax(LOGIN.StationBarcode);
+             stationAjax(LOGIN.StationID);
              appcan.initBounce();
             //设置当前时间
             tdDate=tY+'-'+tM+'-'+tD;

@@ -101,6 +101,10 @@
         }
         
         var reload = function(){
+            appcan.locStorage.remove('AMOUNTDETAILINFO');
+            appcan.locStorage.remove('PROCESSLIST');
+            appcan.locStorage.remove('RECWHBARCODE');
+            appcan.locStorage.remove('RECOMMENDSHOWJSON');
             uexWindow.reload();
         }
     </script>

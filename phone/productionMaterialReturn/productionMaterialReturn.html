@@ -78,6 +78,10 @@
         })
          //提交
          function subReview(){
+            appcan.locStorage.remove('pmrAmountDetailInfo');
+            appcan.locStorage.remove('STATION');
+            appcan.locStorage.remove('PROCESS');
+            appcan.locStorage.remove('parkPRODUCT');
              uexWindow.reload();
          }
         //总计按钮

@@ -103,6 +103,11 @@
         }
         
         var reload = function(){
+            appcan.locStorage.remove('AMOUNTDETAILINFO');
+            appcan.locStorage.remove('PROCESSLIST');
+            appcan.locStorage.remove('GOODSOBJ');
+            appcan.locStorage.remove('CONINPUTFLAG');
+            appcan.locStorage.remove('CONINPUTDATA');
             uexWindow.reload();
         }
 

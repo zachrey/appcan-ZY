@@ -106,6 +106,8 @@
         }
         
         var reload = function(){
+            appcan.locStorage.remove('parkAmountDetailInfo');
+            appcan.locStorage.remove('parkPRODUCT');
             uexWindow.reload();
         }
 

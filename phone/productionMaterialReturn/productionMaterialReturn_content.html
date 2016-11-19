@@ -121,7 +121,7 @@
         var LOGIN = appcan.locStorage.getVal("LOGIN");
         LOGIN = JSON.parse( LOGIN );
         appcan.ready(function() {
-            stationAjax(LOGIN.StationBarcode);
+            stationAjax(LOGIN.StationID);
             //获取当前日期
             var myDate = new Date();
             $("#time").html(myDate.getFullYear()+'/'+(myDate.getMonth()+1)+'/'+myDate.getDate());   

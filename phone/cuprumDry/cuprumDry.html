@@ -101,6 +101,8 @@
         }
         
         var reload = function(){
+            appcan.locStorage.remove('AMOUNTDETAILINFO');
+            appcan.locStorage.remove('PROCESSLIST');
             uexWindow.reload();
         }
     </script>

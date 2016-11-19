@@ -108,6 +108,8 @@
         }
         
         var reload = function(){
+            appcan.locStorage.remove('pseAmountDetailInfo');
+            appcan.locStorage.remove('PROCESS');
             uexWindow.reload();
         }
     </script>

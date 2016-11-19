@@ -68,6 +68,9 @@
         })
          //提交
          function subReview(){
+            appcan.locStorage.remove('INSPECTAMOUNTDETAILINFO');
+            appcan.locStorage.remove('ISTPROCESS');
+            appcan.locStorage.remove('INSPECTPRODUCT');
              uexWindow.reload();
          }
         //点击提交按钮
