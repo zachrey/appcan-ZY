@@ -29,7 +29,7 @@
               <div  class="ub yqq-w10" id="stove" style="display: none !important;">
                  <div  class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">炉号</div>
                  <div  class="ub ub-f1 uinput umar-l yqq-bbd ub-ac ub-pc wkf-hh wkf-font-w">
-                     <input  type="text" id="stoveNum" class="ub wkf-font-w" placeholder="请输入捆号"/>
+                     <input  type="text" id="stoveNum" class="ub wkf-font-w" placeholder="请输入炉号"/>
                  </div>
               </div>
               <div  class="ub yqq-w10" id="coil" style="display: none !important;">
@@ -371,15 +371,17 @@
                 dataType:"json",
                 success : function( info ) {
                         // appcan.window.alert(JSON.stringify(info));
-                        if(info.isFitBarcodeType && info.isFitBarcodeType != 9){
+                        if(info.isFitBarcodeType && info.isFitBarcodeType == 9){
                             if( info.isBarcodeBeUsed  ){
                                 appcan.window.openToast('条码已使用，请重新扫描！',1000,5,0);
                                 return ;
                             }else{
                                 $('#materialNumber').html(barcode);
                             }
+                        }else if(info.isFitBarcodeType && info.isFitBarcodeType == 1){
+                        	$('#materialNumber').html(barcode);
                         }else{
-                            appcan.window.openToast('条码不是物料实例码，请重新扫描！',1000,5,0);
+                        	appcan.window.openToast('条码不是物料实例码或不是容器码，请重新扫描！',1000,5,0);
                             return ;
                         }
                 },
@@ -439,12 +441,14 @@
                 dataType:'json',
                 success: function( info ){
                     if( info.bSuccess ){
+                    	$("#coil").css("display","none !important");
+                    	$("#stove").css("display","none !important");
                         switch(info.flag){
                             case 1 :
-                                $('#stove').slideToggle();
+                                $('#coil').slideToggle();
                                 break;
                             case 2 :
-                                $('#coil').slideToggle();
+                                $('#stove').slideToggle();
                                 break;
                         }
                     }

@@ -447,7 +447,7 @@
                     break;
                case 'recommend':
                     //容器码推荐选择返回结果
-                    //appcan.window.alert(JSON.stringify(info));
+                    appcan.window.alert(JSON.stringify(info));
                     $('#bar_append').html('');
                     $('#vesselCode').html('/');
                 	$('#oldWarehouseNum').html('/');//原库位
@@ -483,8 +483,8 @@
             	json.NewAlibraryBarcode = wareHouseJD.AlibraryBarcode;
                 json.NewWareBarcode = wareHouseJD.WarehouseBarcode;
                 json.NewAlibraryname = wareHouseJD.WarehouseName;
-                json.OldWareBarcode = "";//$("#oldWarehouseNum").html();
-                json.OldAlibraryBarcode  = "";//$("#oldWarehouse").html();
+                json.OldWareBarcode = barcodeArrNow.NewWareBarcode;//$("#oldWarehouseNum").html();
+                json.OldAlibraryBarcode  = barcodeArrNow.NewAlibraryBarcode;//$("#oldWarehouse").html();
                 json.ContainerOldBarcode = "";//ContainerJD.ContainerBarCode;   //容器条码
                 json.listMaterialEntity = barcodeArrNow.listMaterialEntity;
                 barcodeBaseInfo.push(json);
