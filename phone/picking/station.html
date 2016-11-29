@@ -55,6 +55,9 @@
         //模糊查询请求
        appcan.button("#btn", "ani-act", function() {
            var Data = $('#check').val();
+           if( Data == '') {
+               return;
+           }
            appcan.window.evaluatePopoverScript({
                name:"picstation",    //val_option
                popName:"content",

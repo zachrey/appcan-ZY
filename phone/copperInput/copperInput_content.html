@@ -25,7 +25,7 @@
                  <div  id="process" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w w-click"></div>
               </div>
               <div  class="ub yqq-w10" >
-                 <div  id="invDel" class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w ">单别</div>
+                 <div  id="invDel" class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w w-click">单别</div>
                  <div  id="invoices" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w w-click"></div>
               </div>
               <div  class="ub yqq-w10" >
@@ -166,7 +166,7 @@
         //工位
         function stationAjax( barcode ){
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -207,7 +207,7 @@
         //库位
         function warehouseNumAjax(barcode){
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -245,7 +245,7 @@
                 return;
             }
             appcan.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                    input:{
@@ -256,7 +256,7 @@
                 },
                 dataType:"json",
                 success:function(info){
-                    appcan.window.alert((JSON.stringify(info)));
+                    // appcan.window.alert((JSON.stringify(info)));
                     if(!info.bSuccess){
                         appcan.window.openToast(info.Error,3000,5,0);
                         return;
@@ -336,13 +336,18 @@
                     break;
                 }
                 case 'invDel':{
+                    if($('#invoices').html() == ''){
+                        $('#invoices').html('/');
+                    }else{
+                        $('#invoices').html('');
+                    }
                     //invoicesAjax('123456');
                     break;
                 }
-                case 'worDel':{
-                    //workorderAjax('9900001561');
-                    break;
-                }
+                // case 'worDel':{
+                    // //workorderAjax('9900001561');
+                    // break;
+                // }
                 case 'warDel':{
                      $("#warehouseNum").html("");
                      $("#warehouse").html("");
@@ -500,14 +505,14 @@
                     OpType: "铜屑入库", 
                     StationBarcode: stationJD.StationBarcode,            //工位条码
                     ProcessID: processJD.ProcessId,     //工序编号
-                    Single: invoicesJD.ID,                         //单别信息,待完善
+                    Single:(invoicesJD.ID ? invoicesJD.ID : ''),                         //单别信息,待完善
                     StorageTime: $('#date').html(), 
                     OperatorId:LOGIN.UserID,//'3556',
                     copperScrapInfoList:ARRSUBMIT
            };
            //appcan.window.alert('提示',JSON.stringify(jsonData));
            appcan.ajax({
-               url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+               url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                type:"POST",
                data:{
                    input:jsonData

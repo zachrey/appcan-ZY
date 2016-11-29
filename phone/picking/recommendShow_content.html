@@ -49,7 +49,7 @@
             //appcan.window.alert('123',JSON.stringify(subData));
             appcan.window.openToast('查询中，请稍等...',10000,5,1);
             appcan.request.ajax({
-                url : "http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url : "http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type : "POST",
                 data : {
                     input:subData
@@ -60,7 +60,8 @@
                     $('#sheet').html('');
                     // appcan.window.alert(JSON.stringify(info));
                     if (info.bSuccess) {
-                        if(!info.RecommendMaterialOutput.RecommendMaterialInstanceList[0].listMaterialEntity){
+                        var jsonData = info.RecommendMaterialOutput.RecommendMaterialInstanceList[0];
+                        if(!jsonData.listMaterialEntity || jsonData.listMaterialEntity.length == 0){
                             appcan.window.evaluateScript({
                                name:"picrecommendShow", 
                                scriptContent:"hide()"

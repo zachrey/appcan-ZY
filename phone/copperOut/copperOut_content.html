@@ -130,7 +130,7 @@
         //工位
         function stationAjax( barcode ){
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -176,7 +176,7 @@
                 return;
             }
             appcan.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -212,9 +212,9 @@
         
         //品号
         function purNumAjax(barcode){
-            alert(barcode);
+            // alert(barcode);
             appcan.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -394,7 +394,7 @@
            }
            //appcan.window.alert('提示',JSON.stringify(jsonData));
            appcan.ajax({
-               url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+               url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                type:"POST",
                data:{
                    input:jsonData

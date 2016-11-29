@@ -51,6 +51,30 @@
                   <div id="workorder"  class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc wkf-hh wkf-font-w w-click"></div>
               </div>
               <div  class="ub yqq-w10" >
+                  <div class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">
+                      <div  id="" class="ub">品号</div>
+                  </div>
+                  <div  class="ub ub-f1 umar-l yqq-bbd ub-ac ub-pc wkf-font-z">
+                     <input type="text" id="Number" name="" readonly="readonly" class="wkf-input-nob wkf-font-w" style="width:98%;text-align:center;border:none; height: 2.2em;" value="" placeholder=""/ >
+                 </div>
+              </div>
+              <div  class="ub yqq-w10" >
+                  <div class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">
+                      <div  id="" class="ub">品名</div>
+                  </div>
+                  <div  class="ub ub-f1 umar-l yqq-bbd ub-ac ub-pc wkf-font-z">
+                     <input type="text" id="Name" name="" readonly="readonly" class="wkf-input-nob wkf-font-w" style="width:98%;text-align:center;border:none; height: 2.2em;" value="" placeholder=""/ >
+                 </div>
+              </div>
+              <div  class="ub yqq-w10" >
+                  <div class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">
+                      <div  id="=" class="ub">规格</div>
+                  </div>
+                  <div  class="ub ub-f1 umar-l yqq-bbd ub-ac ub-pc wkf-font-z">
+                     <input type="text" id="Specification" name="" readonly="readonly" class="wkf-input-nob wkf-font-w" style="width:98%;text-align:center;border:none; height: 2.2em;" value="" placeholder=""/ >
+                 </div>
+              </div>
+              <!-- <div  class="ub yqq-w10" >
                  <div class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">品号</div>
                   <div id="Number" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w"></div>
               </div>
@@ -61,7 +85,7 @@
               <div  class="ub yqq-w10" >
                  <div class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">规格</div>
                   <div id="Specification" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w"></div>
-              </div>
+              </div> -->
               <div  class="ub yqq-w10" >
                  <div class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">&diams;投入物料</div>
                   <div id="inputMaterial" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w w-click"></div>
@@ -201,7 +225,7 @@
         //工位
         function stationAjax( barcode ){
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -250,7 +274,7 @@
         //设备
         function deviceAjax( barcode ){
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -281,7 +305,7 @@
         //工单
         function workorderAjax( barcode ){
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -306,9 +330,9 @@
                             $('#inputMaterial').html(inputMatJD.MaterialName);
                         }
                         $('#workorder').html(work.WorkOrderNumber);
-                        $('#Name').html(work.ProductName);
-                        $('#Number').html(work.ProductNumber);
-                        $('#Specification').html(work.ProductSpecifications);
+                        $('#Name').val(work.ProductName);
+                        $('#Number').val(work.ProductNumber);
+                        $('#Specification').val(work.ProductSpecifications);
                         proAndworAjax();
                         // //存入工单下面的物料信息
                         // appcan.locStorage.val('INPUTMATERIALLIST',barArr);
@@ -325,7 +349,7 @@
         //产出批次
         function materialBatchAjax( batchJD ){
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -359,7 +383,7 @@
         //条码
         function materialNumberAjax (barcode) {
           appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                         input:{
@@ -394,7 +418,7 @@
         function productNumberAjax( barcode ){
             //alert(barcode);
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                    input:{
@@ -429,7 +453,7 @@
         //得到炉号或捆号
         var stoveAndcoilAjax = function(){
             appcan.ajax({
-                url: 'http://10.101.55.75/fzzy/SPEngine/Barcode',
+                url: 'http://10.101.55.73/fzzy/SPEngine/Barcode',
                 type: 'POST',
                 data: {
                     input:{
@@ -462,14 +486,14 @@
         //根据工序和工单带出品号
         var proAndworAjax = function(){
             appcan.ajax({
-                url: 'http://10.101.55.75/fzzy/SPEngine/Barcode',
+                url: 'http://10.101.55.73/fzzy/SPEngine/Barcode',
                 type: 'POST',
                 data: {
                     input:{
                         LogicType:"扫码",
                         ScanType:"工单工序查询",
                         WorkerorderMaintenanceInput:{
-                            "WorkerorderID":workorderJD.WorkOrderNumber,//"20151113013",
+                            "WorkerorderID":(workorderJD ? workorderJD.WorkOrderNumber : ''),//"20151113013",
                             "ProcessNumber":processJD.ProcessNumber//"013"
                         }
                     }
@@ -542,7 +566,18 @@
                     break;
                 case 'worTest':
                     // workorderAjax('9900001561');
-                    $('#workorder').html('');
+                    if($('#workorder').html() == ''){
+                        $('#workorder').html('/');
+                        readonly="readonly"
+                        $('#Name').removeAttr('readonly');
+                        $('#Number').removeAttr('readonly');
+                        $('#Specification').removeAttr('readonly');
+                    }else{
+                        $('#workorder').html('');
+                        $('#Name').attr('readonly','readonly');
+                        $('#Number').attr('readonly','readonly');
+                        $('#Specification').attr('readonly','readonly');
+                    }
                     break;
                 case 'matTest':
                     // materialNumberAjax('9900001528');
@@ -605,9 +640,9 @@
                         $('#inputMaterial').html(inputMatJD.MaterialName);
                     }
                     $('#workorder').html(work.WorkOrderNumber);
-                    $('#Name').html(work.ProductName);
-                    $('#Number').html(work.ProductNumber);
-                    $('#Specification').html(work.ProductSpecifications);
+                    $('#Name').val(work.ProductName);
+                    $('#Number').val(work.ProductNumber);
+                    $('#Specification').val(work.ProductSpecifications);
                     proAndworAjax();
                     // //存入工单下面的物料信息
                     // appcan.locStorage.val('INPUTMATERIALLIST',barArr);
@@ -739,14 +774,14 @@
                "DeviceBarcode":deviceJD.DeviceBarcode,
                "DeviceGuid":deviceJD.RecordID,
                "DeviceName":deviceJD.DeviceName,
-               "BillNumber":workorderJD.WorkOrderNumber,
-               "ProductMaterialId":workorderJD.ProductNumber,
+               "BillNumber":(workorderJD ? workorderJD.WorkOrderNumber : ''),
+               "ProductMaterialId":(workorderJD ? workorderJD.ProductNumber : $('#Number').val()),
                "ProductList":barcodeArrNow
            };
            //appcan.window.alert( "提示",JSON.stringify(submintInfo) );
            appcan.window.openToast('提交中...',10000,5,1);
            appcan.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:submintInfo

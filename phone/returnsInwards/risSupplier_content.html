@@ -45,7 +45,7 @@
         function searchRequest( Data ) {
             appcan.window.openToast('查询中，请稍等...',10000,5,1);
             appcan.request.ajax({
-                url : "http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url : "http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type : "POST",
                 data : {
                     input:{
@@ -63,23 +63,23 @@
                     //appcan.window.alert(JSON.stringify(data))
                     if (data.SupplierListOutput.IsSuccess) {
                         list = data.SupplierListOutput.SupplierList;
-                        for (var i = 0; i < list.length; i++) {
-                            var str = '<div id="'+i+'" class="ub ub-f1 ub-ver  uc-a uinn umar-a zk-marTop2 yqq-xxk">'+
-                                        '<div class="ub yqq-w10 zk-borderBottom" >'+
-                                            '<div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">'+
-                                                '供应商'+
-                                            '</div>'+
-                                            '<div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">'+
-                                                list[i].Supplier.SupplierName+
-                                            '</div>'+
-                                        '</div>'+
-                                    '</div>';
-                            $('#sheet').append(str);
-                            
+                        // for (var i = 0; i < list.length; i++) {
+                            // var str = '<div id="'+i+'" class="ub ub-f1 ub-ver  uc-a uinn umar-a zk-marTop2 yqq-xxk">'+
+                                        // '<div class="ub yqq-w10 zk-borderBottom" >'+
+                                            // '<div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                // '供应商'+
+                                            // '</div>'+
+                                            // '<div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                // list[i].Supplier.SupplierName+
+                                            // '</div>'+
+                                        // '</div>'+
+                                    // '</div>';
+                            // $('#sheet').append(str);
+                            $('#sheet').append(data.ViewForClient);
                             appcan.button('.zk-marTop2','ani-act',function(){
                                 multipleChoice( this.id );
                             });
-                        }
+                        // }
                     } else {
                         appcan.window.openToast("没有此码！", 1000, 5, 0);
                     }

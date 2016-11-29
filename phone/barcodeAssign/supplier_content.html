@@ -15,87 +15,6 @@
     </head>
     <body class="um-vp" ontouchstart>
         <div id="sheet" class="ub uinn ub-f1 ub-ver bc-text">
-            <!-- <div id="sheet0" class="ub ub-f1 ub-ver yqq-xxk uc-a uinn umar-a zk-marTop2" onclick="multipleChoice( 0 );">
-                <div class="ub yqq-w10 zk-borderBottom" >
-                    <div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">
-                        工单
-                    </div>
-                    <div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">
-                        gd00003154
-                    </div>
-                </div>
-                <div  class="ub yqq-w10 zk-borderTop ub-ver" >
-                    <div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">
-                        <div class="ub yqq-w3 ub-pc">
-                            产品品号
-                        </div>
-                        <div class="ub yqq-w7">
-                            cpph6555
-                        </div>
-                    </div>
-                    <div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">
-                        <div class="ub yqq-w3 ub-pc">
-                            产品品名
-                        </div>
-                        <div class="ub yqq-w7">
-                            名称
-                        </div>
-                    </div>
-                    <div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">
-                        <div class="ub yqq-w3 ub-pc">
-                            产品规格
-                        </div>
-                        <div class="ub yqq-w7">
-                            GB941788
-                        </div>
-                    </div>
-                </div>
-                <div  class="ub yqq-w10 zk-borderBottom zk-marTop1">
-                    <div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">
-                        物料条码
-                    </div>
-                    <div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">
-                        wl55544985222
-                    </div>
-                </div>
-                <div  class="ub yqq-w10  zk-borderTop ub-ver" >
-                    <div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">
-                        <div class="ub yqq-w3 ub-pc">
-                            品号
-                        </div>
-                        <div class="ub yqq-w7">
-                            ph655665
-                        </div>
-                    </div>
-                    <div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">
-                        <div class="ub yqq-w3 ub-pc">
-                            品名
-                        </div>
-                        <div class="ub yqq-w7">
-                            名称
-                        </div>
-                    </div>
-                    <div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">
-                        <div class="ub yqq-w3 ub-pc">
-                            规格
-                        </div>
-                        <div class="ub yqq-w7">
-                            cpph6555
-                        </div>
-                    </div>
-                </div>
-                <div  class="ub yqq-w10  zk-marTop2" >
-                    <div class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">
-                        投料批次:
-                    </div>
-                    <div class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">
-                        tlpc823655
-                    </div>
-                    <div class="ub yqq-w4 sheetuinn ub-pc ub-ac wkf-font-w">
-                        18（kg）
-                    </div>
-                </div>
-            </div> -->
         </div>
     </body>
     <script src="../js/appcan.js"></script>
@@ -111,27 +30,13 @@
         var FLAG = 1;
         appcan.ready(function() {
         });
-        appcan.button(".nav-btn", "btn-act", function() {
-            if( localOption.localPop() ){
-                    break;
-            }appcan.window.close(-1);dow.close(-1);
-            
-        })
-        function close() {
-            if( localOption.localPop() ){
-                    break;
-            }appcan.window.close(-1);reak;}}appcan.window.close(-1);
-        }
-
-        //  点击提交 传数据 关闭页面
-        
 
         //模糊查询请求
         function searchRequest( Data ) {
-        	alert(234);
+        	// alert(234);
             appcan.window.openToast('查询中，请稍等...',10000,5,1);
             appcan.request.ajax({
-                url : "http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url : "http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type : "POST",
                 data : {
                     input:{
@@ -146,37 +51,38 @@
                 success : function(data) {
                     appcan.window.closeToast();
                     $('#sheet').html('');
-                    //console.log(JSON.stringify(data));
+                    // console.log(JSON.stringify(data));
                     if (data.SupplierListOutput.IsSuccess) {
                         list = data.SupplierListOutput.SupplierList;
                         if(list.length === 0){
                             appcan.window.openToast('查询结果为空！',1000,5,0);
                             return;
                         }
-                        for (var i = 0; i < list.length; i++) {
-                            var str = '<div id="'+i+'" class="ub ub-f1 ub-ver  uc-a uinn umar-a zk-marTop2 yqq-xxk">'+
-                                        '<div class="ub yqq-w10 zk-borderBottom yqq-bbd" >'+
-                                            '<div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">'+
-                                                '供应商'+
-                                            '</div>'+
-                                            '<div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">'+
-                                                list[i].Supplier.SupplierName+
-                                            '</div>'+
-                                        '</div>'+
-                                        '<div class="ub yqq-w10 zk-borderBottom" >'+
-                                            '<div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">'+
-                                                '供应商编号'+
-                                            '</div>'+
-                                            '<div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">'+
-                                                list[i].Supplier.SupplierCode+
-                                            '</div>'+
-                                        '</div>'+
-                                    '</div>';
-                            $('#sheet').append(str);
-                            appcan.button('.zk-marTop2','ani-act',function(){
-                                multipleChoice( this.id );
-                            });
-                        }
+                        // for (var i = 0; i < list.length; i++) {
+                            // var str = '<div id="'+i+'" class="ub ub-f1 ub-ver  uc-a uinn umar-a zk-marTop2 yqq-xxk">'+
+                                        // '<div class="ub yqq-w10 zk-borderBottom yqq-bbd" >'+
+                                            // '<div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                // '供应商'+
+                                            // '</div>'+
+                                            // '<div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                // list[i].Supplier.SupplierName+
+                                            // '</div>'+
+                                        // '</div>'+
+                                        // '<div class="ub yqq-w10 zk-borderBottom" >'+
+                                            // '<div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                // '供应商编号'+
+                                            // '</div>'+
+                                            // '<div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                // list[i].Supplier.SupplierCode+
+                                            // '</div>'+
+                                        // '</div>'+
+                                    // '</div>';
+                            // $('#sheet').append(str);
+                        // }
+                        $('#sheet').append(data.ViewForClient);
+                        appcan.button('.zk-marTop2','ani-act',function(){
+                            multipleChoice( this.id );
+                        });
                     } else {
                         appcan.window.openToast("查询结果为空！", 1000, 5, 0);
                     }
@@ -189,7 +95,7 @@
         //模拟单项选择
         function multipleChoice( flag ) {
             if( FLAG == 1 && $("#"+flag).hasClass("zk-clickR")){
-                appcan.window.evaluatePopoverScript({
+               appcan.window.evaluatePopoverScript({
                    name:"barcodeAssign",
                    popName:"content",
                    scriptContent:"openWindowBack('"+JSON.stringify(list[flag])+"')"

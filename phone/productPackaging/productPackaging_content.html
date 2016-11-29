@@ -185,7 +185,7 @@
        //工位精确查询
         function stationAjax( Data ){
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -215,7 +215,7 @@
         //外包装码
         function packOutputBarcodeAjax( Data ){
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -259,7 +259,7 @@
                 return;
             }
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -438,7 +438,7 @@
            }
            appcan.window.openToast('提交中...',10000,5,1);
            appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:submitInfo

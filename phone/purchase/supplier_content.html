@@ -15,87 +15,6 @@
     </head>
     <body class="um-vp" ontouchstart>
         <div id="sheet" class="ub uinn ub-f1 ub-ver bc-text">
-            <!-- <div id="sheet0" class="ub ub-f1 ub-ver yqq-xxk uc-a uinn umar-a zk-marTop2" onclick="multipleChoice( 0 );">
-                <div class="ub yqq-w10 zk-borderBottom" >
-                    <div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">
-                        工单
-                    </div>
-                    <div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">
-                        gd00003154
-                    </div>
-                </div>
-                <div  class="ub yqq-w10 zk-borderTop ub-ver" >
-                    <div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">
-                        <div class="ub yqq-w3 ub-pc">
-                            产品品号
-                        </div>
-                        <div class="ub yqq-w7">
-                            cpph6555
-                        </div>
-                    </div>
-                    <div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">
-                        <div class="ub yqq-w3 ub-pc">
-                            产品品名
-                        </div>
-                        <div class="ub yqq-w7">
-                            名称
-                        </div>
-                    </div>
-                    <div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">
-                        <div class="ub yqq-w3 ub-pc">
-                            产品规格
-                        </div>
-                        <div class="ub yqq-w7">
-                            GB941788
-                        </div>
-                    </div>
-                </div>
-                <div  class="ub yqq-w10 zk-borderBottom zk-marTop1">
-                    <div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">
-                        物料条码
-                    </div>
-                    <div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">
-                        wl55544985222
-                    </div>
-                </div>
-                <div  class="ub yqq-w10  zk-borderTop ub-ver" >
-                    <div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">
-                        <div class="ub yqq-w3 ub-pc">
-                            品号
-                        </div>
-                        <div class="ub yqq-w7">
-                            ph655665
-                        </div>
-                    </div>
-                    <div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">
-                        <div class="ub yqq-w3 ub-pc">
-                            品名
-                        </div>
-                        <div class="ub yqq-w7">
-                            名称
-                        </div>
-                    </div>
-                    <div class="ub yqq-w9 sheetuinn ub-pc ub-ac wkf-font-w">
-                        <div class="ub yqq-w3 ub-pc">
-                            规格
-                        </div>
-                        <div class="ub yqq-w7">
-                            cpph6555
-                        </div>
-                    </div>
-                </div>
-                <div  class="ub yqq-w10  zk-marTop2" >
-                    <div class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">
-                        投料批次:
-                    </div>
-                    <div class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">
-                        tlpc823655
-                    </div>
-                    <div class="ub yqq-w4 sheetuinn ub-pc ub-ac wkf-font-w">
-                        18（kg）
-                    </div>
-                </div>
-            </div> -->
         </div>
     </body>
     <script src="../js/appcan.js"></script>
@@ -126,8 +45,9 @@
         //模糊查询请求
         function searchRequest( Data ) {
             appcan.window.openToast('查询中，请稍等...',10000,5,1);
+            // var start1 = new Date();
             appcan.request.ajax({
-                url : "http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url : "http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type : "POST",
                 data : {
                     input:{
@@ -140,6 +60,8 @@
                 },
                 dataType : "json",
                 success : function(data) {
+                    // var end1 = new Date();
+                    // appcan.window.alert('网络请求时间：' + (end1-start1) + 'ms' );        
                     appcan.window.closeToast();
                     $('#sheet').html('');
                     //console.log(JSON.stringify(data));
@@ -149,31 +71,36 @@
                             appcan.window.openToast('查询结果为空！',1000,5,0);
                             return;
                         }
-                        for (var i = 0; i < list.length; i++) {
-                            var str = '<div id="'+i+'" class="ub ub-f1 ub-ver  uc-a uinn umar-a zk-marTop2 yqq-xxk">'+
-                                        '<div class="ub yqq-w10 zk-borderBottom yqq-bbd" >'+
-                                            '<div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">'+
-                                                '供应商'+
-                                            '</div>'+
-                                            '<div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">'+
-                                                list[i].Supplier.SupplierName+
-                                            '</div>'+
-                                        '</div>'+
-                                        '<div class="ub yqq-w10 zk-borderBottom" >'+
-                                            '<div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">'+
-                                                '供应商编号'+
-                                            '</div>'+
-                                            '<div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">'+
-                                                list[i].Supplier.SupplierCode+
-                                            '</div>'+
-                                        '</div>'+
-                                    '</div>';
-                            $('#sheet').append(str);
-                            
+                        // // var start = new Date();
+                        // for (var i = 0; i < list.length; i++) {
+                            // var str = '<div id="'+i+'" class="ub ub-f1 ub-ver  uc-a uinn umar-a zk-marTop2 yqq-xxk">'+
+                                        // '<div class="ub yqq-w10 zk-borderBottom yqq-bbd" >'+
+                                            // '<div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                // '供应商'+
+                                            // '</div>'+
+                                            // '<div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                // list[i].Supplier.SupplierName+
+                                            // '</div>'+
+                                        // '</div>'+
+                                        // '<div class="ub yqq-w10 zk-borderBottom" >'+
+                                            // '<div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                // '供应商编号'+
+                                            // '</div>'+
+                                            // '<div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                // list[i].Supplier.SupplierCode+
+                                            // '</div>'+
+                                        // '</div>'+
+                                    // '</div>';
+                            // $('#sheet').append(str);
+                            $('#sheet').append(data.ViewForClient);
                             appcan.button('.zk-marTop2','ani-act',function(){
                                 multipleChoice( this.id );
                             });
-                        }
+                        // }
+                        // var end = new Date();
+                        // var s = end - start;
+                        // appcan.window.alert('1','消耗的时间为：' + s + 'ms');  
+                                  
                     } else {
                         appcan.window.openToast("查询结果为空！", 1000, 5, 0);
                     }

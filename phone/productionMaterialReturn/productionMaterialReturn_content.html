@@ -31,7 +31,7 @@
                  <div  id="category" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w w-click br"></div>
               </div>
               <div  class="ub yqq-w10" >
-                 <div  class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">调拨日期</div>
+                 <div  class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">日期</div>
                  <div  id="time" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc wkf-hh wkf-font-w"></div>
               </div>
               <div class="ub yqq-w10" >
@@ -72,7 +72,7 @@
                       <div  id="unit" class="ub" style="color:red;"></div>
                   </div>
                   <div id="pmrCount" class="ub ub-f1 uinput umar-l yqq-bbd ub-ac ub-pc wkf-hh wkf-font-w">
-                        <input onkeyup="this.value=this.value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')" type="number" id="count"class="ub wkf-font-w" placeholder="请输入数量"/>
+                        <input readonly="readonly" onkeyup="this.value=this.value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')" type="number" id="count" class="ub wkf-font-w" placeholder="请输入数量"/>
                   </div>
               </div>
           </div>
@@ -142,8 +142,20 @@
              // case 'Name': if( TYPE === "容器" || TYPE === "包装") openWindow('pmrGoodsId'); break;       
              case 'pmrStation': $("#station").html(""); $("#process").html(""); break;
              case 'pmrProcess': $("#process").html(""); break;
-             case 'pmrCategory': $("#category").html(""); break;
-             case 'pmrWorkOrder': $("#workOrder").html(""); break;
+             case 'pmrCategory': 
+                if($('#category').html() == ''){
+                    $("#category").html("/");
+                }else{
+                    $("#category").html("");
+                } 
+                break;
+             case 'pmrWorkOrder': 
+                if($("#workOrder").html() == ''){
+                    $("#workOrder").html("/"); 
+                }else{
+                    $("#workOrder").html(""); 
+                }
+                break;
              case 'pmrShippingSpace': $("#shippingSpace").html("");$("#wareHouse").html(""); break;
              case 'pmrMaterialNumber': $("#materialNumber").html("");$("#Name").html("");$("#NumberCode").html("");$("#Specification").html("");$("#count").val("");$("#unit").html("单位");break;;                                                      
              
@@ -197,7 +209,7 @@
         //satation-->ajax
         function stationAjax( Data ){
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -236,7 +248,7 @@
         //category-->ajax
         function categoryAjax( Data ){
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -269,7 +281,7 @@
         //workOrder -->ajax
         function workOrderAjax( Data ){
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -300,7 +312,7 @@
         //shippingSpace -->ajax
         function shippingSpaceAjax( Data ){
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -339,7 +351,7 @@
                 return;
             }
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -365,7 +377,7 @@
                                  $("#Name").html('无');
                                  $("#NumberCode").html('无');
                                  $("#Specification").html('无');
-                                 $("#count").val( 1 );
+                                 $("#count").val( info.BarcodeInfo.materialbarcodeList[0].Amount );
                                  $("#unit").html("");
                              }
                              appcan.locStorage.setVal( "parkPRODUCT" , info.BarcodeInfo );
@@ -393,8 +405,9 @@
                             $("#NumberCode").html(info.BarcodeInfo.materialbarcode.MaterialID ? info.BarcodeInfo.materialbarcode.MaterialID : '无');
                             $("#Specification").html(info.BarcodeInfo.materialbarcode.Specifications ? info.BarcodeInfo.materialbarcode.Specifications : '无');
                             $("#unit").html(info.BarcodeInfo.materialbarcode.Company);
-                             $('html,body').animate({scrollTop:$('#materialNumber').offset().top-80},1000);
-                             barcodeArr.push(Data);
+                            $("#count").val( info.BarcodeInfo.materialbarcode.Amount );
+                            $('html,body').animate({scrollTop:$('#materialNumber').offset().top-80},1000);
+                            barcodeArr.push(Data);
                         } else {
                                 appcan.window.openToast("条码无实例！",1000,5,0);
                         }
@@ -544,7 +557,7 @@
            }
            // appcan.window.alert( "提示",JSON.stringify(submitInfo) );                           
            appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:submitInfo
@@ -607,6 +620,7 @@
                     $("#packGoodsName").html(Obj.MatName);
                     $("#packGoodsStandard").html(Obj.Brand);
                     $("#unit").html(Obj.Company);
+                    $("#count").val( Obj.Amount );
                     break;
                 }
             }

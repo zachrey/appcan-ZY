@@ -59,6 +59,10 @@
                  <div  class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">存放仓库</div>
                  <div  id="warehouse" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w"></div>
               </div>
+              <div  class="ub yqq-w10 uhide" id="inputContainer">
+                 <div  id="inConNumDel" class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w w-click">转入容器</div>
+                 <div  id="inConNum" class="ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc  wkf-hh wkf-font-w w-click br"></div>
+              </div>
         </div>
         
         <div id="down" class="ub ub-f1 ub-ver yqq-xxk uc-a uinn umar-a " style="margin-bottom: 2em;color:white;">
@@ -100,6 +104,8 @@
         var workorderJD;
         //存入请求得到的总计信息对象
         var detailJD = [];
+        //存入请求得到的转入容器对象
+        var inConJD;
         //当前打开的窗口名字
         var winNameNow = '';
         //原库位对象
@@ -145,13 +151,15 @@
                  vesselCodeAjax( barcode );
             }else if($("#warehouseNum").html() == null || $("#warehouseNum").html() == ""){
                  warehouseNumAjax( barcode );
+            }else if( !$('#inputContainer').hasClass('uhide') && $('#inConNum').html() == ''){
+                inputContainerAjax( barcode );
             }
         }
         
         //工位
         function stationAjax( barcode ){
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -191,7 +199,7 @@
         //单别
         function invoicesAjax( barcode ){
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                      input:{
@@ -223,7 +231,7 @@
         //工单
         function workorderAjax( barcode ){
              appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -255,7 +263,7 @@
         //库位
         function warehouseNumAjax(barcode){
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -293,7 +301,7 @@
                 return;
             }
             appcan.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -347,6 +355,33 @@
                 }
             })
         }
+        //转入容器
+        var inputContainerAjax = function(barcode){
+            appcan.request.ajax({
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
+                type:"POST",
+                data:{
+                    input:{
+                        LogicType:"扫码",
+                        scanType:"通用扫码",
+                        barcode:barcode
+                    }
+                },
+                dataType:"json",
+                success : function( info ) {
+                    if(info.bSuccess){
+                        if(info.BarcodeType == 1){
+                            $('#inConNum').html(barcode);
+                        }
+                    }else{
+                        appcan.window.openToast(info.Error,2000,5,0);
+                    }
+                },
+                error: function(){
+                    appcan.window.openToast("网络请求错误！",1000,5,0);
+                }
+            })
+        }
         
         appcan.button('.w-click','ani-act',function(){
             switch(this.id){
@@ -379,11 +414,19 @@
                     break;
                 case 'invDel':
                     //invoicesAjax('123456');
-                    $('#invoices').html('');
+                    if($('#invoices').html() == ''){
+                        $('#invoices').html('/');
+                    }else{
+                        $('#invoices').html('');
+                    }
                     break;
                 case 'worDel':
                     //workorderAjax('9900001561');
-                    $('#workorder').html('');
+                    if($('#workorder').html() == ''){
+                        $('#workorder').html('/');
+                    }else{
+                        $('#workorder').html('');
+                    }
                     break;
                 case 'warDel':
                     //warehouseNumAjax('9900001503');
@@ -394,7 +437,15 @@
                     //vesselCodeAjax('9900001441');
                     $('#vesselCode').html('');
                     $('#bar_append').html('');
+                    $('#oldWarehouseNum').html('');
+                    $('#oldWarehouse').html('');
+                    $('#inputContainer').addClass('uhide');
+                    // console.log($('#inputContainer').css('display'))
                     barcodeArr.pop();
+                    break;
+                case 'inConNumDel':
+                    $('#inConNum').html('');
+                    // inputContainerAjax('9900001441');
                     break;
             }
         });
@@ -447,11 +498,13 @@
                     break;
                case 'recommend':
                     //容器码推荐选择返回结果
-                    appcan.window.alert(JSON.stringify(info));
+                    //appcan.window.alert(JSON.stringify(info));
                     $('#bar_append').html('');
                     $('#vesselCode').html('/');
                 	$('#oldWarehouseNum').html('/');//原库位
-                   	$('#oldWarehouse').html('/');//原仓库             
+                   	$('#oldWarehouse').html('/');//原仓库 
+                   	//显示转入容器
+                   	$('#inputContainer').removeClass('uhide');         
                    	barcodeArrNow = info;
                     ContainerJD = info.listMaterialEntity;
                     var length = barcodeArrNow.listMaterialEntity.length;
@@ -486,6 +539,8 @@
                 json.OldWareBarcode = barcodeArrNow.NewWareBarcode;//$("#oldWarehouseNum").html();
                 json.OldAlibraryBarcode  = barcodeArrNow.NewAlibraryBarcode;//$("#oldWarehouse").html();
                 json.ContainerOldBarcode = "";//ContainerJD.ContainerBarCode;   //容器条码
+                //放入转入容器
+                json.ContainerINtoBarCode = $('#inConNum').html();     //推荐需要转入容器
                 json.listMaterialEntity = barcodeArrNow.listMaterialEntity;
                 barcodeBaseInfo.push(json);
                 //存入准备展示的数据
@@ -502,6 +557,7 @@
                 json.OldWareBarcode = oldWareObj.WarehouseBarcode;
                 json.OldAlibraryBarcode  = oldWareObj.AlibrayBarcode;
                 json.ContainerOldBarcode = ContainerJD.ContainerBarCode;   //容器条码
+                json.ContainerINtoBarCode = '';   //扫容器码的情况
                 json.listMaterialEntity = barcodeArrNow;
                 //存入数组
                 barcodeBaseInfo.push(json);
@@ -568,16 +624,16 @@
                     "OpType": "生产领料", 
                     "Station": stationJD.StationBarcode,            //工位条码
                     "WorkProcegure": processJD.ProcessId,     //工序编号
-                    "Single": invoicesJD.ID,                         //单别信息,待完善
-                    "WorkOrder": workorderJD.Barcode,                 //工单
+                    "Single":(invoicesJD.ID ? invoicesJD.ID : ""),                         //单别信息,待完善
+                    "WorkOrder": (workorderJD ? workorderJD.Barcode : ''),                 //工单
                     "StorageTime": $('#date').html(), 
-                    "WorkOrderNumber": workorderJD.WorkOrderNumber,    //WorkOrderNumber
+                    "WorkOrderNumber": (workorderJD ? workorderJD.WorkOrderNumber : ''),    //WorkOrderNumber
                     "OperatorName": user.U_LoginName,//"lfq",         //用户
                     "LLPurchasingInfoEntity":barcodeBaseInfo,
            }
-           //appcan.window.alert('提示',JSON.stringify(jsonData));
+           console.log('提示',JSON.stringify(jsonData));
            appcan.ajax({
-               url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+               url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                type:"POST",
                data:{
                    input:jsonData

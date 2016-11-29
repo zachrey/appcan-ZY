@@ -56,6 +56,9 @@
        appcan.button("#btn", "ani-act", function() {
             //得到输入框的值
             var Data = $('#check').val();
+            if( Data == '') {
+               return;
+           }
            appcan.window.evaluatePopoverScript({
                name:"pmrWorkOrder",    //val_option
                popName:"content",
@@ -65,7 +68,7 @@
        //关闭窗口
        function closeWindow(){
            if(localOption.localPop()){appcan.window.close(-1);}
-           if(localOption.localPop()){appcan.window.close(-1);}
+           
        }
     </script>
 </html>

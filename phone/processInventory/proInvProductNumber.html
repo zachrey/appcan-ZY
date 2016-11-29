@@ -19,7 +19,7 @@
             <!--header开始-->
             <div id="header" class="uh bc-text-head ub ub-ac ub-pc yqq-bbd">
                 <div class="uinput ub ub-f1 ub-ac ub-pc">
-                    <input class="ub ub-f1 ub-pc input_c bc-text-head" id="check" placeholder="品号">
+                    <input class="ub ub-f1 ub-pc input_c bc-text-head" id="check" placeholder="品名">
                 </div>
                 <div class="ub ub-pc ub-ac zk-min-h zk-mar2 sc-btn" id="btn">
                     <div class="ub btn ub-ac fa fa-search"></div>
@@ -55,6 +55,9 @@
         //模糊查询请求
        appcan.button("#btn", "ani-act", function() {
            var Data = $('#check').val();
+           if( Data == '') {
+               return;
+           }
            appcan.window.evaluatePopoverScript({
                name:"proInvProductNumber",    //val_option
                popName:"content",

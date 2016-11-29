@@ -22,35 +22,40 @@
             </div>
             <!--header结束--><!--content开始-->
             <div id="content" class="ub-f1 tx-l">
-
             </div>
             <!--content结束-->
-
+            <div id="footer" class="ub ub-ver">
+                <!-- 显示下载进度 -->
+                <div class="ub ub-f1 uinn ub-ac ub-pc umar-a" id="percentage">
+                </div>
+            </div>
         </div>
         <script src="../js/appcan.js"></script>
         <script src="../js/appcan.control.js"></script>
         <script src="../js/locStorageModify.js"></script>
     </body>
+    <!-- <script src="./js/versionOption.js"></script> -->
     <script>
-        //IP 10.101.55.75 外网
         //存储当前窗口的名字，便于调用
         appcan.ready(function() {
             localOption.intiWindowsName();
             uexSupoinScan.etStartScan =   function( data ){
                 data = eval('('+ data +')');
                 var name = localOption.getWindowName();
-                console.log(name);
+                // appcan.window.alert(1,name);
                 appcan.window.evaluatePopoverScript({
                      name:name,
                      popName:'content',
                      scriptContent:'getData(\''+data.result+'\')'
                 })
             }
-            var titHeight = $('#header').offset().height;
-            appcan.frame.open("content", "login_content.html", 0, titHeight);
-            window.onorientationchange = window.onresize = function() {
-                appcan.frame.resize("content", 0, titHeight);
-            }
+            
+            
+             var titHeight = $('#header').offset().height;
+                appcan.frame.open("content", "login_content.html", 0, titHeight);
+                window.onorientationchange = window.onresize = function() {
+                    appcan.frame.resize("content", 0, titHeight);
+             }
         });
     </script>
 </html>

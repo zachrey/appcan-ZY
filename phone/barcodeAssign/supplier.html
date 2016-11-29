@@ -54,6 +54,9 @@
         //模糊查询请求
        appcan.button("#btn", "ani-act", function() {
            var Data = $('#check').val();
+           if( Data == '') {
+               return;
+           }
            appcan.window.evaluatePopoverScript({
                name:"asssupplier",    //val_option
                popName:"content",
@@ -62,8 +65,8 @@
        });
         function closeWindow(){
             if( localOption.localPop() ){
-                    break;
-            }appcan.window.close(-1);
+                 appcan.window.close(-1);   
+            }
         }
-    </script>
+</script>
 </html>

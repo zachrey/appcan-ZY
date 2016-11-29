@@ -116,7 +116,7 @@
         function searchRequest( Data ) {
             appcan.window.openToast('查询中,请稍后...',10000,5,0);
             appcan.request.ajax({
-                url : "http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url : "http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type : "POST",
                 data : {
                     input:{LogicType:"扫码",
@@ -167,7 +167,7 @@
         //模拟单项选择
         function multipleChoice( flag ) {
             if( FLAG == 1 && $("#"+flag).hasClass("zk-clickR")){
-                appcan.window.alert(JSON.stringify(list[flag]));
+                // appcan.window.alert(JSON.stringify(list[flag]));
                     appcan.window.evaluatePopoverScript({
                        name:"containerTransfer",
                        popName:"content",

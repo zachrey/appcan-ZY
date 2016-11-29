@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/ui-box.css">
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/ui-color.css">
+        <link rel="stylesheet" href="../css/appcan.icon.css">
+        <link rel="stylesheet" href="../css/appcan.control.css">
+        <link rel="stylesheet" href="css/yqq_cgrk.css">
+        <link rel="stylesheet" href="css/zk.css">
+         <script src="../js/init.js"></script>
+    </head>
+    <body class="um-vp" ontouchstart>
+        <div id="sheet" class="ub uinn ub-f1 ub-ver bc-text">
+        </div>
+    </body>
+    <script src="../js/appcan.js"></script>
+    <script src="../js/appcan.control.js"></script>
+    <script src="../js/locStorageModify.js"></script>
+    </body>
+    <script>
+        var length;
+        var goodsId;
+        var list = [];
+        var lastFlag;
+        var FLAG = 1;
+        appcan.ready(function() {
+            var showJson = appcan.locStorage.val('RECOMMENDSHOWJSON');
+            // appcan.window.alert('123',showJson);
+            showJson = eval('('+showJson+')');
+            searchRequest(showJson);
+        });
+
+        //模糊查询请求
+        function searchRequest( showJson ) {
+            var subData = {
+                LogicType:"物料管理",
+                OpType:"物料推荐",
+                RecommendMaterialInput:{
+                    "WareHouseBarcode":showJson.warehouse,//'9900001497',//
+                    "Amount":parseInt(showJson.amount,10),
+                    "MaterialID":showJson.purNumber
+                }
+            };
+            //appcan.window.alert('123',JSON.stringify(subData));
+            appcan.window.openToast('查询中，请稍等...',10000,5,1);
+            appcan.request.ajax({
+                url : "http://10.101.55.73/fzzy/SPEngine/Barcode",
+                type : "POST",
+                data : {
+                    input:subData
+                },
+                dataType : "json",
+                success : function(info) {
+                    appcan.window.closeToast();
+                    $('#sheet').html('');
+                    // appcan.window.alert(JSON.stringify(info));
+                    if (info.bSuccess) {
+                       var jsonData = info.RecommendMaterialOutput.RecommendMaterialInstanceList[0];
+                        if(!jsonData.listMaterialEntity || jsonData.listMaterialEntity.length == 0){
+                            appcan.window.evaluateScript({
+                               name:"recommendShow", 
+                               scriptContent:"hide()"
+                            });
+                            appcan.window.openToast('暂无推荐！',1000,5,0);
+                            return;
+                        }
+                        var arr = info.RecommendMaterialOutput.RecommendMaterialInstanceList[0].listMaterialEntity,
+                            ARR = info.RecommendMaterialOutput.RecommendMaterialInstanceList[0],
+                            length = arr.length;
+                        list = info.RecommendMaterialOutput.RecommendMaterialInstanceList[0];
+                        for (var i = 0; i < length; i++) {
+                            var str = '<div id="'+i+'" class="ub ub-f1 ub-ver  uc-a uinn umar-a zk-marTop2 yqq-xxk">'+
+                                        '<div class="ub yqq-w10 zk-borderBottom" >'+
+                                            '<div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                '条码'+
+                                            '</div>'+
+                                            '<div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                arr[i].Barcode+
+                                            '</div>'+
+                                        '</div>'+
+                                        '<div class="ub yqq-w10 zk-borderBottom" >'+
+                                            '<div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                '类型'+
+                                            '</div>'+
+                                            '<div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                arr[i].BarcodeType+
+                                            '</div>'+
+                                        '</div>'+
+                                        '<div class="ub yqq-w10 zk-borderBottom" >'+
+                                            '<div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                '品号'+
+                                            '</div>'+
+                                            '<div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                arr[i].ProductNo+
+                                            '</div>'+
+                                        '</div>'+
+                                        '<div class="ub yqq-w10 zk-borderBottom" >'+
+                                            '<div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                '品名'+
+                                            '</div>'+
+                                            '<div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                arr[i].MatName+
+                                            '</div>'+//库位、仓库、数量添加
+                                        '</div>'+
+                                        
+                                        '<div class="ub yqq-w10 zk-borderBottom" >'+
+                                            '<div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                '库位'+
+                                            '</div>'+
+                                            '<div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                ARR.NewAlibraryname+
+                                            '</div>'+
+                                        '</div>'+
+                                        '<div class="ub yqq-w10 zk-borderBottom" >'+
+                                            '<div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                '仓库'+
+                                            '</div>'+
+                                            '<div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                ARR.NewWareBarcodeName+
+                                            '</div>'+
+                                        '</div>'+
+                                        '<div class="ub yqq-w10 zk-borderBottom" >'+
+                                            '<div  class="ub yqq-w3 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                '数量添加'+
+                                            '</div>'+
+                                            '<div  class="ub yqq-w6 sheetuinn ub-pc ub-ac wkf-font-w">'+
+                                                arr[i].Amount+
+                                            '</div>'+
+                                        '</div>'+
+                                    '</div>';
+                            $('#sheet').append(str);
+                            // appcan.button('.zk-marTop2','ani-act',function(){
+                                // multipleChoice( this.id );
+                            // });
+                        }
+                    } else {
+                        appcan.window.openToast("没有此码！", 1000, 5, 0);
+                    }
+                },
+                error : function(e) {
+                    appcan.window.openToast("网络连接错误！", 1000, 5, 0);
+                }
+            });
+        }
+        //模拟单项选择
+        function multipleChoice( flag ) {
+            if(FLAG && $("#"+flag).hasClass("zk-clickR")){
+                   appcan.window.evaluatePopoverScript({
+                       name:"materialManagement",
+                       popName:"content",
+                       scriptContent:"openWindowBack('"+JSON.stringify(list[flag])+"')"
+                   });
+                   appcan.window.evaluateScript({
+                       name:"recommendShow", 
+                       scriptContent:"closeWindow()"
+                   });
+                   FLAG = 0;
+            }else{
+                 if(lastFlag != null){
+                     $("#"+lastFlag).removeClass("zk-clickR");
+                     $("#"+lastFlag).addClass("yqq-xxk");
+                 }
+                 lastFlag = flag;
+                $("#"+lastFlag).removeClass("yqq-xxk");
+                $("#"+lastFlag).addClass("zk-clickR");
+            }
+        }
+        
+        
+        //返回结果到生产领料页面
+        var callback = function(){
+            // console.log(JSON.stringify(list));
+            appcan.window.evaluatePopoverScript({
+               name:"materialManagement",
+               popName:"content",
+               scriptContent:"openWindowBack('"+JSON.stringify(list)+"')"
+            });
+            appcan.window.evaluateScript({
+               name:"recommendShow", 
+               scriptContent:"closeWindow()"
+           });
+        }
+    </script>
+</html>

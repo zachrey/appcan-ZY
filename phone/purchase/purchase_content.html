@@ -76,7 +76,7 @@
           <!--采购单号结束-->
            <div id="down" class="ub ub-f1 ub-ver yqq-xxk uc-a uinn umar-a " style="margin-bottom: 2em;color:white;">
               <div id="" class="ub ub-f1">
-                  <div class="ub wkf-font-w umar-l uinn">物料条码</div>
+                  <div class="ub wkf-font-w umar-l uinn">条码</div>
                   <div class="ub ub-f1 ub-pe">
                       <div class="ub uinn uc-a" id="deleteBarcoe" style="background-color: #2B6576">删除</div>
                   </div>
@@ -137,7 +137,11 @@
                   break;
              }
              case 'emptycategory': {
-                  $("#category").html("");  
+                 if($("#category").html() == ''){
+                     $("#category").html('/');  
+                 }else{
+                     $("#category").html("");  
+                 }
                   //categoryAjax("123456");
                   break;
              }
@@ -152,7 +156,15 @@
                   //shippingSpaceAjax("9900001502");
                   break;
              }
-              case 'met': {
+             case 'emptypurchaseNum' : {
+                 if($('#purchaseNum').html() == ''){
+                     $('#purchaseNum').html('/');
+                 }else{
+                     $('#purchaseNum').html('');
+                 }
+                 break;
+             }
+             case 'met': {
                   $("#shippingSpace").html("");  
                   $("#wareHouse").html("");  
                   //materialCodeAjax("9900001441");
@@ -219,7 +231,7 @@
         //satation-->ajax
         function stationAjax( Data ){
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -254,7 +266,7 @@
         function categoryAjax( Data ){
             //alert(Data);
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -284,7 +296,7 @@
         //supplier-->ajax
         function supplierAjax( Data ){
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -313,7 +325,7 @@
         //shippingSpace -->ajax
         function shippingSpaceAjax( Data ){
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -357,7 +369,7 @@
             }
             //alert(213);
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -492,13 +504,13 @@
            // appcan.window.alert(JSON.stringify(json));
            appcan.window.openToast('提交中...',10000,5,1);
            appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
                             LogicType:"14",
                             OpType:"1",
-                            Single:categoryObj.Code,//====
+                            Single:categoryObj.Code ? categoryObj.Code : '',//====
                             SupCode:supplierObj.SupplierCode,
                             SupName:supplierObj.SupplierName,
                             SupBarcode:null,
@@ -592,6 +604,9 @@
                     break;
                 }
                 case 'articleNum':{
+                    if($('#purchaseNum').html() == '' || $('#purchaseNum').html() == '/'){
+                        $('#purchaseNum').html('/');
+                    }
                     $("#articleName").html(Obj.MatName);
                     $("#articleNum").html(Obj.MaterialID);
                     $("#standard").html(Obj.Standard);
@@ -622,6 +637,7 @@
        var deleteArr = function(index){
             detailNeed.splice(index,1);
             barcodeBaseInfo.splice(index,1);
+            barcodeArr.splice(index,1);
             appcan.window.evaluateScript({
                 name:"purchase",
                 scriptContent:"modifyCount("+barcodeBaseInfo.length+")"

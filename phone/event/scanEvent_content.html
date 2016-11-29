@@ -21,8 +21,11 @@
             <div id="生产领料" class="uhide wkf-w45 w-click  ub wkf-h3 ub-ac ub-pc wkf-butt wkf-font-w wkf-button-left">生产领料</div>
             <div id="物料移库" class="uhide wkf-w45 w-click  ub wkf-h3 ub-ac ub-pc wkf-butt wkf-font-w wkf-button-left">物料移库</div>
             <div id="容器转移" class="uhide wkf-w45 w-click  ub wkf-h3 ub-ac ub-pc wkf-butt wkf-font-w wkf-button-left">容器转移</div>
+            <div id="物料取出" class="uhide wkf-w45 w-click  ub wkf-h3 ub-ac ub-pc wkf-butt wkf-font-w wkf-button-left">物料取出</div>
             <div id="产品包装" class="uhide wkf-w45 w-click  ub wkf-h3 ub-ac ub-pc wkf-butt wkf-font-w wkf-button-left">产品包装</div>
             <div id="条码替换" class="uhide wkf-w45 w-click  ub wkf-h3 ub-ac ub-pc wkf-butt wkf-font-w wkf-button-left">条码替换</div>
+            <div id="物料流转" class="uhide wkf-w45 w-click  ub wkf-h3 ub-ac ub-pc wkf-butt wkf-font-w wkf-button-left">物料流转</div>
+            <div id="库存初始化" class="uhide wkf-w45 w-click  ub wkf-h3 ub-ac ub-pc wkf-butt wkf-font-w wkf-button-left">库存初始化</div>
             <div id="加工投料采集" class="uhide wkf-w45 w-click  ub wkf-h3 ub-ac ub-pc wkf-butt wkf-font-w wkf-button-left">加工投料采集</div>
             <div id="加工产出采集" class="uhide wkf-w45 w-click  ub wkf-h3 ub-ac ub-pc wkf-butt wkf-font-w wkf-button-left">加工产出采集</div>
             <div id="铜屑产出" class="uhide wkf-w45 w-click  ub wkf-h3 ub-ac ub-pc wkf-butt wkf-font-w wkf-button-left">铜屑产出</div>
@@ -50,8 +53,8 @@
             USER = eval('('+USER+')');
             for(var i=0;i<USER.ListEvent.length;i++){
                 $('#'+USER.ListEvent[i].EventName).removeClass('uhide');
-            }
-            //eventAjax('9900001542');
+          }
+            // eventAjax('111');
         });
         function getData( Data ){
             // alert(Data);
@@ -60,7 +63,7 @@
         
         function eventAjax( Data ){
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                    input:{
@@ -125,6 +128,10 @@
                   name = "containerTransfer";  
                   break;  
                 }
+                case '物料取出':{
+                    name = 'containerOutput';
+                    break;
+                }
                 case '产品包装':{
                   name = "productPackaging";   
                   break;  
@@ -139,6 +146,14 @@
                 }
                 case '条码替换':{
                   name = "BarcodeReplace";   
+                  break;  
+                }
+                case '物料流转':{
+                    name = "materialManagement";
+                    break;
+                }
+                case '库存初始化':{
+                  name = "materialInitialization";   
                   break;  
                 }
                 case '加工投料采集':{

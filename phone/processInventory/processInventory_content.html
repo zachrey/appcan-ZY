@@ -79,7 +79,7 @@
                       <div  id="unit" class="ub" style="color:red;"></div>
                   </div>
                       <div  class="ub ub-f1 umar-l yqq-bbd ub-ac ub-pc wkf-font-z">
-                        <input type="number" onkeyup="this.value=this.value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')" id="amount" name=""  class="wkf-input-nob wkf-font-w" style="width:98%;text-align:center;border:none; height: 2.2em;" value="" placeholder="请手动输入"/ >
+                        <input readonly="" type="number" readonly="readonly" onkeyup="this.value=this.value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')" id="amount" name=""  class="wkf-input-nob wkf-font-w" style="width:98%;text-align:center;border:none; height: 2.2em;" value="" placeholder="请手动输入"/ >
                       </div>
               </div>
           </div>
@@ -193,10 +193,17 @@
              break
          };
          case 'emptyWorkOrder':{
-             $("#proInvWorkOrder").html("");
-             $("#proInvProductNumber").html("");
-             $("#proInvProductName").html("");
-             $("#proInvProductSpecification").html("");
+            if($("#proInvWorkOrder").html() == null|| $("#proInvWorkOrder").html() == ""){
+                $("#proInvWorkOrder").html('/');
+                 $("#proInvProductNumber").html("");
+                 $("#proInvProductName").html("");
+                 $("#proInvProductSpecification").html(""); break;
+            }else{
+                 $("#proInvWorkOrder").html("");
+                 $("#proInvProductNumber").html("");
+                 $("#proInvProductName").html("");
+                 $("#proInvProductSpecification").html(""); break;
+            }
              // WorkOrderAjax( "9900001561" );
              break
          };
@@ -279,6 +286,7 @@
                     $("#proInvNumber").html(Obj.MatName);
                     $("#proInvSpecification").html(Obj.Specifications);
                     $("#proInvbatchCharging").html(Obj.BusinessBatch);
+                    $('#amount').val(Obj.Amount);
                     $("#unit").html('('+Obj.Company+')');
                     // MATERIALINSTANCED = Obj;
                     $('html,body').animate({scrollTop:$('#proInvName').offset().top-80},1000);
@@ -307,7 +315,7 @@
         function stationAjax( Data ){
             // alert(Data);
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -353,7 +361,7 @@
         //Device-->ajax
         function DeviceAjax( Data ){
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -386,7 +394,7 @@
         //WorkOrder-->ajax
         function WorkOrderAjax( Data ){
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -428,7 +436,7 @@
             // }
             //alert('准备请求');
             appcan.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -461,6 +469,7 @@
                                     $("#proInvSpecification").html(info.BarcodeInfo.materialbarcodeList[0].Specifications);
                                     $("#proInvbatchCharging").html(info.BarcodeInfo.materialbarcode.BusinessBatch);
                                     $("#unit").html('('+info.BarcodeInfo.materialbarcodeList[0].Company+')');
+                                    $('#amount').val(info.BarcodeInfo.materialbarcodeList[0].Amount);
                                  }
                                  appcan.locStorage.setVal( "MATERIALINSTANCE" , info.BarcodeInfo );
                             }else {
@@ -481,6 +490,7 @@
                                 $("#proInvSpecification").html(info.BarcodeInfo.materialbarcode.Specifications);
                                 $("#proInvbatchCharging").html(info.BarcodeInfo.materialbarcode.BusinessBatch);
                                 $("#unit").html('('+info.BarcodeInfo.materialbarcode.Company+')');
+                                $('#amount').val(info.BarcodeInfo.materialbarcode.Amount);
                             } else {
                                     appcan.window.openToast("条码无实例！",1000,5,0);
                             }
@@ -609,12 +619,19 @@
            }
            if(stationFlag == 0){
                //alert(0);
-               SUBJSON = {OpType:"投入",
+           var WORKORDERTEXT;
+            if($("#proInvWorkOrder").html() == '/'){
+                WORKORDERTEXT = '';
+            }else{
+                WORKORDERTEXT = $("#proInvWorkOrder").html();
+            }
+               SUBJSON = {
+                        OpType:"投入",
                         WorkLocationGuid:STATION.StationID,//工位静态信息guid----
                         DeviceGuid:DEVICE.RecordID,//设备的GUID------
                         WorkProccessId:PROCESS.ProcessId,//工序唯一ID------
                         ProductMaterialId : $("#proInvProductNumber").html(),
-                        BillNumber:$("#proInvWorkOrder").html(),
+                        BillNumber:WORKORDERTEXT,
                         WorkLocationInstanceGuid:STATION.GUID,
                         InputListOfCreateMixInstance:Djson,
                         LogicType: "工位管理",
@@ -638,7 +655,7 @@
             //appcan.window.alert("123",JSON.stringify(SUBJSON));
            appcan.window.openToast('提交中...',10000,5,1);
            appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:SUBJSON

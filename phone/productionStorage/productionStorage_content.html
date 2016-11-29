@@ -128,11 +128,19 @@
                 break;
              case 'pseCategory': 
                 // categoryAjax( '123456' );
-                $('#category').html('');
+                if($("#category").html() == null|| $("#category").html() == ""){
+                    $("#category").html('/');
+                }else{
+                    $("#category").html(""); break;
+                }
                 break;
              case 'pseWorkOrder': 
                 // workOrderAjax( '9900001561' );
-                $('#workOrder').html('');
+                if($("#workOrder").html() == null|| $("#workOrder").html() == ""){
+                    $('#workOrder').html('/');
+                }else{
+                    $('#workOrder').html('');
+                }
                 break;
              case 'pseShippingSpace': 
                 //shippingSpaceAjax( '9900001501' );
@@ -174,7 +182,7 @@
         //satation-->ajax
         function stationAjax( Data ){
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -213,7 +221,7 @@
         //category-->ajax
         function categoryAjax( Data ){
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -243,7 +251,7 @@
         //workOrder -->ajax
         function workOrderAjax( Data ){
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -274,7 +282,7 @@
         //shippingSpace -->ajax
         function shippingSpaceAjax( Data ){
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -314,7 +322,7 @@
                 return;
             }
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -379,7 +387,7 @@
            }
            //完整展示数据存入对象
            var updataPartJson = {
-             workOrder:$("#workOrder").html(),
+             workOrder:($("#workOrder").html()!=='/' ? $("#workOrder").html() : ''),
              shippingSpace:$("#shippingSpace").html(),
              wareHouse:$("#wareHouse").html(),
              materialCodes:barcodeArrNow
@@ -387,7 +395,7 @@
            barcodeBaseInfo.push(updataPartJson);
           //准备提交的保存数据
           var subminInfo = {
-              "WorkOrderBarcode":workorderJD.WorkOrderNumber,//工单
+              "WorkOrderBarcode":(workorderJD ? workorderJD.WorkOrderNumber : ''),//工单
               "NewWareBarcode": wareHouseJD.WarehouseBarcode,//仓库条码
               "NewAlibraryBarcode": wareHouseJD.AlibraryBarcode,//库位条码
               "listMaterialEntity":barcodeArrNow
@@ -418,6 +426,12 @@
            }
            var user = appcan.locStorage.val('LOGIN');
            user = eval('('+user+')');
+           var CATEGORY;
+            if($("#category").html() == '/'){
+                CATEGORY = '';
+            }else{
+                CATEGORY = String(invoicesJD.ID);
+            }
            var submitInfo = {
               "LogicType": "流转工位管理",
               "ScanType": "生产入库",
@@ -425,7 +439,7 @@
               "SupCode":'',//供应商编号
               "OperatorId":user.UserID,//操作人ID
               "StorageTime":$('#time').html(),//入库时间 
-              "Single":String(invoicesJD.ID),//单别 
+              "Single":CATEGORY,//单别 
               "Station":stationJD.StationID,//工位
               "WorkProcegure":String(processJD.ProcessId),//工序 
               "LLPurchasingInfoEntity":barcodeBaseSubInfo
@@ -433,7 +447,7 @@
            //appcan.window.alert( "提示",JSON.stringify(submitInfo) );
            appcan.window.openToast('提交中...',10000,5,0);
            appcan.ajax({
-              url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+              url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:submitInfo

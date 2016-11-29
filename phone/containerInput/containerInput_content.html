@@ -115,6 +115,15 @@
                 var oData=eval('('+data+')');
                 $("#time").html(oData.year+'/'+oData.month+'/'+oData.day);   
             }
+            //判断是否从事件页面跳转过来，是则删除两个本地存储的标记量
+            var WINDOWNAMES = appcan.locStorage.val('WINDOWNAMES');
+            WINDOWNAMES = eval('('+WINDOWNAMES+')');
+            var lastWindowName = WINDOWNAMES[WINDOWNAMES.length -2];
+            if(lastWindowName === 'event'){
+                //appcan.alert("提示",'从'+lastWindowName+'跳转');
+                appcan.locStorage.remove('CONINPUTFLAG');
+                appcan.locStorage.remove('CONINPUTDATA');
+            }
            //这里判断是否是其他页面跳转过来(产出)
            if(appcan.locStorage.val('CONINPUTFLAG')){               //加工产出采集
                appcan.locStorage.val('CONINPUTFLAG',false);        //避免该页面单独使用的时候，得到其他数据
@@ -144,7 +153,7 @@
                                        traStandard:ARR[i].Specifications,
                                        oldCount:lengthB[j].Amount,
                                        outputAmount:lengthB[j].Amount,
-                                       unit:ARR[i].Unit,
+                                       unit:ARR[i].Unit
                                     };
                                GUIDAjax( lengthB[j].Amount , lengthB[j].BarCode ,Djson , LENGTH);
                            }
@@ -183,7 +192,7 @@
         //GUID查询
         function GUIDAjax( Amount , barcode , Djson , LENGTH){
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -275,17 +284,52 @@
         //接受扫描数据
         function getData( Data )
         {
-            if($("#inputContainer").html() == null || $("#inputContainer").html() == ""){
+            if($("#traStation").html() == null || $("#traStation").html() == ""){
+                 stationAjax( Data );
+            }else if($("#inputContainer").html() == null || $("#inputContainer").html() == ""){
                  inputContainerAjax( Data );
             }else if( $("#barcode").html()==""||$("#barcode").html()==null){
                  barcodeAjax( Data );
              }
             
         }       
+        function stationAjax( Data ){
+            appcan.request.ajax({
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
+                type:"POST",
+                data:{
+                    input:{
+                        LogicType:"扫码",
+                        ScanType:"工位精确查询",
+                        StationInput:{
+                                "StationBarCode":Data,//"9900001471"
+                        }
+                   }
+                },
+                dataType:"json",
+                success : function( info ) {
+                //appcan.window.alert(JSON.stringify(info));
+                    if(!info.bSuccess){
+                        appcan.window.openToast(info.Error,3000,5,0);
+                        return;
+                    }
+                    if( info.StationOutput.IsSuccess ){
+                        stationObj = info.StationOutput.StationInfo;
+                        $("#traStation").html(info.StationOutput.StationInfo.StationName);
+                        $('html,body').animate({scrollTop:$('#traStation').offset().top-80},1000);
+                    }else{
+                        appcan.window.openToast(info.Error,3000,5,0);
+                    }
+                },
+                error: function(){
+                    appcan.window.openToast("网络请求错误！",1000,5,0);
+                }
+            })
+        } 
        
         function barcodeAjax( Data ){
              appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -323,7 +367,7 @@
         function inputContainerAjax( Data ){
             //$("#inputContainer").html(Data);
             appcan.request.ajax({
-                    url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                    url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                     type:"POST",
                     data:{
                         input:{LogicType:"扫码",
@@ -462,7 +506,7 @@
                     }
                 // appcan.window.alert('123',JSON.stringify(json));
                 appcan.request.ajax({
-                    url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                    url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                     type:"POST",
                     data:{
                        input:json

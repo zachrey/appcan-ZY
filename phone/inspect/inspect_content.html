@@ -36,7 +36,7 @@
           <!--采购单号开始-->
           <div id="updataPart" class="ub ub-f1 ub-ver yqq-xxk uc-a uinn umar-a " style="margin-bottom: 1em">
               <div class="ub yqq-w10" >
-                 <div id="emptyBarcode" class="ub w-click yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">容器条码</div>
+                 <div id="emptyBarcode" class="ub w-click yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">条码</div>
                  <div id="barcode" class="w-click ub ub-f1 umar-l yqq-bbd uinn ub-ac ub-pc wkf-hh wkf-font-z"></div>
               </div>
               <div class="ub yqq-w10" >
@@ -58,7 +58,7 @@
               <div class="ub yqq-w10" >
                  <div  class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">数量<div id="unit" class="wkf-font-r"></div></div>
                  <div  class="ub ub-f1 umar-l yqq-bbd ub-ac ub-pc wkf-font-z">
-                     <input type="number" min='0' id="amount" name=""  class="wkf-input-nob wkf-font-w" style="width:98%;text-align:center;border:none; height: 2.2em;" value="" placeholder="请手动输入"/ >
+                     <input type="number" readonly="readonly" min='0' id="amount" name=""  class="wkf-input-nob wkf-font-w" style="width:98%;text-align:center;border:none; height: 2.2em;" value="" placeholder=""/ >
                  </div>
               </div>
               <div class="ub yqq-w10" >
@@ -85,7 +85,7 @@
           <!--采购单号结束-->
            <div id="down" class="ub ub-f1 ub-ver yqq-xxk uc-a uinn umar-a " style="margin-bottom: 2em;color:white;">
               <div id="" class="ub ub-f1">
-                  <div class="ub wkf-font-w umar-l uinn">容器条码</div>
+                  <div class="ub wkf-font-w umar-l uinn">条码</div>
                   <div class="ub ub-f1 ub-pe">
                       <div class="ub uinn uc-a" id="deleteBarcoe" style="background-color: #2B6576">删除</div>
                   </div>
@@ -125,7 +125,7 @@
         var LOGIN = appcan.locStorage.getVal("LOGIN");
         LOGIN = JSON.parse( LOGIN );
         appcan.ready(function() {
-            $("#emptyInspectStation").html(LOGIN.StationName);
+            $("#inspectStation").html(LOGIN.StationName);
             //获取检查类型
             insTypeFn();
             //获取检查项目
@@ -193,7 +193,7 @@
         //satation-->ajax   送检
         function stationAjax1( Data ){
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -225,7 +225,7 @@
         //satation-->ajax   检验
         function stationAjax2( Data ){
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -270,7 +270,7 @@
                 return;
             }
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -292,22 +292,30 @@
                                 appcan.window.openToast("容器码为空！",1000,5,0);
                                 return;
                             }
-                            TYPE = "容器";
                             $("#barcode").html( Data );
                             materialObj = info.BarcodeInfo.materialbarcode;
                             if(info.BarcodeInfo.materialbarcodeList.length == 1){
-                                 materialSObj = info.BarcodeInfo.materialbarcodeList[0];
-                                 $("#articleName").html(info.BarcodeInfo.materialbarcodeList[0].MatName);
+                                materialSObj = info.BarcodeInfo.materialbarcodeList[0];
+                                $("#articleName").html(info.BarcodeInfo.materialbarcodeList[0].MatName);
                                 $("#articleNum").html(info.BarcodeInfo.materialbarcodeList[0].MaterialID);
                                 $("#standard").html(info.BarcodeInfo.materialbarcodeList[0].Specifications);
                                 $("#batch").html(info.BarcodeInfo.materialbarcodeList[0].BusinessBatch);
                                 $("#unit").html(info.BarcodeInfo.materialbarcodeList[0].Company);
+                                $('#amount').html(info.BarcodeInfo.materialbarcodeList[0].Amount);
                              }
                              appcan.locStorage.setVal( "INSPECTPRODUCT" , info.BarcodeInfo );
                              $('html,body').animate({scrollTop:$('#barcode').offset().top-80},1000);
                         }else {
                             appcan.window.openToast("条码无实例！",1000,5,0);
                         }
+                    }else if(info.BarcodeType=="9"){
+                        materialSObj = info.BarcodeInfo.materialbarcode;
+                        $("#articleName").html(materialSObj.MatName);
+                        $("#articleNum").html(materialSObj.MaterialID);
+                        $("#standard").html(materialSObj.Specifications);
+                        $("#batch").html(materialSObj.BusinessBatch);
+                        $("#unit").html(materialSObj.Company);
+                        $('#amount').html(materialSObj.Amount);
                     } else {
                         appcan.window.openToast("条码类型错误！",1000,5,0);
                     }
@@ -321,7 +329,7 @@
         var insTypeFn = function(){
             $('#inspectionType').html('');
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                    input:{
@@ -357,7 +365,7 @@
         var insItemFn = function(){
             $('#inspectionItem').html('');
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                    input:{
@@ -534,7 +542,7 @@
             }
            // appcan.window.alert( "提示", JSON.stringify(input) );                                                                 
            appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:input
@@ -593,6 +601,7 @@
                     $("#standard").html(Obj.Specifications);
                     $("#batch").html(Obj.BusinessBatch);
                     $("#unit").html('('+Obj.Company+')');
+                    $('#amount').html(Obj.Amount);
                     materialSObj = Obj;
                     break;
                 }

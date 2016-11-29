@@ -156,7 +156,7 @@
                   $("#traGoodsName").html("");
                   $("#traStandard").html("");
                   $("#unit").html("");
-                 //outputContainerAjax("9900001442"); 
+                //outputContainerAjax("9900001783"); 
                   break;
              };
              case 'emptyInputContainer': {
@@ -203,34 +203,32 @@
                  appcan.window.openToast('容器码重复!',1000,5,0);
                  return;
                }
-            appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+             appcan.request.ajax({
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
-                    input:{LogicType:"扫码",
-                    ScanType:"容器扫码",
-                    ContainerBarcodeInput:{
-                        "Barcode":Data,//"9900001417"
-                        }
+                    input:{
+                        LogicType:"扫码",
+                        scanType:"通用扫码",
+                        barcode:Data
                     }
                 },
                 dataType:"json",
                 success : function( info ) {
-                    //appcan.window.alert(JSON.stringify(info));
-                        
-                        if(!info.bSuccess){
-                            appcan.window.openToast(info['Error'],1000,5,0);
-                            return ;
-                        }
-                        if( !info.isFitBarcodeType  ){
-                            appcan.window.openToast('不为容器码，请重新扫描！',1000,5,0);
-                            return ;
-                        }
-                        if(info.ContainerBarcodeOutput.isContainerBarcodeDefined == false ){
-                             appcan.window.openToast('容器码未定义',1000,5,0);
+               		if(!info.bSuccess){
+                		appcan.window.openToast(info['Error'],1000,5,0);
+                        return ;//直接跳过return；
+                	}
+                	if( info.BarcodeType != 1 && info.BarcodeType != 9 ){//扫码不为物料实例或者是容器码
+                		appcan.window.openToast("该条码不为容器码或者物料实例码！",1000,5,0);
+                        return ;//直接跳过return；
+                	}
+                    if(info.BarcodeType == 1){//容器码
+                    	if(info.BarcodeInfo.materialbarcode == null ){//物料实例码没带实例
+                             appcan.window.openToast('该条码未实例化',1000,5,0);
                              return ;
-                        }
-                        var arr = info.ContainerBarcodeOutput.ContainerInstance.listMaterial;
+                    	}
+                    	var arr = info.BarcodeInfo.materialbarcodeList;
                         if(arr.length == 1){
                            $("#traGoodsId").html(arr[0].MaterialID);
                            $("#traGoodsName").html(arr[0].MatName);
@@ -239,24 +237,48 @@
                            $("#unit").html('('+arr[0].Company+')');
                            goodObj = arr[0];
                            if(arr[0].Inspection === 1){
-                               appcan.window.openToast('当前物料为送检状态，请重新扫描！',2000,5,0);
-                               return;
+                               appcan.window.openToast('当前物料为送检状态，请重新扫描！',2000,5,0);return;
                            }
                         }
                         appcan.locStorage.val('INFOLIST',arr);
-                        $("#outputContainer").html(info.ContainerBarcodeOutput.ContainerEntity.ContainerBarCode);
-                        outContaineObj = info.ContainerBarcodeOutput.ContainerEntity;
+                        $("#outputContainer").html(info.BarcodeInfo.container.ContainerBarCode);
+                        outContaineObj = info.BarcodeInfo.container;//=============================提交细化对象  两种
                         $('html,body').animate({scrollTop:$('#outputContainer').offset().top-80},1000);
+                    }else if(info.BarcodeType == 9){//物料实例码
+                    	if(info.BarcodeInfo.materialbarcode == null ){//物料实例码没带实例
+                             appcan.window.openToast('该条码未实例化',1000,5,0);
+                             return ;
+                    	}
+                    	var arr = info.BarcodeInfo.materialbarcode;
+                           $("#traGoodsId").html(arr.MaterialID);
+                           $("#traGoodsName").html(arr.MatName);
+                           $("#traStandard").html(arr.Specifications); 
+                           $("#oldCount").html(arr.Amount);
+                           $("#unit").html('('+arr.Company+')');
+                           goodObj = arr;
+                           if(arr.Inspection === 1){
+                               appcan.window.openToast('当前物料为送检状态，请重新扫描！',2000,5,0);return;
+                           }
+                        var ARR=[];
+                        ARR.push(arr);   
+                        appcan.locStorage.val('INFOLIST',ARR);
+                        $("#outputContainer").html(info.BarcodeInfo.materialbarcode.Barcode);
+                        outContaineObj = {
+                        	ContainerGuid:"",
+                        	ContainerBarCode:""
+                        };//==============
+                        $('html,body').animate({scrollTop:$('#outputContainer').offset().top-80},1000);
+                    }
                 },
                 error: function(){
-                    appcan.window.openToast("网络请求错误！",1000,5,0);
+                      appcan.window.openToast("网络请求错误！",1000,5,0);
                 }
             })
         }
        //--------转入容器----->ajax
         function inputContainerAjax( Data ){
             appcan.request.ajax({
-                    url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                    url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                     type:"POST",
                     data:{
                         input:{LogicType:"扫码",
@@ -279,7 +301,7 @@
                             } 
                         }
                         $("#inputContainer").html(info.ContainerBarcodeOutput.ContainerEntity.ContainerBarCode);
-                         inContaineObj = info.ContainerBarcodeOutput.ContainerEntity;
+                        inContaineObj = info.ContainerBarcodeOutput.ContainerEntity;
                         $('html,body').animate({scrollTop:$('#inputContainer').offset().top-80},1000);
                     },
                     error: function(){
@@ -472,7 +494,7 @@
                             }
                 //appcan.window.alert('123',JSON.stringify(json));
                 appcan.request.ajax({
-                    url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                    url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                     type:"POST",
                     data:{
                        input:{

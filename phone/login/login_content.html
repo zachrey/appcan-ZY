@@ -73,7 +73,7 @@
             if($("#station").val() == null || $("#station").val() == ""){
                  stationAjax( Data );
             }else if($("#UserID").val() == null || $("#UserID").val() == ""){
-                userAjax( Data );
+                 userAjax( Data );
             }else if($("#UserPassword").val() == null || $("#UserPassword").val() == ""){
                 appcan.window.openToast("请输入密码！",1000,5,0);
             }else{
@@ -98,7 +98,7 @@
                 appcan.window.openToast("请输入密码！",1000,5,0);
             }else{
                 appcan.request.ajax({
-                    url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                    url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                     type:"POST",
                     data:{
                         input:{
@@ -139,7 +139,7 @@
         //satation-->ajax
         function stationAjax( Data ){
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{

@@ -19,7 +19,7 @@
           <!-- 刷新框 -->
           <div id="" class="ub ub-f1 ub-ver yqq-xxk uc-a uinn umar-a ">  
               <div id="" class="ub yqq-w10" >
-                 <div  id="matDel" class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">容器条码</div>
+                 <div  id="matDel" class="ub yqq-w3 yqq-bbd uinn ub-pc ub-ac wkf-font-w">条码</div>
                  <div  id="container" class="ub ub-f1 w-click umar-l yqq-bbd uinn ub-ac ub-pc wkf-hh wkf-font-z"></div>
               </div>
               <div id="" class="ub yqq-w10" >
@@ -152,6 +152,7 @@
             $("#part2").hide();
             user = appcan.locStorage.val('LOGIN');
             user = eval('('+user+')');
+            //containerAjax('9900001521');
         });
         
         appcan.button("#matDel","ani-act",function(){
@@ -159,7 +160,7 @@
         }) 
         appcan.button("#purNumber","ani-act",function(){
             if($("#container").html() == ""){
-                appcan.window.openToast("请先扫描容器条码！",1000,5,0);
+                appcan.window.openToast("请先扫描条码！",1000,5,0);
                 return;
             }
             localOption.localSave("traGoodsId");
@@ -211,7 +212,7 @@
         
        function containerAjax( Data ){
             appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                     input:{
@@ -222,6 +223,16 @@
                 },
                 dataType:"json",
                 success : function( info ) {
+                	if( info.BarcodeType !=1 && info.BarcodeType !=9 ) {
+                        appcan.window.openToast("条码类型错误！",1000,5,0);
+                        return ;
+                    }
+                	if( info.BarcodeType == 9 ){
+                		 $("#container").html(Data);
+                		 parameter = info.BarcodeInfo.materialbarcode.GUID;
+                		GUIDAjax(info.BarcodeInfo.materialbarcode.GUID);
+                		return ;
+                	}
                     if(!info.BarcodeInfo.materialbarcodeList  || info.BarcodeInfo.materialbarcodeList.length == 0){
                          appcan.window.openToast("扫码失败！",1000,5,0);
                          return ;
@@ -240,7 +251,7 @@
         // var insResultFn = function(){
             // $('#insResult').html('');
             // appcan.request.ajax({
-                // url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                // url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 // type:"POST",
                 // data:{
                    // input:{
@@ -303,18 +314,23 @@
         function openWindowBack( Obj ){
             //appcan.window.alert(Obj);
             Obj = eval('('+Obj+')');
-            parameter = Obj.GUID;
+            parameter = Obj.GUID;//容器里物料的guid
             //alert(parameter);
             $("#purName").html(Obj.MatName);
-            appcan.request.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+            
+            GUIDAjax( parameter );
+        }
+        
+        function GUIDAjax( GUID ){
+        	appcan.request.ajax({
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                    input:{
                        LogicType:"扫码",
                        ScanType:"检验查询",
                        InspectionInput:{
-                           MaterialGUID:parameter
+                           MaterialGUID:GUID
                        }
                    }
                 },
@@ -333,6 +349,7 @@
                     $("#InsType").html(infoObj.InspectionType ? infoObj.InspectionType:'无');
                     $("#InsProject").html(infoObj.InspectionItems ? infoObj.InspectionItems:'无');
                     //$("#productUsed").html(infoObj ? infoObj.ProductNo:'/');
+                   
                 },
                 error: function(){
                     appcan.window.openToast("网络请求错误！",1000,5,0);
@@ -403,7 +420,7 @@
             //appcan.window.alert('提交数据',JSON.stringify(submitInfo));     
             appcan.window.openToast('提交中...',10000,5,1); 
             appcan.ajax({
-                url:"http://10.101.55.75/fzzy/SPEngine/Barcode",
+                url:"http://10.101.55.73/fzzy/SPEngine/Barcode",
                 type:"POST",
                 data:{
                   input:submitInfo  

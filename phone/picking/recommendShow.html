@@ -59,6 +59,9 @@
         //模糊查询请求
        appcan.button("#btn", "ani-act", function() {
            var Data = $('#check').val();
+           if( Data == '') {
+               return;
+           }
            appcan.window.evaluatePopoverScript({
                name:"picrecommendShow",    //val_option
                popName:"content",
@@ -84,7 +87,6 @@
                scriptContent:"closeWindow()"
             });
             localOption.localPop();  //调两次回到主页
-            localOption.localPop();
             appcan.window.close(-1);
         }
         

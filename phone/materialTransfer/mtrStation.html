@@ -56,6 +56,9 @@
        appcan.button("#btn", "ani-act", function() {
             //得到输入框的值
             var Data = $('#check').val();
+            if( Data == '') {
+               return;
+           }
            appcan.window.evaluatePopoverScript({
                name:"mtrStation",    //val_option
                popName:"content",
